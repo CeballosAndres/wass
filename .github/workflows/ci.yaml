@@ -3,15 +3,15 @@ name: Django CI/CD Workflow
 
 # triggers for our workflow
 on:
-  # opening a pull request to master and develop branch will be a trigger
+  # opening a pull request to main and develop branch will be a trigger
   pull_request:
     branches:
       - develop
-      - master
-  # any code pushed to master and develop branch will also be a trigger
+      - main
+  # any code pushed to main and develop branch will also be a trigger
   push:
     branches:
-      - master
+      - main
       - develop
 
 
