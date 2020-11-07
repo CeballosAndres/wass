@@ -48,7 +48,7 @@ spec:
             - name: SECRET_KEY
               valueFrom:
                 secretKeyRef:
-                  key: secret
+                  key: secretkey
                   name: appsecrets
           ports:
             - containerPort: 8000
