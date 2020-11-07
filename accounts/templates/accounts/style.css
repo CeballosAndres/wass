@@ -1,0 +1,18 @@
+main {
+  margin: auto;
+  width: 50%;
+  text-align: center;
+}
+
+/* size for the inputs */   
+.input-box {
+    height: 3.5rem;
+    width: 300px;
+    margin: auto;
+}
+
+form a {
+  font-size: 10px;
+  display: block;
+}
+  
