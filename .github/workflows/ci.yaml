@@ -63,7 +63,7 @@ jobs:
       - name: Checkout Code # checking out code.
         uses: actions/checkout@v2
       - name: Build & Publish Image # we are using a public GitHub Action to build and publish docker image to our GCR registry.
-        uses: docker/build-push-action@v1
+        uses: docker/build-push-action@v2
         env:
           app_name: app
         with:
