@@ -10,4 +10,3 @@ class WebsiteTests(TestCase):
             slug='home'
         )
         page.save()
-        
