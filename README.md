@@ -22,3 +22,7 @@ create database wass;
 \c
 \dt
 ```
+## Levantar el servidor 
+```bash
+python manage.py runservice
+```
