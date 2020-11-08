@@ -4,3 +4,4 @@ password: custom-value
 host: custom-value
 port: custom-value
 name: custom-value
+secretkey: custom-value
