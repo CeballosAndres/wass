@@ -3,7 +3,7 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return render(request, 'accounts/dashboard.html')
+    return render(request, 'accounts/main.html')
 
 
 def alumno(request):
