@@ -1,0 +1,10 @@
+- Create alerts for: 
+    Login succesfully
+    Login error
+
+    Register succesfully
+    Register error
+
+- Add image to the views or something
+
+- Buttons events

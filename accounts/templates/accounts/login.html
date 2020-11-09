@@ -1,21 +1,18 @@
-{% extends 'accounts/main.html' %}
+{% extends 'accounts/simple-main.html' %}
 
 {% block content %}
 
 <main>
     <h1 class="py-5">Iniciar Sesion</h1>
 
-    <div>
-        <form>
-            <input id="InputEmail1" type="email" class="form-control form-control-lg mb-5 input-box" aria-describedby="emailHelp" placeholder="Correo">
-            <input id="InputPassword" type="password" class="form-control form-control-lg mb-5 input-box" placeholder="Contrasenia">
-            <button type="submit" class="btn btn-outline-primary btn-lg">Entrar</button>
-            <a class="font-weight-lighter text-muted mt-2 mb-5" href="#">Olvide mi contrasenia</a>
-        </form>
+    <form>
+        <input id="InputEmail1" type="email" class="form-control form-control-lg input-box mb-5" aria-describedby="email" placeholder="Correo institucional">
+        <input id="InputPassword" type="password" class="form-control form-control-lg input-box mb-5" placeholder="Contraseña">
+        <button type="submit" class="btn btn-outline-primary btn-lg">Entrar</button>
+        <a class="font-weight-lighter text-muted mt-2 mb-5" href="#">Olvide mi contraseña</a>
+    </form>
 
-        <p class="font-italic"><a href="#" class="text-decoration-none" style="display:inline;">Registrarse</a> en caso de no tener una cuenta</p>
-    </div>
-
+    <p class="font-italic"><a href="#" class="text-decoration-none" style="display:inline;">Registrarse</a> en caso de no tener una cuenta</p>
 </main>
 
 {% endblock %}
