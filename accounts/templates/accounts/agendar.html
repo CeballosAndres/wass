@@ -1,0 +1,57 @@
+{% extends 'accounts/nav.html' %}
+
+
+{% block content %}
+<style>
+
+    button{
+        width: 300px;
+        height: 60px;
+        margin-bottom: 2rem;
+    }
+
+
+</style>
+    <h1 class="mb-5 py-2"><a href="#"><i class="fas fa-arrow-circle-left px-4"></i></a> Agendar asesoria</h1>
+
+
+
+<main>
+    <!-- Obvi esta parte no sera asi, pero es para ver si visualmente quedaria asi -->
+    <select class="browser-default custom-select mb-5">
+        <option selected>Selecciona la carrera</option>
+        <option value="1">Ingenieria en Sistemas Computacionales</option>
+        <option value="2">Inforamtica</option>
+      </select>
+      <!-- Mostrar las materias de acuerdo a su kardex-->
+      <select class="browser-default custom-select mb-5">
+        <option selected>Materia</option>
+        <option value="1">Calculo Diferencial</option>
+        <option value="2">Fundamentos de programacion</option>
+        <option value="3">Matematicas discretas</option>
+        <option value="4">Calculo Integral</option>
+      </select>
+      <select class="browser-default custom-select mb-5">
+        <option selected>Tema (unidad)</option>
+        <option value="1">Numeros Reales</option>
+        <option value="2">Funciones</option>
+        <option value="3">Limites y continuidad</option>
+        <option value="4">Derivadas</option>
+        <option value="5">Aplicaciones de las derivadas</option>
+      </select>
+      <select class="browser-default custom-select mb-5">
+        <option selected>Subtema</option>
+        <option value="1">Los numeros reales</option>
+        <option value="2">Axiomas de los números reales.</option>
+        <option value="3">Intervalos y su representación gráfica.</option>
+        <option value="4">Valor absoluto y sus propiedades.</option>
+        <option value="5">Propiedades de las desigualdades.</option>
+        <option value="6">Resolución de desigualdades de primer y segundo grado con una incógnita.</option>
+        <option value="6">Resolución de desigualdades que incluyan valor absoluto. </option>
+      </select>
+      <div> 
+        <button type="button" class="btn btn-outline-primary" style="font-size:20px;">Buscar</button> 
+    </div>
+</main>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!--- Link our css  -->
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
+    <!--- Fonts Icon  -->
+    <script src="https://kit.fontawesome.com/cf8f2989e3.js" crossorigin="anonymous"></script>
+    <title>WASS</title>
+</head>
+
+
+<body>
+
+    <nav class="navbar navbar-dark bg-dark">
+        <img src="{% static 'images/Logo.png' %}" width="75" height="35" loading="lazy" alt="Wass logo">
+        <div>
+            <a href="#"><i style="color: #BFBFBF;" class="fas fa-user-circle mr-3"></i></a>
+            <a href="#"><i style="color: #BFBFBF;" class="fas fa-sign-out-alt"></i></a>
+        </div>
+    </nav>
+
+
+    {% block content %}
+
+
+    {% endblock %}
+
+</body>
+</html>

@@ -8,3 +8,5 @@
 - Add image to the views or something
 
 - Buttons events
+
+- Change logo's colors
