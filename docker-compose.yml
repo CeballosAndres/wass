@@ -287,7 +287,7 @@ services:
       # Organizr - Unified Frontend
   app:
     container_name: wass
-    image: wass:latest
+    image: registry.digitalocean.com/wass/wass:latest
     restart: unless-stopped
     networks:
       - t2_proxy
@@ -319,7 +319,7 @@ services:
       - "traefik.http.middlewares.organizr-redirect.redirectregex.permanent=true"
       ## HTTP Services
       - "traefik.http.routers.organizr-rtr.service=organizr-svc"
-      - "traefik.http.services.organizr-svc.loadbalancer.server.port=80"
+      - "traefik.http.services.organizr-svc.loadbalancer.server.port=8000"
 
 # Cloudflare DDNS - Dynamic DNS Updater
 #  cloudddns:
@@ -332,3 +332,4 @@ services:
 #      - PUID=$PUID
 #      - PGID=$PGID
 #      - TZ=$TZ
+
