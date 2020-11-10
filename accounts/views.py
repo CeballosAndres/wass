@@ -20,7 +20,7 @@ def Pasesor(request):
 
 def PjefeD(request):
     return render(request, 'accounts/ppal-jfedpto.html')
-    
+
 
 def Padmi(request):
     return render(request, 'accounts/ppal-adm.html')
