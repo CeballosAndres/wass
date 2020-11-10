@@ -28,4 +28,3 @@ def Padmi(request):
 
 def agendar(request):
     return render(request, 'accounts/agendar.html')
-
