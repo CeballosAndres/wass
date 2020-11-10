@@ -5,6 +5,7 @@
 python3 -m venv env
 
 source env/bin/activate
+env\Scripts\activate.bat #windows
 
 pip install -r requirements.txt
 ```
