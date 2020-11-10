@@ -67,7 +67,7 @@ jobs:
       - name: Checkout Code # checking out code.
         uses: actions/checkout@v2
       - name: Build & Publish Image # we are using a public GitHub Action to build and publish docker image to our GCR registry.
-        run: docker build -t $(echo $REGISTRY)/$(echo $IMAGE_NAME):latest -t $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7) .
+        run: docker build -t $(echo $REGISTRY)/$(echo $IMAGE_NAME):latest .
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
@@ -75,7 +75,7 @@ jobs:
       - name: Log in to DigitalOcean Container Registry with short-lived credentials
         run: doctl registry login --expiry-seconds 600
       - name: Push image to DigitalOcean Container Registry
-        run: docker push $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
+        run: docker push $(echo $REGISTRY)/$(echo $IMAGE_NAME):latest
 
   deploy-job: # deploy job is for deploying our code to google cloud cluster.
     runs-on: ubuntu-latest
@@ -93,6 +93,6 @@ jobs:
             docker stop $(echo $IMAGE_NAME)
             docker rm $(echo $IMAGE_NAME)
             docker login registry.digitalocean.com
-            docker pull registry.digitalocean.com/wass/wass:GITHUB_SHA
+            docker pull registry.digitalocean.com/wass/wass:latest
             cd /home/andres/docker
             docker-compose up -d
