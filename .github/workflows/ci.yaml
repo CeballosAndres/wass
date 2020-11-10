@@ -14,6 +14,10 @@ on:
       - main
       - develop
 
+env:
+  REGISTRY: "registry.digitalocean.com/wass"
+  IMAGE_NAME: "wass"
+
 
 # three job definition
 jobs:
