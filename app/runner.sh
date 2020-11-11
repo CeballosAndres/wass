@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
-# Getting static files for Admin panel hosting!
-./manage.py collectstatic --noinput
-uwsgi --http "0.0.0.0:${PORT}" --module api.wsgi --master --processes 4 --threads 2
+# CMD ["gunicorn", "--bind", "0.0.0.0:8000", "app.wsgi"]
+python manage.py migrate
+python manage.py collectstatic --noinput
+gunicorn --bind 0.0.0.0:8000 app.wsgi
