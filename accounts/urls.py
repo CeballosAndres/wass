@@ -11,4 +11,6 @@ urlpatterns = [
         path('jfe-dpto/', views.PjefeD),
         path('admi/', views.Padmi),
         path('agendar/', views.agendar),
+        path('ver-asesorias/', views.verAsesorias),
+        path('config/', views.config),
         ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
