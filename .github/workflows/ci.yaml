@@ -82,6 +82,7 @@ jobs:
     needs: [package-job] # will require package-job to be successful for triggering
     if: ${{ github.event_name == 'push' }} # will be fire if the trigger event is a push event.
     steps:
+      if: ${{ github.ref == 'refs/heads/main' }}
       - name: Deploy to Digital Ocean droplet via SSH action
         uses: appleboy/ssh-action@master
         with:
@@ -90,8 +91,23 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           envs: IMAGE_NAME,REGISTRY,GITHUB_SHA
           script: |
-            docker stop $(echo $IMAGE_NAME)
-            docker rm $(echo $IMAGE_NAME)
+            docker stop wass
+            docker rm wass
+            docker login registry.digitalocean.com
+            docker pull registry.digitalocean.com/wass/wass:latest
+            cd /home/andres/docker
+            docker-compose up -d
+      if: ${{ github.ref == 'refs/heads/develop' }}
+      - name: Deploy to Digital Ocean droplet via SSH action
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          envs: IMAGE_NAME,REGISTRY,GITHUB_SHA
+          script: |
+            docker stop wass-dev
+            docker rm wass-dev
             docker login registry.digitalocean.com
             docker pull registry.digitalocean.com/wass/wass:latest
             cd /home/andres/docker
