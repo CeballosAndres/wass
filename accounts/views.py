@@ -28,3 +28,11 @@ def Padmi(request):
 
 def agendar(request):
     return render(request, 'accounts/agendar.html')
+
+
+def verAsesorias(request):
+    return render(request, 'accounts/ver-asesorias.html')
+
+
+def config(request):
+    return render(request, 'accounts/config.html')

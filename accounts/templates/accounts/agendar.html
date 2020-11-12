@@ -3,25 +3,39 @@
 
 {% block content %}
 <style>
-
-    button{
-        width: 300px;
-        height: 60px;
-        margin-bottom: 2rem;
-    }
+  button{
+    width: 300px;
+    height: 60px;
+    margin-bottom: 2rem;
+  }
+  .result {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 80%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */ 
+}
 
 
 </style>
-    <h1 class="mb-5 py-2"><a href="#"><i class="fas fa-arrow-circle-left px-4"></i></a> Agendar asesoria</h1>
+
+<!---Titulo-->
+<h1 class="my-3"><a href="#"><i class="fas fa-arrow-circle-left px-4"></i></a> Agendar asesoria</h1>
 
 
 
 <main>
     <!-- Obvi esta parte no sera asi, pero es para ver si visualmente quedaria asi -->
-    <select class="browser-default custom-select mb-5">
+    <select class="browser-default custom-select my-5">
         <option selected>Selecciona la carrera</option>
         <option value="1">Ingenieria en Sistemas Computacionales</option>
-        <option value="2">Inforamtica</option>
+        <option value="2">Informatica</option>
       </select>
       <!-- Mostrar las materias de acuerdo a su kardex-->
       <select class="browser-default custom-select mb-5">
@@ -51,7 +65,54 @@
       </select>
       <div> 
         <button type="button" class="btn btn-outline-primary" style="font-size:20px;">Buscar</button> 
-    </div>
+      </div>
 </main>
 
+
+<!-- TThe result window -->
+<div id="agenda" class="result">
+
+  <div>
+    <button class="my-btn"><i class="fas fa-chevron-right"></i></button>
+    <p>fechas</p>
+    <button class="my-btn"><i class="fas fa-chevron-left"></i></button>
+  </div>
+
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <table class="table table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Asesor</th>
+          <th scope="col">Lunes</th>
+          <th scope="col">Martes</th>
+          <th scope="col">Miercoles</th>
+          <th scope="col">Jueves</th>
+          <th scope="col">Viernes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Octavio Paz</th>
+          <td>13:00</td>
+          <td>11:00</td>
+          <td></td>
+          <td>13:00</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th scope="row">Jose Sonora</th>
+          <td>14:00</td>
+          <td></td>
+          <td>10:00</td>
+          <td>9:00</td>
+          <td>11:00</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
 {% endblock %}
+

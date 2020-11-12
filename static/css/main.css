@@ -19,3 +19,10 @@ form a {
 i {
     font-size: 30px   
 }
+
+.card {     
+    margin: 0 auto; 
+    float: none; 
+    margin-bottom: 10px; 
+    background-color: #C4C4C4;
+}

@@ -9,4 +9,3 @@
 
 - Buttons events
 
-- Change logo's colors

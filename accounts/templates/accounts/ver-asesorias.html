@@ -1,0 +1,40 @@
+{% extends 'accounts/nav.html' %}
+{% load static %}
+
+{% block content %}
+
+<!---Titulo-->
+<h1 class="my-3"><a href="#"><i class="fas fa-arrow-circle-left px-4"></i></a> Asesorias</h1>
+<!-- Opcion de filtrado-->
+<div class="row px-lg-5 mb-5">
+  <div class="col-sm-9"></div>
+  <div class="col-sm-3">
+    <select class="custom-select" style="width: 12.5rem; height: 50px;">
+      <option selected>Filtrar por</option>
+      <option value="1">Pendientes</option>
+      <option value="2">Aceptadas</option>
+      <option value="2">Rechazadas</option>
+      <option value="2">Finalizadas</option>
+      <option value="2">Canceladas</option>
+    </select>
+  </div>
+</div>
+
+<div class="c card w-75 mb-5" >
+  <div class="card-body">
+    <img class = "m-2" src="{% static 'images/user-circle-solid.svg' %}"  width="72" height="72" alt="Foto de perfil">
+    Docente Juanito Fulanito
+  </div>
+</div>
+
+<div class="card w-75 mb-5" >
+  <div class="card-body">
+    This is some text within a card body.
+  </div>
+</div>
+
+
+
+
+
+{% endblock %}
