@@ -27,7 +27,9 @@ if os.getenv('GITHUB_WORKFLOW'):
     DEBUG = True
 else:
     SECRET_KEY = config('SECRET_KEY')
-    DEBUG = config('DEBUG', default=False, cast=bool)
+    DEBUG = False
+    #DEBUG = config('DEBUG', default=False, cast=bool)
+
 
 ALLOWED_HOSTS = ['www.constru.app', 'dev.constru.app', '127.0.0.1', 'localhost']
 
@@ -46,6 +48,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -147,6 +150,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 STATIC_URL = '/static/'
 
@@ -156,4 +160,3 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
