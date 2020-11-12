@@ -24,11 +24,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 if os.getenv('GITHUB_WORKFLOW'):
     SECRET_KEY = '=lxu(o7vpbm+h+zd3&-qgayq$^h8h23knn@nkhbvtn6l6%70pd'
+    DEBUG = True
 else:
     SECRET_KEY = config('SECRET_KEY')
+    DEBUG = config('DEBUG')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG')
+
 
 ALLOWED_HOSTS = ['www.constru.app', 'dev.constru.app', '127.0.0.1', 'localhost']
 
