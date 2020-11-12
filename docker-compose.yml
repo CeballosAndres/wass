@@ -289,6 +289,8 @@ services:
     container_name: wass
     image: registry.digitalocean.com/wass/wass:latest
     restart: unless-stopped
+    ports:
+      - "8000:8000"
     networks:
       - t2_proxy
     security_opt:
@@ -325,6 +327,8 @@ services:
     container_name: wass-dev
     image: registry.digitalocean.com/wass/wass:latest
     restart: unless-stopped
+    ports:
+      - "8001:8001"
     networks:
       - t2_proxy
     security_opt:
@@ -351,4 +355,5 @@ services:
       ## HTTP Services
       - "traefik.http.routers.wassdev-rtr.service=wass-svc"
       - "traefik.http.services.wassdev-svc.loadbalancer.server.port=8001"
+
 
