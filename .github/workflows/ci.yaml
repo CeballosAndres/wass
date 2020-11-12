@@ -77,38 +77,42 @@ jobs:
       - name: Push image to DigitalOcean Container Registry
         run: docker push $(echo $REGISTRY)/$(echo $IMAGE_NAME):latest
 
-  deploy-job: # deploy job is for deploying our code to google cloud cluster.
+  deploy-job-main: # deploy job is for deploying our code to google cloud cluster.
     runs-on: ubuntu-latest
     needs: [package-job] # will require package-job to be successful for triggering
-    if: ${{ github.event_name == 'push' }} # will be fire if the trigger event is a push event.
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }} # will be fire if the trigger event is a push event.
     steps:
-      if: ${{ github.ref == 'refs/heads/main' }}
-      - name: Deploy to Digital Ocean droplet via SSH action
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          envs: IMAGE_NAME,REGISTRY,GITHUB_SHA
-          script: |
-            docker stop wass
-            docker rm wass
-            docker login registry.digitalocean.com
-            docker pull registry.digitalocean.com/wass/wass:latest
-            cd /home/andres/docker
-            docker-compose up -d
-      if: ${{ github.ref == 'refs/heads/develop' }}
-      - name: Deploy to Digital Ocean droplet via SSH action
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          envs: IMAGE_NAME,REGISTRY,GITHUB_SHA
-          script: |
-            docker stop wass-dev
-            docker rm wass-dev
-            docker login registry.digitalocean.com
-            docker pull registry.digitalocean.com/wass/wass:latest
-            cd /home/andres/docker
-            docker-compose up -d
+    - name: Deploy to Digital Ocean droplet via SSH action
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        envs: IMAGE_NAME,REGISTRY,GITHUB_SHA
+        script: |
+          docker stop wass
+          docker rm wass
+          docker login registry.digitalocean.com
+          docker pull registry.digitalocean.com/wass/wass:latest
+          cd /home/andres/docker
+          docker-compose up -d
+
+  deploy-job-develop: # deploy job is for deploying our code to google cloud cluster.
+    runs-on: ubuntu-latest
+    needs: [package-job] # will require package-job to be successful for triggering
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }} # will be fire if the trigger event is a push event.
+    steps:
+    - name: Deploy to Digital Ocean droplet via SSH action
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        envs: IMAGE_NAME,REGISTRY,GITHUB_SHA
+        script: |
+          docker stop wass-dev
+          docker rm wass-dev
+          docker login registry.digitalocean.com
+          docker pull registry.digitalocean.com/wass/wass:latest
+          cd /home/andres/docker
+          docker-compose up -d
