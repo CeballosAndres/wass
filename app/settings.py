@@ -27,8 +27,7 @@ if os.getenv('GITHUB_WORKFLOW'):
     DEBUG = True
 else:
     SECRET_KEY = config('SECRET_KEY')
-    DEBUG = False
-    #DEBUG = config('DEBUG', default=False, cast=bool)
+    DEBUG = config('DEBUG', default=False, cast=bool)
 
 
 ALLOWED_HOSTS = ['www.constru.app', 'dev.constru.app', '127.0.0.1', 'localhost']
@@ -159,4 +158,3 @@ MEDIA_URL = '/images/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-
