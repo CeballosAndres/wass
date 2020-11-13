@@ -1,18 +1,28 @@
 {% extends 'accounts/simple-nav.html' %}
+{% load static %}
 
 
 {% block content %}
 
 <main>
-    <h1 class="py-5">Registro</h1>
+    <img src="{% static 'images/Logo.png' %}" width="200" height="110" alt="Wass logo" class="p-3">
+    <h2 class="pt-5 pb-4">Registro</h2>
 
-    <form>
-        <input id="InputEmail1" type="email" class="form-control form-control-lg input-box mb-5" aria-describedby="emailRegister" placeholder="Correo institucional">
-        <input id="InputPassword" type="password" class="form-control form-control-lg input-box mb-5" placeholder="Contraseña" aria-describedby="ContraseniaRegistro">
-        <button type="submit" class="btn btn-outline-primary btn-lg mb-5">Registrarse</button>
+    <form method="POST" action="">
+        <!--{% csrf_token %}
+        {{form}}    
+
+        <input type="submit" name="Create User">--->
+
+        <input id="InputEmail1" type="email" class="form-control form-control-lg input-box mb-4" aria-describedby="emailRegister" placeholder="Correo institucional">
+
+        <input id="InputPassword" type="password" class="form-control form-control-lg input-box mb-5" placeholder="Contraseña" aria-describedby="ContraseñaRegistro">
+        <input type="submit" class ="my-btn" value="Registrarse">
     </form>
 
-    <p class="font-italic"><a href="#" class="text-decoration-none" style="display:inline;">Iniciar sesion</a> en caso tener una cuenta</p>
+    <div class="mt-3">
+        <p class="font-italic"><a href="#" class="text-decoration-none" style="display:inline;">Iniciar sesion</a> en caso tener una cuenta</p>
+    </div>
 </main>
 
 {% endblock %}

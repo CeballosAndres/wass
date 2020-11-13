@@ -1,14 +1,17 @@
 {% extends 'accounts/simple-nav.html' %}
+{% load static %}
 
 {% block content %}
 
 <main>
-    <h1 class="py-5">Iniciar Sesion</h1>
+    <img src="{% static 'images/Logo.png' %}" width="200" height="110" alt="Wass logo" class="p-3">
+    <h2 class="pt-5 pb-4">Iniciar Sesión</h2>
+    
 
     <form>
-        <input id="InputEmail1" type="email" class="form-control form-control-lg input-box mb-5" aria-describedby="email" placeholder="Correo institucional">
+        <input id="InputEmail1" type="email" class="form-control form-control-lg input-box mb-4" aria-describedby="email" placeholder="Correo institucional">
         <input id="InputPassword" type="password" class="form-control form-control-lg input-box mb-5" placeholder="Contraseña">
-        <button type="submit" class="btn btn-outline-primary btn-lg">Entrar</button>
+        <input type="submit" class ="my-btn" value="Entrar">
         <a class="font-weight-lighter text-muted mt-2 mb-5" href="#">Olvide mi contraseña</a>
     </form>
 

@@ -1,13 +1,25 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.forms import UserCreationForm
 
+#from .forms import OrderForm, CreateUserForm
 
 def registro(request):
-    return render(request, 'accounts/registro.html')
+    context = {}
+
+    """form = CreateUserForm()
+
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()"""
+
+    return render(request, 'accounts/registro.html', context)
 
 
 def ingreso(request):
-    return render(request, 'accounts/ingreso.html')
+    context = {}
+    return render(request, 'accounts/ingreso.html', context)
 
 
 def Pasesorado(request):

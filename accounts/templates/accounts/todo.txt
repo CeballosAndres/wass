@@ -9,3 +9,4 @@
 
 - Buttons events
 
+- fix left line from config profile pic
