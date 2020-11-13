@@ -3,19 +3,28 @@
 
 {% block content %}
 
-<main>
-    <img src="{% static 'images/Logo.png' %}" width="200" height="110" alt="Wass logo" class="p-3">
-    <h2 class="pt-5 pb-4">Iniciar Sesión</h2>
+
+<main class="container text-center">
+    <div class="row p-3">
+        <div class="col-12"><img src="{% static 'images/Logo.png' %}" width="200" height="110" alt="Wass logo"></div>
+    </div>
+    <div class="row pt-5 pb-4">
+        <div class="col-12"><h2>Iniciar Sesión</h2></div>
+    </div>
     
+    <div class="row">
+        <div class="col-12">
+            <form>
+                <input id="InputEmail1" type="email" class="form-control form-control-lg input-box mb-4" aria-describedby="email" placeholder="Correo institucional">
+                <input id="InputPassword" type="password" class="form-control form-control-lg input-box mb-5" placeholder="Contraseña">
+                <input type="submit" class ="my-btn" value="Entrar">
+                <a class="font-weight-lighter text-muted mt-2 mb-5" href="#">Olvide mi contraseña</a>
+            </form>
+        
+            <p class="font-italic"><a href="#" class="text-decoration-none" style="display:inline;">Registrarse</a> en caso de no tener una cuenta</p>
+        </div>
+    </div>
 
-    <form>
-        <input id="InputEmail1" type="email" class="form-control form-control-lg input-box mb-4" aria-describedby="email" placeholder="Correo institucional">
-        <input id="InputPassword" type="password" class="form-control form-control-lg input-box mb-5" placeholder="Contraseña">
-        <input type="submit" class ="my-btn" value="Entrar">
-        <a class="font-weight-lighter text-muted mt-2 mb-5" href="#">Olvide mi contraseña</a>
-    </form>
-
-    <p class="font-italic"><a href="#" class="text-decoration-none" style="display:inline;">Registrarse</a> en caso de no tener una cuenta</p>
 </main>
 
 {% endblock %}

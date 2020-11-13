@@ -1,12 +1,7 @@
-main {
-    margin: auto;
-    width: 50%;
-    text-align: center;
-}
 
 /* size for the inputs */   
 .input-box {
-    height: 3.5rem;
+    height: 50px;
     width: 300px;
     margin: auto;
 }
@@ -44,7 +39,7 @@ input[type=submit]{
     color: #555;
     height: 70px;
     font-size: 22px;
-    width: 350px;
+    max-width: 350px;
     margin-bottom: 2rem;
 }
 
@@ -61,3 +56,9 @@ input[type=submit]{
 .my-btn:hover, .my-btn-small:hover {
     color: #e8aa00;
 }
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
