@@ -47,3 +47,7 @@ def cAsesor(request):
 
 def index(request):
     return render(request, 'accounts/index.html')
+
+
+def reportes(request):
+    return render(request, 'accounts/ppal-reportes.html')

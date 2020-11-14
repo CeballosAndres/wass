@@ -15,4 +15,5 @@ urlpatterns = [
         path('config-alumno/', views.cAsesorado),
         path('config-docente/', views.cAsesor),
         path('ingreso/', views.ingreso),
+        path('reportes/', views.reportes)
         ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
