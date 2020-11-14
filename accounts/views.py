@@ -13,19 +13,19 @@ def ingreso(request):
     return render(request, 'accounts/ingreso.html', context)
 
 
-def Pasesorado(request):
+def pAsesorado(request):
     return render(request, 'accounts/ppal-asesorado.html')
 
 
-def Pasesor(request):
+def pAsesor(request):
     return render(request, 'accounts/ppal-asesor.html')
 
 
-def PjefeD(request):
+def pJefeD(request):
     return render(request, 'accounts/ppal-jfedpto.html')
 
 
-def Padmi(request):
+def pAdmi(request):
     return render(request, 'accounts/ppal-adm.html')
 
 
@@ -37,5 +37,13 @@ def verAsesorias(request):
     return render(request, 'accounts/ver-asesorias.html')
 
 
-def config(request):
-    return render(request, 'accounts/config.html')
+def cAsesorado(request):
+    return render(request, 'accounts/config-asesorado.html')
+
+
+def cAsesor(request):
+    return render(request, 'accounts/config-asesor.html')
+
+
+def index(request):
+    return render(request, 'accounts/index.html')

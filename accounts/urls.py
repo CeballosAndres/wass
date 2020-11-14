@@ -4,13 +4,15 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-        path('', views.ingreso),
+        path('', views.index),
         path('registro/', views.registro),
-        path('alumno/', views.Pasesorado),
-        path('docente/', views.Pasesor),
-        path('jfe-dpto/', views.PjefeD),
-        path('admi/', views.Padmi),
+        path('alumno/', views.pAsesorado),
+        path('docente/', views.pAsesor),
+        path('jfe-dpto/', views.pJefeD),
+        path('admi/', views.pAdmi),
         path('agendar/', views.agendar),
         path('ver-asesorias/', views.verAsesorias),
-        path('config/', views.config),
+        path('config-alumno/', views.cAsesorado),
+        path('config-docente/', views.cAsesor),
+        path('ingreso/', views.ingreso),
         ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
