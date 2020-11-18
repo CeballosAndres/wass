@@ -10,3 +10,5 @@
 - Buttons events
 
 - fix left line from config profile pic
+
+- authentication or check for the login page

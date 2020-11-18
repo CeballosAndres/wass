@@ -1,4 +1,4 @@
-{% extends 'accounts/nav-profile.html' %}
+{% include 'accounts/nav-profile.html' %}
 {% load static %}
 
 {% block content %}
@@ -28,7 +28,7 @@
         </div>
 
         <div class="col-md-3 border-left">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="mt-5" src="{% static 'images/user-circle-solid.svg' %}" width="90">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="mt-5" src="{% static 'images/user.svg' %}" width="90">
             </div>
         </div>
 
