@@ -1,10 +1,9 @@
 {% extends 'accounts/root.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
 
 {% block content %}
-
-
 <main class="container text-center">
     
     <div class="row pt-3">
@@ -16,16 +15,28 @@
     
     <div class="row">
         <div class="col-12">
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+
             <form method="POST" action="">
-                <input id="InputEmail1" type="email" class="form-control form-control-lg input-box mb-4" aria-describedby="emailRegister" placeholder="Correo institucional">
-                <input id="InputPassword" type="password" class="form-control form-control-lg input-box mb-5" placeholder="Contraseña">
+                {% csrf_token %}
+                {% render_field form.email class="form-control form-control-lg input-box mb-4" placeholder="Correo institucional" %}
+                {% render_field form.password1 class="form-control form-control-lg input-box mb-4" placeholder=form.password1.label %}
+                {% render_field form.password2 class="form-control form-control-lg input-box mb-4" placeholder=form.password2.label %}
                 <input type="submit" class ="my-btn" value="Registrarse">
             </form>
-        
+
             <p class="font-italic"><a href="{% url 'ingreso' %}" class="text-decoration-none mt-3" style="display:inline;">Iniciar sesión</a> en caso de tener una cuenta</p>
         </div>
     </div>
-
 </main>
 
 {% endblock %}
