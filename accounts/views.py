@@ -27,13 +27,23 @@ def registro(request):
 def ingreso(request):
 
     if request.method == 'POST':
-        request.POST.get('email')
-        request.POST.get('password')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-        user = authenticate(request, )
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            login(request, user)
+            return redirect('principal')
+        else:
+            messages.warning(request, 'Combinación incorrecta de usuario y contraseña.')
 
     context = {}
     return render(request, 'accounts/ingreso.html', context)
+
+def salir(request):
+    logout(request)
+    return redirect('ingreso')
 
 
 def pAsesorado(request):

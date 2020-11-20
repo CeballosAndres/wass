@@ -15,17 +15,17 @@
     
     <div class="row">
         <div class="col-12">
-
-        {% for message in messages %}
-            <div class="alert alert-success alert-dismissible">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>{{ message }}</strong>
-            </div>
-        {% endfor %}
-
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{message.tags}} alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>{{ message }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
             <form method="POST" action="">
                 {% csrf_token %}
-                <input name="email" type="email" class="form-control form-control-lg input-box mb-4" aria-describedby="email" placeholder="Correo institucional">
+                <input name="username" type="text" class="form-control form-control-lg input-box mb-4" aria-describedby="email" placeholder="Usuario">
                 <input name="password" type="password" class="form-control form-control-lg input-box mb-5" placeholder="Contraseña">
                 <input type="submit" class ="my-btn" value="Entrar">
                 <a class="text-muted mb-5" href="#">Olvidé mi contraseña</a>
