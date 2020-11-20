@@ -1,14 +1,37 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+
+from .models import *
+from .forms import CreateUserForm
 
 
 def registro(request):
-    context = {}
+    form = CreateUserForm()
+
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # Add some flash messajes before to redirect
+            email = form.cleaned_data.get('email')
+            messages.success(request, 'Registro exitoso para ' + email)
+        
+            return redirect('ingreso')
+        
+    context = {'form':form}
     return render(request, 'accounts/registro.html', context)
 
 
 def ingreso(request):
+
+    if request.method == 'POST':
+        request.POST.get('email')
+        request.POST.get('password')
+
+        user = authenticate(request, )
+
     context = {}
     return render(request, 'accounts/ingreso.html', context)
 
