@@ -13,17 +13,22 @@ class CreateUserForm(UserCreationForm):
         'bad_domain': _('El dominio permitido es @colima.tecnm.mx .'),
         'user_exists': _('El usuario ya se encuentra registrado.'),
     }
-    email = forms.EmailField(required=True, label=_("Email"), max_length=254,
-        widget=forms.EmailInput(attrs={'autocomplete': 'email'}))
+
+    email = forms.EmailField(
+            required=True,
+            label=_("Email"),
+            max_length=254,
+            widget=forms.EmailInput(attrs={'autocomplete': 'email'})
+            )
 
     class Meta:
         model = User
         fields = ('email',)
-    
+
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if email:
-            user, domain = email.split('@') 
+            user, domain = email.split('@')
             if domain != 'colima.tecnm.mx':
                 raise ValidationError(
                     self.error_messages['bad_domain'],

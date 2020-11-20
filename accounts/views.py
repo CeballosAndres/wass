@@ -18,29 +18,24 @@ def registro(request):
             # Add some flash messajes before to redirect
             email = form.cleaned_data.get('email')
             messages.success(request, 'Registro exitoso para ' + email)
-        
             return redirect('ingreso')
-        
-    context = {'form':form}
+    context = {'form': form}
     return render(request, 'accounts/registro.html', context)
 
 
 def ingreso(request):
-
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-
         user = authenticate(request, username=username, password=password)
-        
         if user is not None:
             login(request, user)
             return redirect('principal')
         else:
             messages.warning(request, 'Combinación incorrecta de usuario y contraseña.')
-
     context = {}
     return render(request, 'accounts/ingreso.html', context)
+
 
 def salir(request):
     logout(request)
