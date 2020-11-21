@@ -31,6 +31,7 @@
                 {% render_field form.email class="form-control form-control-lg input-box mb-4" placeholder="Correo institucional" %}
                 {% render_field form.password1 class="form-control form-control-lg input-box mb-4" placeholder=form.password1.label %}
                 {% render_field form.password2 class="form-control form-control-lg input-box mb-4" placeholder=form.password2.label %}
+<<<<<<< HEAD
                 <input type="submit" class ="small my-btn mb-5" value="Registrarse">
             </form>
 
@@ -39,6 +40,14 @@
     </div>
 
 
+=======
+                <input type="submit" class ="my-btn" value="Registrarse">
+            </form>
+
+            <p class="font-italic"><a href="{% url 'ingreso' %}" class="text-decoration-none mt-3" style="display:inline;">Iniciar sesión</a> en caso de tener una cuenta</p>
+        </div>
+    </div>
+>>>>>>> 117bb85e63b657cbb034ccf8a9d7e822762214df
 </main>
 
 {% endblock %}

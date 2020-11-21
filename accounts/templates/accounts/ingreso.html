@@ -25,11 +25,18 @@
                 {% endfor %}
             {% endif %}
             <form method="POST" action="">
+<<<<<<< HEAD
                 <!--- Inputs y boton -->
                 {% csrf_token %}
                 <input name="username" type="text" class="form-control form-control-lg input-box mb-4" aria-describedby="user" placeholder="Usuario">
                 <input name="password" type="password" class="form-control form-control-lg input-box mb-5" placeholder="Contraseña">
                 <input type="submit" class ="small my-btn mb-1" value="Entrar">
+=======
+                {% csrf_token %}
+                <input name="username" type="text" class="form-control form-control-lg input-box mb-4" aria-describedby="email" placeholder="Usuario">
+                <input name="password" type="password" class="form-control form-control-lg input-box mb-5" placeholder="Contraseña">
+                <input type="submit" class ="my-btn" value="Entrar">
+>>>>>>> 117bb85e63b657cbb034ccf8a9d7e822762214df
                 <a class="text-muted mb-5" href="#">Olvidé mi contraseña</a>
             </form>
         
