@@ -50,4 +50,4 @@ def index(request):
 
 
 def reportes(request):
-    return render(request, 'accounts/ppal-reportes.html')
+    return render(request, 'accounts/ver-reportes.html')
