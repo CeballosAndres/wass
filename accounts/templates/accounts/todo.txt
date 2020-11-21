@@ -12,3 +12,7 @@
 - fix left line from config profile pic
 
 - authentication or check for the login page
+
+- add topic to the 'asesoria' card (thats not in Figma)
+
+- the user is not gonna enter with the email but with the control's number

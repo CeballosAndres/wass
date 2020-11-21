@@ -5,15 +5,15 @@
 
 {% block content %}
 <main class="container text-center">
-    
+        
     <div class="row pt-3">
         <div class="col-12"><img src="{% static 'images/Logo.png' %}" width="280" height="140" alt="Wass logo"></div>
     </div>
     <div class="row pt-5 pb-4">
         <div class="col-12"><h2>Registro</h2></div>
     </div>
-    
-    <div class="row">
+
+    <div class="container-fluid">
         <div class="col-12">
             {% if form.errors %}
                 {% for field in form %}
@@ -31,10 +31,11 @@
                 {% render_field form.email class="form-control form-control-lg input-box mb-4" placeholder="Correo institucional" %}
                 {% render_field form.password1 class="form-control form-control-lg input-box mb-4" placeholder=form.password1.label %}
                 {% render_field form.password2 class="form-control form-control-lg input-box mb-4" placeholder=form.password2.label %}
-                <input type="submit" class ="my-btn" value="Registrarse">
+
+                <input type="submit" class ="small my-btn mb-5" value="Registrarse">
             </form>
 
-            <p class="font-italic"><a href="{% url 'ingreso' %}" class="text-decoration-none mt-3" style="display:inline;">Iniciar sesión</a> en caso de tener una cuenta</p>
+            <p class="font-italic"><a href="{% url 'ingreso' %}" class="text-decoration-none" style="display:inline;">Iniciar sesión</a> en caso de tener una cuenta</p>
         </div>
     </div>
 </main>
