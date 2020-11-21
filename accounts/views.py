@@ -6,11 +6,12 @@ from django.contrib.auth.decorators import login_required
 
 from .models import *
 from .forms import CreateUserForm
+from .decorators import unauthenticated_user
 
 
+@unauthenticated_user
 def registro(request):
     form = CreateUserForm()
-
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
@@ -23,6 +24,7 @@ def registro(request):
     return render(request, 'accounts/registro.html', context)
 
 
+@unauthenticated_user
 def ingreso(request):
     if request.method == 'POST':
         username = request.POST.get('username')
