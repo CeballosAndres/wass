@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from .models import *
 from .forms import CreateUserForm
-from .decorators import unauthenticated_user
+from .decorators import unauthenticated_user, allowed_users
 
 
 @unauthenticated_user
@@ -45,8 +45,23 @@ def salir(request):
 
 
 @login_required(login_url='ingreso')
-def pAsesorado(request):
-    return render(request, 'accounts/ppal-asesorado.html')
+@allowed_users(['asesorados', 'asesores', 'jefes'])
+def principal(request):
+    opciones = []
+    group = request.user.groups.all()[0].name
+    if group == 'asesorados':
+        opciones = {'agendar': 'Agendar',
+                    'ver-asesorias': 'Ver Asesorías'}
+    elif group == 'asesores':
+        opciones = {'agendar': 'Mis asesorías',
+                    'ver-asesorias': 'Horario',
+                    'index': 'Temario',
+                    'reportes': 'Reportes'}
+    elif group == 'jefes':
+        opciones = {'index': 'Carrera',
+                    'reportes': 'Reportes'}
+    context = {'opciones': opciones}
+    return render(request, 'accounts/principal.html', context)
 
 
 @login_required(login_url='ingreso')
