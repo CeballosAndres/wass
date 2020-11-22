@@ -4,26 +4,61 @@
 {% block content %}
 
 <!---Titulo-->
-<h1 class="my-3"><a href="#"><i class="fas fa-arrow-circle-left px-4"></i></a> Asesorias</h1>
-<!-- Opcion de filtrado-->
-<div class="row px-lg-5 mb-5">
-  <div class="col-sm-9"></div>
-  <div class="col-sm-3">
+<div class="d-flex justify-content-between m-3">
+  <h1><a href="#"><i class="fas fa-arrow-circle-left"></i></a> Asesorias</h1>
+  <!-- Opcion de filtrado-->
+  <div>
     <select class="custom-select" style="width: 12.5rem; height: 50px;">
-      <option selected>Filtrar por</option>
-      <option value="1">Pendientes</option>
-      <option value="2">Aceptadas</option>
-      <option value="2">Rechazadas</option>
-      <option value="2">Finalizadas</option>
-      <option value="2">Canceladas</option>
+        <option selected>Filtrar por</option>
+        <option value="1">Pendientes</option>
+        <option value="2">Aceptadas</option>
+        <option value="2">Rechazadas</option>
+        <option value="2">Finalizadas</option>
+        <option value="2">Canceladas</option>
     </select>
   </div>
 </div>
+
 <!-- Asesoria card-->
-<div class="c card w-75 mb-5" >
-  <div class="card-body">
-    <img class = "m-2" src="{% static 'images/user.svg' %}"  width="72" height="72" alt="Foto de perfil">
-    Docente Juanito Fulanito
+<div class="d-flex" style="max-width: 1200px;">
+
+  <div class="card" >
+    <div class="row no-gutters">
+      <div class="col-md-1 my-auto">
+        <img src="{% static 'images/user.svg' %}"  width="72" height="72" alt="Foto de perfil">
+      </div>
+      <div class="col-md-6">
+        <div class="card-body">
+          <h5 class="card-title">Nombre completo</h5>
+          <p class="card-text">Tema</p>
+          <p class="card-text">Lugar</p>
+          <p class="card-text">Dia y hora</p>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="card-body botones">
+          <button type="button" class="my-btn">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</div>
+
+
+<div class="c card w-75 mb-5  border-light" >
+  <h3 class="card-title">Tema ?</h3>
+  <div class="row no-gutters">
+    <div class="col-2">
+      
+    </div>
+    <div class="col-6">
+      <h2>Estudiante tal</h2>
+      <p>Lugar</p>
+    </div>
   </div>
 </div>
 
