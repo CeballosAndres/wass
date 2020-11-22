@@ -56,7 +56,7 @@ i {
 }
 
 .alert {
-    width: 300px;
-    margin: auto; 
     display: table;
+    margin: auto; 
+    width: 300px;   
 }
