@@ -27,8 +27,8 @@
             <form method="POST" action="">
                 <!--- Inputs y boton -->
                 {% csrf_token %}
-                <input name="username" type="text" class="form-control form-control-lg input-box mb-4" aria-describedby="user" placeholder="Usuario">
-                <input name="password" type="password" class="form-control form-control-lg input-box mb-5" placeholder="Contraseña">
+                <input name="username" type="text" class="form-control form-control-lg input-box mb-4" aria-describedby="user" placeholder="Usuario" required="required">
+                <input name="password" type="password" class="form-control form-control-lg input-box mb-5" placeholder="Contraseña" required="required">
                 <input type="submit" class ="small my-btn mb-1" value="Entrar">
                 <a class="text-muted mb-5" href="#">Olvidé mi contraseña</a>
             </form>

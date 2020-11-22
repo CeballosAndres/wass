@@ -16,7 +16,7 @@ def registro(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
-            # Add some flash messajes before to redirect
+            # Add some flash messages before to redirect
             email = form.cleaned_data.get('email')
             messages.success(request, 'Registro exitoso para ' + email)
             return redirect('ingreso')
