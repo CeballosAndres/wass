@@ -2,74 +2,61 @@
 {% load static %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static '/css/responsive.css' %}">
 
 <!---Titulo-->
-<div class="d-flex justify-content-between m-3">
-  <h1><a href="#"><i class="fas fa-arrow-circle-left"></i></a> Asesorias</h1>
-  <!-- Opcion de filtrado-->
-  <div>
-    <select class="custom-select" style="width: 12.5rem; height: 50px;">
+<div class="container-fluid my-3">
+  <div class="row">
+    <div class="col-xs-6 col-md-9"><h1 id="title"><a href="#"><i class="fas fa-arrow-circle-left"></i></a> Asesorias</h1></div>
+      <!-- Opcion de filtrado-->
+    <div class="col-xs-6 col-md-3">
+      <select id="filter" class="custom-select">
         <option selected>Filtrar por</option>
         <option value="1">Pendientes</option>
         <option value="2">Aceptadas</option>
         <option value="2">Rechazadas</option>
         <option value="2">Finalizadas</option>
         <option value="2">Canceladas</option>
-    </select>
+      </select>
+    </div>
   </div>
 </div>
 
 <!-- Asesoria card-->
-<div class="d-flex" style="max-width: 1200px;">
-
-  <div class="card" >
-    <div class="row no-gutters">
-      <div class="col-md-1 my-auto">
-        <img src="{% static 'images/user.svg' %}"  width="72" height="72" alt="Foto de perfil">
-      </div>
-      <div class="col-md-6">
-        <div class="card-body">
-          <h5 class="card-title">Nombre completo</h5>
-          <p class="card-text">Tema</p>
-          <p class="card-text">Lugar</p>
-          <p class="card-text">Dia y hora</p>
-        </div>
-      </div>
-      <div class="col-md-5">
-        <div class="card-body botones">
-          <button type="button" class="my-btn">Aceptar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-
-</div>
-
-
-<div class="c card w-75 mb-5  border-light" >
-  <h3 class="card-title">Tema ?</h3>
+<div class="my-card card border-light">
   <div class="row no-gutters">
-    <div class="col-2">
-      
-    </div>
-    <div class="col-6">
-      <h2>Estudiante tal</h2>
-      <p>Lugar</p>
+
+  <div class="col-md-2 my-auto">
+      <img src="{% static 'images/user.svg' %}" class="m-5" height="80" alt="Foto de perfil">
+  </div>
+
+  <div class="col-md-7">
+    <div class="card-body">
+      <h5 class="card-title">Nombre completo</h5>
+      <p class="card-text">Tema</p>
+      <p class="card-text">Lugar</p>
+      <p class="card-text">Dia y hora</p>
     </div>
   </div>
-</div>
 
-<div class="card" >
-  <div class="card-body">
-    This is some text within a card body.
+  <div class="col-md-3">
+    <div class="card-body botones">
+      <p class="status pendiente">Pendiente</p>
+      <p class="status rechazada">Rechazada</p>
+      <p class="status aceptada">Aceptada</p>
+      <p class="status cancelada">Cancelada</p>
+      <p class="status finalizada">Finalizada</p>
+      <button type="button" class="my-btn">Estado</button>
+    </div>
   </div>
+
+  </div>
+
+  <div class="row no-gutters">
+    
+  </div>
+
 </div>
-
-
-
 
 
 {% endblock %}

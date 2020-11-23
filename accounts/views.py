@@ -8,6 +8,8 @@ from .models import *
 from .forms import CreateUserForm
 from .decorators import unauthenticated_user, allowed_users
 
+from django.views.generic import DetailView
+
 
 @unauthenticated_user
 def registro(request):
@@ -89,12 +91,10 @@ def verAsesorias(request):
     return render(request, 'accounts/ver-asesorias.html')
 
 
-@login_required(login_url='ingreso')
 def cAsesorado(request):
     return render(request, 'accounts/config-asesorado.html')
 
 
-@login_required(login_url='ingreso')
 def cAsesor(request):
     return render(request, 'accounts/config-asesor.html')
 
