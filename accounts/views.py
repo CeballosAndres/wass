@@ -91,10 +91,12 @@ def verAsesorias(request):
     return render(request, 'accounts/ver-asesorias.html')
 
 
+@unauthenticated_user
 def cAsesorado(request):
     return render(request, 'accounts/config-asesorado.html')
 
 
+@unauthenticated_user
 def cAsesor(request):
     return render(request, 'accounts/config-asesor.html')
 
