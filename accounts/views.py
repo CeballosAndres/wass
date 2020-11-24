@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 
 from .models import *
-from .forms import CreateUserForm
+from .forms import *
 from .decorators import unauthenticated_user, allowed_users
 
 from django.views.generic import DetailView
@@ -91,6 +92,7 @@ def verAsesorias(request):
     return render(request, 'accounts/ver-asesorias.html')
 
 
+<<<<<<< HEAD
 @unauthenticated_user
 def cAsesorado(request):
     return render(request, 'accounts/config-asesorado.html')
@@ -99,6 +101,51 @@ def cAsesorado(request):
 @unauthenticated_user
 def cAsesor(request):
     return render(request, 'accounts/config-asesor.html')
+=======
+def configurar(request):
+    group = request.user.groups.all()[0].name
+    user_profile = None
+    form = None
+    user_email = request.user.email
+    # User type
+    if group == 'asesorados':
+        user_profile = Asesorado.objects.get(usuario=request.user.id)
+    else:
+        user_profile = Asesor.objects.get(usuario=request.user.id)
+    # User data form
+    if request.method == 'POST':
+        if group == 'asesorados':
+            form = AsesoradoForm(request.POST, instance=user_profile)
+        else:
+            form = AsesorForm(request.POST, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Datos personales actualizados.')
+            return redirect('configurar')
+    else:
+        if group == 'asesorados':
+            form = AsesoradoForm(instance=user_profile)
+        else:
+            form = AsesorForm(instance=user_profile)
+    context = {'hide_config': True, 'group': group, 'form': form,
+               'user_email': user_email}
+    return render(request, 'accounts/configurar.html', context)
+
+
+@login_required(login_url='ingreso')
+def contrasena(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # solve autologin!
+            messages.success(request, 'Contraseña actualizada')
+            return redirect('configurar')
+    else:
+        form = PasswordChangeForm(request.user)
+    context = {'form': form}
+    return render(request, 'accounts/contrasena.html', context)
+>>>>>>> 44c7599605596d130509f4bc6f7c785f86ab813f
 
 
 @login_required(login_url='ingreso')

@@ -5,21 +5,34 @@ from django.utils.translation import gettext, gettext_lazy as _
 from django.core.exceptions import ValidationError
 
 from django.contrib.auth.models import User
+from .models import Asesorado, Asesor
+
+
+class AsesoradoForm(ModelForm):
+    class Meta:
+        model = Asesorado
+        fields = ['celular', 'nombre', 'carrera']
+
+
+class AsesorForm(ModelForm):
+    class Meta:
+        model = Asesor
+        fields = ['celular', 'nombre', 'departamento', 'clave_empleado', ]
 
 
 class CreateUserForm(UserCreationForm):
     error_messages = {
         'password_mismatch': _('The two password fields didn’t match.'),
-        'bad_domain': _('El dominio permitido es @colima.tecnm.mx .'),
+        'bad_domain': _('El dominio permitido es colima.tecnm.mx .'),
         'user_exists': _('El usuario ya se encuentra registrado.'),
     }
 
     email = forms.EmailField(
-            required=True,
-            label=_("Email"),
-            max_length=254,
-            widget=forms.EmailInput(attrs={'autocomplete': 'email'})
-            )
+        required=True,
+        label=_("Email"),
+        max_length=254,
+        widget=forms.EmailInput(attrs={'autocomplete': 'email'})
+    )
 
     class Meta:
         model = User

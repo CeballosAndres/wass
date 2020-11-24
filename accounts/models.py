@@ -22,7 +22,10 @@ class Departamento(models.Model):
 
 class Carrera(models.Model):
     nombre = models.CharField(max_length=255)
-    departamento = models.ForeignKey(Departamento, null=True, on_delete=models.SET_NULL)
+    departamento = models.ForeignKey(Departamento,
+                                     null=True,
+                                     blank=True,
+                                     on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.nombre
@@ -39,7 +42,9 @@ class Materia(models.Model):
 
 class Asesorado(models.Model):
     usuario = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-    celular = models.CharField(max_length=200, null=True)
+    nombre = models.CharField(max_length=255, null=True, blank=True)
+    celular = models.CharField(max_length=200, null=True, blank=True)
+    carrera = models.ForeignKey(Carrera, null=True, on_delete=models.SET_NULL, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
@@ -48,9 +53,10 @@ class Asesorado(models.Model):
 
 class Asesor(models.Model):
     usuario = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-    celular = models.CharField(max_length=200, null=True)
-    clave_empleado = models.CharField(max_length=200, null=True)
-    departamento = models.ForeignKey(Departamento, null=True, on_delete=models.SET_NULL)
+    nombre = models.CharField(max_length=255, null=True, blank=True)
+    celular = models.CharField(max_length=200, null=True, blank=True)
+    clave_empleado = models.CharField(max_length=200, null=True, blank=True)
+    departamento = models.ForeignKey(Departamento, null=True, on_delete=models.SET_NULL, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
