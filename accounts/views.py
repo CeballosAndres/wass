@@ -92,16 +92,6 @@ def verAsesorias(request):
     return render(request, 'accounts/ver-asesorias.html')
 
 
-<<<<<<< HEAD
-@unauthenticated_user
-def cAsesorado(request):
-    return render(request, 'accounts/config-asesorado.html')
-
-
-@unauthenticated_user
-def cAsesor(request):
-    return render(request, 'accounts/config-asesor.html')
-=======
 def configurar(request):
     group = request.user.groups.all()[0].name
     user_profile = None
@@ -145,7 +135,6 @@ def contrasena(request):
         form = PasswordChangeForm(request.user)
     context = {'form': form}
     return render(request, 'accounts/contrasena.html', context)
->>>>>>> 44c7599605596d130509f4bc6f7c785f86ab813f
 
 
 @login_required(login_url='ingreso')
