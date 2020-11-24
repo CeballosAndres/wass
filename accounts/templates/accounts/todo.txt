@@ -16,3 +16,5 @@
 - add topic to the 'asesoria' card (thats not in Figma)
 
 - the user is not gonna enter with the email but with the control's number
+
+- check height for the 2nd column between status and option

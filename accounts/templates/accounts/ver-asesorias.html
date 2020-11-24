@@ -4,6 +4,39 @@
 {% block content %}
 <link rel="stylesheet" href="{% static '/css/responsive.css' %}">
 
+<style>
+  /* Ocultar estados posibles */
+  .s-rechazada {
+    display: none;
+  }
+  .s-aceptada {
+    /*display: none;*/
+  }  
+  .s-cancelada {
+    display: none;
+  }  
+  .s-finalizada {
+    display: none; 
+  }
+  .s-pendiente {
+    display: none; 
+  }
+  /* Ocultar opciones posibles */
+  .o-rechazar {
+    display: none;
+  }
+  .o-aceptar {
+    display: none;
+  }  
+  .o-cancelar {
+    display: none;
+  }  
+  .o-finalizar {
+    display: inline;
+    /* display: none; */
+  }
+</style>
+
 <!---Titulo-->
 <div class="container-fluid my-3">
   <div class="row">
@@ -39,21 +72,35 @@
     </div>
   </div>
 
-  <div class="col-md-3">
-    <div class="card-body botones">
-      <p class="status pendiente">Pendiente</p>
-      <p class="status rechazada">Rechazada</p>
-      <p class="status aceptada">Aceptada</p>
-      <p class="status cancelada">Cancelada</p>
-      <p class="status finalizada">Finalizada</p>
-      <button type="button" class="my-btn">Estado</button>
+  <div class="col-md-3 text-center mt-2">
+    <div class="col">
+      <div class="s-pendiente">
+        <p class="status pendiente">Pendiente</p>
+      </div>
+      <div class="s-aceptada">
+        <p class="status aceptada">Aceptada</p>
+      </div>
+      <div class="s-rechazada">
+        <p class="status rechazada">Rechazada</p>
+      </div>
+      <div class="s-finalizada">
+        <p class="status finalizada">Finalizada</p>
+      </div>
+      <div class="s-cancelada">
+        <p class="status cancelada">Cancelada</p>
+      </div>
     </div>
-  </div>
+    <div class="col h-50"></div>
+
+    <div class="col mb-2">
+      <button type="button" class="o-finalizar btn btn-primary">Finalizar</button>
+      <button type="button" class="o-aceptar btn btn-success">Aceptar</button>
+      <button type="button" class="o-rechazar btn btn-danger">Rechazar</button>
+      <button type="button" class="o-cancelar btn btn-warning">Cancelar</button>
+    </div>
 
   </div>
 
-  <div class="row no-gutters">
-    
   </div>
 
 </div>
