@@ -1,0 +1,11 @@
+{% include 'accounts/nav.html' %}
+
+{% block content %}
+
+<form method="post" action="">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Actualizar</button>
+</form>
+
+{% endblock %}
