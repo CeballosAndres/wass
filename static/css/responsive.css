@@ -2,9 +2,6 @@
 
 /* // Small devices (landscape phones, 300px and up) xs */
 @media (min-width: 300px) { 
-    h1 {
-        color: blue;
-    }
     #title {
         font-size: 1.5rem;
     }
@@ -20,9 +17,6 @@
 
 /* // Medium devices (tablets, 768px and up) sm */
 @media (min-width: 768px) { 
-    h1 {
-        color: pink;
-    }
     #title {
         font-size: 2.5rem;
     }
@@ -39,10 +33,6 @@
 
 /* // Large devices (desktops, 992px and up) md */
 @media (min-width: 992px) { 
-    h1 {
-        color: purple;
-    }
-
     #title {
         font-size: 2.5rem;
     }
