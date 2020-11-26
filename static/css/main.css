@@ -87,8 +87,4 @@ i {
     border-color: #FFC107;
 }
 
-.centered {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+}
