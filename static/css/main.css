@@ -87,4 +87,7 @@ i {
     border-color: #FFC107;
 }
 
+/* Tamanio de fuente para indicaciones en el cambio de contrasenia */
+.indications {
+    font-size: 0.75rem;
 }
