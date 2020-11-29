@@ -1,0 +1,23 @@
+{% include 'accounts/nav.html' %}
+
+{% block content %}
+
+
+{% for agenda in agendas %}
+    {{agenda.dia}}
+    {{agenda.hora}}
+    <a href="{% url 'eliminar_horario' agenda.id %}">x</a>
+    <br>
+{% endfor %}
+
+
+<br>
+
+<form method="POST" action="">
+    {% csrf_token %}
+    {{form.dia}}
+    {{form.hora}}
+    <input type="submit" value="Agregar">
+</form>
+
+{% endblock %}

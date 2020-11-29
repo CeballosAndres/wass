@@ -57,29 +57,14 @@ def principal(request):
                     'ver-asesorias': 'Ver Asesorías'}
     elif group == 'asesores':
         opciones = {'agendar': 'Mis asesorías',
-                    'ver-asesorias': 'Horario',
-                    'index': 'Temario',
+                    'horario': 'Horario',
+                    'temas': 'Temario',
                     'reportes': 'Reportes'}
     elif group == 'jefes':
         opciones = {'index': 'Carrera',
                     'reportes': 'Reportes'}
     context = {'opciones': opciones}
     return render(request, 'accounts/principal.html', context)
-
-
-@login_required(login_url='ingreso')
-def pAsesor(request):
-    return render(request, 'accounts/ppal-asesor.html')
-
-
-@login_required(login_url='ingreso')
-def pJefeD(request):
-    return render(request, 'accounts/ppal-jfedpto.html')
-
-
-@login_required(login_url='ingreso')
-def pAdmi(request):
-    return render(request, 'accounts/ppal-adm.html')
 
 
 @login_required(login_url='ingreso')
@@ -145,3 +130,38 @@ def index(request):
 @login_required(login_url='ingreso')
 def reportes(request):
     return render(request, 'accounts/ver-reportes.html')
+
+
+@login_required(login_url='ingreso')
+def horario(request):
+    asesor = Asesor.objects.get(usuario=request.user.id)
+    agendas = Agenda.objects.filter(asesor=asesor).order_by('dia','hora')
+    
+    form = AgendaForm()
+
+    if request.method == 'POST':
+        form = AgendaForm(request.POST)
+        if form.is_valid():
+            agenda = form.save(commit=False)
+            agenda.asesor = asesor
+            agenda.save()
+        form = AgendaForm()
+
+    context = {'agendas':agendas,'form':form}
+    return render(request, 'accounts/horario.html', context)
+
+
+
+@login_required(login_url='ingreso')
+def eliminarHorario(request, pk):
+    asesor = Asesor.objects.get(usuario=request.user.id)
+    agendas = Agenda.objects.filter(asesor=asesor) 
+    agenda = Agenda.objects.get(id=pk)
+    if agenda in agendas:
+        agenda.delete()
+    return redirect('horario')
+
+
+@login_required(login_url='ingreso')
+def temas(request):
+    return render(request, 'accounts/temas.html')

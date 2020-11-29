@@ -51,13 +51,36 @@ class Asesorado(models.Model):
         return self.usuario.username
 
 
+class DiaAtencion(models.Model):
+    nombre = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.nombre
+
+
 class Asesor(models.Model):
     usuario = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=255, null=True, blank=True)
     celular = models.CharField(max_length=200, null=True, blank=True)
     clave_empleado = models.CharField(max_length=200, null=True, blank=True)
-    departamento = models.ForeignKey(Departamento, null=True, on_delete=models.SET_NULL, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
+    departamento = models.ForeignKey(Departamento, null=True, on_delete=models.SET_NULL, blank=True)
+
+    horarios = models.ManyToManyField(DiaAtencion, through='Agenda')
 
     def __str__(self):
         return self.usuario.username
+
+
+class HorarioAtencion(models.Model):
+    inicio = models.TimeField()
+
+    def __str__(self):
+        return str(self.inicio)
+
+
+class Agenda(models.Model):
+    asesor = models.ForeignKey(Asesor, null=False, on_delete=models.CASCADE)
+    dia = models.ForeignKey(DiaAtencion, null=True, on_delete=models.SET_NULL)
+    hora = models.ForeignKey(HorarioAtencion, null=True, on_delete=models.SET_NULL)
+

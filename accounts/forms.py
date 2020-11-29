@@ -5,7 +5,13 @@ from django.utils.translation import gettext, gettext_lazy as _
 from django.core.exceptions import ValidationError
 
 from django.contrib.auth.models import User
-from .models import Asesorado, Asesor
+from .models import Asesorado, Asesor, Agenda
+
+
+class AgendaForm(ModelForm):
+    class Meta:
+        model = Agenda
+        fields = ['dia','hora']
 
 
 class AsesoradoForm(ModelForm):
