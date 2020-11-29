@@ -2,10 +2,46 @@
 
 {% block content %}
 
-<form method="post" action="">
-    {% csrf_token %}
-    {{ form }}
-    <button type="submit">Actualizar</button>
-</form>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="my-3"><a href="#"><i class="fas fa-arrow-circle-left px-4 mb-5"></i></a>Cambiar contraseña</h1>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <form method="post" action="">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="">Contraseña antigua</label>
+                    <input type="password" class="form-control" id="oldPass" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="">Contraseña nueva</label>
+                    <input type="password" class="form-control" id="newPass" placeholder="">
+            
+                    <ul class="indications font-weight-light text-muted mt-2">
+                        <li>Su contraseña no puede ser muy similar a su otra información personal.</li>
+                        <li>Su contraseña es muy corta. Debe contener al menos 8 caracteres.</li>
+                        <li>Su contraseña no puede ser una contraseña de uso común.</li>
+                        <li>Su contraseña no puede ser completamente numérica.</li>
+                    </ul>
+            
+                </div>
+                <div class="form-group">
+                    <label for="">Confirmar contraseña nueva</label>
+                    <input type="password" class="form-control" id="newPassConfirm" placeholder="">
+                </div>
+            
+                <button type="submit" class="my-btn small my-5">Actualizar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 
 {% endblock %}
