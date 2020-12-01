@@ -1,0 +1,25 @@
+{% include 'accounts/nav.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="container">
+    
+    <div class="row">
+        <div class="col-md-9 text-center">
+            <form action="" method="post">
+                {% csrf_token %}
+                <h2>Neta quieres eliminar la materia?</h2>
+                <input type="submit" value="Eliminar" class="btn btn-danger">
+                <a href="{% url 'temario'%}" class="btn btn-primary">Cancelar</a>
+            </form>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+{% endblock %}

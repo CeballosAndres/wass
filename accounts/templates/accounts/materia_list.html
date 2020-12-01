@@ -1,0 +1,10 @@
+{% include 'accounts/nav.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+
+{% for materia in object_list %}
+    <li>{{ materia.nombre }}</li>
+    
+{% endfor %}
+{% endblock %}

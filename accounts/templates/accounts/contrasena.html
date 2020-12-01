@@ -1,5 +1,5 @@
 {% include 'accounts/nav.html' %}
-
+{% load widget_tweaks %}
 {% block content %}
 
 
@@ -10,32 +10,42 @@
         </div>
     </div>
 
+    {% if form.errors %}
+    {% for field in form %}
+    {% for error in field.errors %}
+    <div class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{ error|escape }}</strong>
+    </div>
+    {% endfor %}
+    {% endfor %}
+    {% endif %}
+
     <div class="row">
 
         <div class="col-md-6">
             <form method="post" action="">
                 {% csrf_token %}
                 <div class="form-group">
-                    <label for="">Contraseña antigua</label>
-                    <input type="password" class="form-control" id="oldPass" placeholder="">
+                    <label for="">{{ form.old_password.label }}</label>
+                    {% render_field form.old_password class="form-control"%}
                 </div>
                 <div class="form-group">
-                    <label for="">Contraseña nueva</label>
-                    <input type="password" class="form-control" id="newPass" placeholder="">
-            
+                    <label for="">{{ form.new_password1.label }}</label>
+                    {% render_field form.new_password1 class="form-control" %}
                     <ul class="indications font-weight-light text-muted mt-2">
                         <li>Su contraseña no puede ser muy similar a su otra información personal.</li>
                         <li>Su contraseña es muy corta. Debe contener al menos 8 caracteres.</li>
                         <li>Su contraseña no puede ser una contraseña de uso común.</li>
                         <li>Su contraseña no puede ser completamente numérica.</li>
                     </ul>
-            
+
                 </div>
                 <div class="form-group">
-                    <label for="">Confirmar contraseña nueva</label>
-                    <input type="password" class="form-control" id="newPassConfirm" placeholder="">
+                    <label for="">{{ form.new_password2.label }}</label>
+                    {% render_field form.new_password2 class="form-control" %}
                 </div>
-            
+
                 <button type="submit" class="my-btn small my-5">Actualizar</button>
             </form>
         </div>

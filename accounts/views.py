@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView, DetailView
+from .filters import MateriaFilter
 
 from .models import *
 from .forms import *
@@ -58,7 +60,7 @@ def principal(request):
     elif group == 'asesores':
         opciones = {'agendar': 'Mis asesorías',
                     'horario': 'Horario',
-                    'temas': 'Temario',
+                    'temario': 'Temario',
                     'reportes': 'Reportes'}
     elif group == 'jefes':
         opciones = {'index': 'Carrera',
@@ -135,8 +137,8 @@ def reportes(request):
 @login_required(login_url='ingreso')
 def horario(request):
     asesor = Asesor.objects.get(usuario=request.user.id)
-    agendas = Agenda.objects.filter(asesor=asesor).order_by('dia','hora')
-    
+    agendas = Agenda.objects.filter(asesor=asesor).order_by('dia', 'hora')
+
     form = AgendaForm()
 
     if request.method == 'POST':
@@ -147,15 +149,14 @@ def horario(request):
             agenda.save()
         form = AgendaForm()
 
-    context = {'agendas':agendas,'form':form}
+    context = {'agendas': agendas, 'form': form}
     return render(request, 'accounts/horario.html', context)
-
 
 
 @login_required(login_url='ingreso')
 def eliminarHorario(request, pk):
     asesor = Asesor.objects.get(usuario=request.user.id)
-    agendas = Agenda.objects.filter(asesor=asesor) 
+    agendas = Agenda.objects.filter(asesor=asesor)
     agenda = Agenda.objects.get(id=pk)
     if agenda in agendas:
         agenda.delete()
@@ -163,5 +164,81 @@ def eliminarHorario(request, pk):
 
 
 @login_required(login_url='ingreso')
-def temas(request):
-    return render(request, 'accounts/temas.html')
+def temario(request):
+    asesor = Asesor.objects.get(usuario=request.user.id)
+    materias = TemarioAsesor.objects.filter(asesor=asesor).distinct('materia')
+    if len(materias) == 0:
+        messages.warning(request, 'No existen materias registradas.')
+    filtro = MateriaFilter()
+
+    context = {'materias': materias, 'filtro': filtro}
+    return render(request, 'accounts/temario.html', context)
+
+
+@login_required(login_url='ingreso')
+def temarioAgregarModal(request):
+    materias = Materia.objects.all()
+
+    filtro = MateriaFilter(request.GET, queryset=materias)
+    materias = filtro.qs
+
+    context = {'materias': materias, 'filtro': filtro}
+    return render(request, 'accounts/temario_materia.html', context)
+
+
+@login_required(login_url='ingreso')
+def temarioAgregar(request, pk):
+    asesor = Asesor.objects.get(usuario=request.user.id)
+    materia = Materia.objects.get(id=pk)
+
+    temas = materia.tema_set.all()
+    for tema in temas:
+        subtemas = tema.subtema_set.all()
+        for subtema in subtemas:
+            TemarioAsesor.objects.get_or_create(asesor=asesor, materia=materia, tema=tema, subtema=subtema)
+
+    messages.success(request, 'Materia agregada')
+    return redirect('temario')
+
+
+@login_required(login_url='ingreso')
+def temarioEliminar(request, pk):
+    if request.method == 'POST':
+        asesor = Asesor.objects.get(usuario=request.user.id)
+        materia = Materia.objects.get(id=pk)
+        TemarioAsesor.objects.filter(asesor=asesor, materia=materia).delete()
+
+        messages.success(request, 'Materia eliminada')
+        return redirect('temario')
+    return render(request, 'accounts/temario_eliminar.html')
+
+
+@login_required(login_url='ingreso')
+def temarioMateriaEditar(request, pk):
+    asesor = Asesor.objects.get(usuario=request.user.id)
+    materia = Materia.objects.get(id=pk)
+
+    temas = TemarioAsesor.objects.filter(asesor=asesor, materia=materia).order_by('tema', 'subtema')
+    print(temas.values())
+
+    if request.method == 'POST':
+        print(request.POST)
+        for tema in temas:
+            if request.POST.get(str(tema.id)):
+                tema.activo = True
+            else:
+                tema.activo = False
+            tema.save()
+        messages.success(request, 'Materia actualizada.')
+        return redirect('temario')
+
+    context = {'materia': materia, 'temas': temas}
+    return render(request, 'accounts/temario_temas.html', context)
+
+
+class ListarMaterias(ListView):
+    model = Materia
+
+
+class TemasDeMaterias(DetailView):
+    model = Tema

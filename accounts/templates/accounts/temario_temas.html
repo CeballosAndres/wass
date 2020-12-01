@@ -1,0 +1,42 @@
+{% include 'accounts/nav.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1>Temas y subtemas a asesorar</h1>
+
+    <div class="row">
+        {% if temas %}
+        <form action="" method="post" class="container">
+            {% csrf_token %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Tema</th>
+                        <th scope="col">Subtema</th>
+                        <th scope="col">Activo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tema in temas %}
+                    <tr>
+                        <td>{{ tema.tema.numero|slugify|add:". "|add:tema.tema.nombre}}</td>
+                        <td>{{ tema.subtema.numero|slugify|add:". "|add:tema.subtema.nombre}}</td>
+                        {% if tema.activo %}
+                        <td><input type="checkbox" checked="checked" name="{{tema.id}}"></td>
+                        {% else %}
+                        <td><input type="checkbox" name="{{tema.id}}"></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{% url 'temario' %}" class="btn btn-secondary">Cancelar</a>
+            <input type="submit" value="Actualizar" class="btn btn-primary">
+        </form>
+        {% else %}
+        <p> No se encontraron resultados a la búsqueda</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

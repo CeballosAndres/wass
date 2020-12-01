@@ -32,11 +32,16 @@ class Carrera(models.Model):
 
 
 class Materia(models.Model):
-    nombre = models.CharField(max_length=255)
-    competencia = models.TextField()
-    clave_materia = models.CharField(max_length=20)
+    nombre = models.CharField(max_length=255, null=False, blank=False)
+    competencia = models.TextField(null=True, blank=True)
+    clave_materia = models.CharField(max_length=20, null=True, blank=True)
+    carrera = models.ForeignKey(Carrera, null=True, blank=True, on_delete=models.SET_NULL)
 
-    def __str__():
+    class Meta:
+        verbose_name = 'Materia'
+        verbose_name_plural = 'Materias'
+
+    def __str__(self):
         return self.nombre
 
 
@@ -58,6 +63,40 @@ class DiaAtencion(models.Model):
         return self.nombre
 
 
+class HorarioAtencion(models.Model):
+    inicio = models.TimeField()
+
+    def __str__(self):
+        return str(self.inicio)
+
+
+class Tema(models.Model):
+    numero = models.IntegerField(null=False, blank=False)
+    nombre = models.CharField(max_length=300, null=False, blank=False)
+    competencia = models.TextField(null=False, blank=True)
+    materia = models.ForeignKey(Materia, null=True, blank=True, on_delete=models.SET_NULL)
+
+    class Meta:
+        verbose_name = 'Tema'
+        verbose_name_plural = 'Temas'
+
+    def __str__(self):
+        return self.nombre
+
+
+class Subtema(models.Model):
+    numero = models.IntegerField(null=False, blank=False)
+    nombre = models.CharField(max_length=300, null=False, blank=False)
+    tema = models.ForeignKey(Tema, null=True, blank=True, on_delete=models.SET_NULL)
+
+    class Meta:
+        verbose_name = 'Subtema'
+        verbose_name_plural = 'Subtemas'
+
+    def __str__(self):
+        return self.nombre
+
+
 class Asesor(models.Model):
     usuario = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=255, null=True, blank=True)
@@ -66,17 +105,11 @@ class Asesor(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     departamento = models.ForeignKey(Departamento, null=True, on_delete=models.SET_NULL, blank=True)
 
+    subtetmas = models.ManyToManyField(Subtema, through='TemarioAsesor')
     horarios = models.ManyToManyField(DiaAtencion, through='Agenda')
 
     def __str__(self):
         return self.usuario.username
-
-
-class HorarioAtencion(models.Model):
-    inicio = models.TimeField()
-
-    def __str__(self):
-        return str(self.inicio)
 
 
 class Agenda(models.Model):
@@ -84,3 +117,18 @@ class Agenda(models.Model):
     dia = models.ForeignKey(DiaAtencion, null=True, on_delete=models.SET_NULL)
     hora = models.ForeignKey(HorarioAtencion, null=True, on_delete=models.SET_NULL)
 
+
+class TemarioAsesor(models.Model):
+    materia = models.ForeignKey(Materia, null=False, blank=False, on_delete=models.CASCADE)
+    tema = models.ForeignKey(Tema, null=False, blank=False, on_delete=models.CASCADE)
+    subtema = models.ForeignKey(Subtema, null=False, blank=False, on_delete=models.CASCADE)
+    asesor = models.ForeignKey(Asesor, null=False, blank=False, on_delete=models.CASCADE)
+    activo = models.BooleanField('Activo/no activo', default=True)
+
+    class Meta:
+        verbose_name = 'Temario del asesor'
+        verbose_name_plural = 'Temarios del asesor'
+        unique_together = (('materia', 'tema', 'subtema', 'asesor'),)
+
+    def __str__(self):
+        return self.materia.nombre

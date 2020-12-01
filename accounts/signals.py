@@ -6,7 +6,7 @@ from .models import Asesorado, Asesor
 
 def post_save_user(sender, instance, created, **kwargs):
     if created:
-        if instance.username.isdigit():
+        if instance.username.split('@')[0].isdigit():
             group = Group.objects.get(name='asesorados')
             instance.groups.add(group)
             Asesorado.objects.create(

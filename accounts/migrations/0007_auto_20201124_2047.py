@@ -14,14 +14,16 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='DiaAtencion',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, primary_key=True,
+                                        serialize=False, verbose_name='ID')),
                 ('nombre', models.CharField(max_length=10)),
             ],
         ),
         migrations.CreateModel(
             name='HorarioAtencion',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, primary_key=True,
+                                        serialize=False, verbose_name='ID')),
                 ('inicio', models.TimeField()),
             ],
         ),
@@ -38,7 +40,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='asesor',
             name='departamento',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='accounts.departamento'),
+            field=models.ForeignKey(blank=True, null=True,
+                                    on_delete=django.db.models.deletion.SET_NULL, to='accounts.departamento'),
         ),
         migrations.AlterField(
             model_name='asesor',
@@ -48,7 +51,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='asesorado',
             name='carrera',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='accounts.carrera'),
+            field=models.ForeignKey(blank=True, null=True,
+                                    on_delete=django.db.models.deletion.SET_NULL, to='accounts.carrera'),
         ),
         migrations.AlterField(
             model_name='asesorado',
@@ -63,10 +67,18 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Agenda',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('asesor', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='accounts.asesor')),
-                ('dia', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='accounts.diaatencion')),
-                ('hora', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='accounts.horarioatencion')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True,
+                                        serialize=False,
+                                        verbose_name='ID')),
+                ('asesor', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                             to='accounts.asesor')),
+                ('dia', models.ForeignKey(null=True,
+                                          on_delete=django.db.models.deletion.SET_NULL,
+                                          to='accounts.diaatencion')),
+                ('hora', models.ForeignKey(null=True,
+                                           on_delete=django.db.models.deletion.SET_NULL,
+                                           to='accounts.horarioatencion')),
             ],
         ),
     ]

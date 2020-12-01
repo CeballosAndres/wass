@@ -11,7 +11,7 @@ from .models import Asesorado, Asesor, Agenda
 class AgendaForm(ModelForm):
     class Meta:
         model = Agenda
-        fields = ['dia','hora']
+        fields = ['dia', 'hora']
 
 
 class AsesoradoForm(ModelForm):
@@ -63,7 +63,7 @@ class CreateUserForm(UserCreationForm):
     def save(self, commit=True):
         user = super().save(commit=False)
         user.email = self.cleaned_data["email"]
-        user.username = self.cleaned_data["email"].split('@')[0]
+        user.username = self.cleaned_data["email"]
         user.set_password(self.cleaned_data["password1"])
         if commit:
             user.save()
