@@ -31,6 +31,7 @@ class CreateUserForm(UserCreationForm):
         'password_mismatch': _('The two password fields didn’t match.'),
         'bad_domain': _('El dominio permitido es colima.tecnm.mx .'),
         'user_exists': _('El usuario ya se encuentra registrado.'),
+        'user_student_incorrect': _('El correo del alumno esta formado por 8 dígitos mas el dominio.'),
     }
 
     email = forms.EmailField(
@@ -53,10 +54,15 @@ class CreateUserForm(UserCreationForm):
                     self.error_messages['bad_domain'],
                     code='bad_domain',
                 )
-            if User.objects.filter(username=user).exists():
+            if User.objects.filter(username=email).exists():
                 raise ValidationError(
                     self.error_messages['user_exists'],
                     code='user_exists',
+                )
+            if user.isdigit() and len(user) != 8:
+                raise ValidationError(
+                    self.error_messages['user_student_incorrect'],
+                    code='user_student_incorrect',
                 )
         return email
 
