@@ -206,7 +206,7 @@ def temarioEliminar(request, pk):
 
         messages.success(request, 'Materia eliminada')
         return redirect('temario')
-    context = {'materia':materia}
+    context = {'materia': materia}
     return render(request, 'accounts/temario_eliminar.html', context)
 
 
