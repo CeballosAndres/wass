@@ -199,14 +199,15 @@ def temarioAgregar(request, pk):
 
 @login_required(login_url='ingreso')
 def temarioEliminar(request, pk):
+    materia = Materia.objects.get(id=pk)
     if request.method == 'POST':
         asesor = Asesor.objects.get(usuario=request.user.id)
-        materia = Materia.objects.get(id=pk)
         TemarioAsesor.objects.filter(asesor=asesor, materia=materia).delete()
 
         messages.success(request, 'Materia eliminada')
         return redirect('temario')
-    return render(request, 'accounts/temario_eliminar.html')
+    context = {'materia':materia}
+    return render(request, 'accounts/temario_eliminar.html', context)
 
 
 @login_required(login_url='ingreso')

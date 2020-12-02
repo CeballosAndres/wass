@@ -33,7 +33,8 @@
                     <th scope="row">{{materia.materia.clave_materia}}</th>
                     <td>{{ materia.materia.nombre }}</td>
                     <td>
-                        <a href="{% url 'temario_materia_editar' materia.materia.id %}" class="btn btn-warning">Editar</a>
+                        <a href="{% url 'temario_materia_editar' materia.materia.id %}"
+                            class="btn btn-warning">Editar</a>
                         <a href="{% url 'temario_eliminar' materia.materia.id %}" class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>
@@ -49,22 +50,16 @@
         </div>
     </div>
 
-    <div class="form-row">
+    <div class="col-auto">
         <form method='GET' action="/temario/agregar/">
-            <div class="col">
-                <label for="nombre_materia">Nombre materia</label>
-                {% render_field filtro.form.nombre_materia class="form-control" %}
+            <div class="form-row align-items-center">
+                <div class="col-8">
+                    {% render_field filtro.form.query class="form-control" placeholder="Nombre o clave de materia" %}
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-primary" type="submit">Buscar</button>
+                </div>
             </div>
-
-            <div class="col">
-                <label for="clave_materia">Clave materia</label>
-                {% render_field filtro.form.clave_materia class="form-control" %}
-            </div>
-            <div class="col">
-                <label for="carrera">Carrera</label>
-                {% render_field filtro.form.carrera class="form-control" %}
-            </div>
-            <button class="btn btn-primary" type="submit">Buscar</button>
         </form>
     </div>
 

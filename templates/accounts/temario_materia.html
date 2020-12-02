@@ -18,31 +18,6 @@
     </div>
 
     <div class="row">
-        <div class="col-md-9 text-center">
-            <h2>Agregar materia</h2>
-        </div>
-    </div>
-
-    <div class="form-row">
-        <form method='GET'>
-            <div class="col">
-                <label for="nombre_materia">Nombre materia</label>
-                {% render_field filtro.form.nombre_materia class="form-control" %}
-            </div>
-
-            <div class="col">
-                <label for="clave_materia">Clave materia</label>
-                {% render_field filtro.form.clave_materia class="form-control" %}
-            </div>
-            <div class="col">
-                <label for="carrera">Carrera</label>
-                {% render_field filtro.form.carrera class="form-control" %}
-            </div>
-            <button class="btn btn-primary" type="submit">Buscar</button>
-        </form>
-    </div>
-
-    <div class="row">
         {% if materias %}
         <table class="table">
             <thead>
@@ -66,6 +41,19 @@
         {% else %}
         <p> No se encontraron resultados a la búsqueda</p>
         {% endif %}
+    </div>
+
+    <div class="col-auto">
+        <form method='GET' action="/temario/agregar/">
+            <div class="form-row align-items-center">
+                <div class="col-8">
+                    {% render_field filtro.form.query class="form-control" placeholder="Nombre o clave de materia" %}
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-primary" type="submit">Buscar</button>
+                </div>
+            </div>
+        </form>
     </div>
 
 </div>
