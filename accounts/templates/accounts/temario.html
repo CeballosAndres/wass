@@ -4,13 +4,9 @@
 
 {% block content %}
 
-<div class="container">
-    <div class="row">
-        <div class="col-xs-6 col-md-9">
-            <h1 id="title"><a href="#"><i class="fas fa-arrow-circle-left"></i></a>Temario</h1>
-        </div>
-    </div>
 
+<div class="container">
+    <h1 id="title" class="my-3"><a href="#"><i class="fas fa-arrow-circle-left px-4"></i></a>Temario</h1>
 
     <div class="row">
         {% if materias %}
@@ -43,29 +39,33 @@
         {% endif %}
     </div>
 
-    <div class="row">
-        <div class="col-md-9 text-center">
-            <h2>Agregar materia</h2>
+    <div class="row text-center">
+        <div class="col-md-12">
+            <button onclick="myFunction()" class="my-btn big">Agregar materia</button>
         </div>
     </div>
 
-    <div class="form-row">
-        <form method='GET' action="/temario/agregar/">
-            <div class="col">
-                <label for="nombre_materia">Nombre materia</label>
-                {% render_field filtro.form.nombre_materia class="form-control" %}
-            </div>
-
-            <div class="col">
-                <label for="clave_materia">Clave materia</label>
-                {% render_field filtro.form.clave_materia class="form-control" %}
-            </div>
-            <div class="col">
-                <label for="carrera">Carrera</label>
-                {% render_field filtro.form.carrera class="form-control" %}
-            </div>
-            <button class="btn btn-primary" type="submit">Buscar</button>
-        </form>
+    <div class="container w-75">
+        <div class="form">
+            <form method='GET' action="/temario/agregar/">
+                <div class="col">
+                    <label for="nombre_materia">Nombre de la materia</label>
+                    {% render_field filtro.form.nombre_materia class="form-control" %}
+                </div>
+    
+                <div class="col">
+                    <label for="clave_materia">Clave de la materia</label>
+                    {% render_field filtro.form.clave_materia class="form-control" %}
+                </div>
+                <div class="col">
+                    <label for="carrera">Carrera</label>
+                    {% render_field filtro.form.carrera class="form-control" %}
+                </div>
+                <div class="col text-center">
+                    <button class="my-btn small my-4" type="submit">Buscar</button>
+                </div>
+            </form>
+        </div>
     </div>
 
 

@@ -1,24 +1,12 @@
-- Create alerts for: 
-    Login succesfully
-    Login error
-
-    Register succesfully
-    Register error
-
-- Add image to the views or something
 
 - Buttons events
 
-- fix left line from config profile pic
-
-- authentication or check for the login page
-
 - add topic to the 'asesoria' card (thats not in Figma)
-
-- the user is not gonna enter with the email but with the control's number
 
 - check height for the 2nd column between status and option
 
 - change title 'Agenda' for 'Asesorias' in Asesores Wireframes 
 
 - new Wireframe : 'Contrasenia' 
+
+
