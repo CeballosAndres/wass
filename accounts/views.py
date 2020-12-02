@@ -1,17 +1,13 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
 from .filters import MateriaFilter
-
 from .models import *
 from .forms import *
 from .decorators import unauthenticated_user, allowed_users
-
-from django.views.generic import DetailView
 
 
 @unauthenticated_user
@@ -203,14 +199,15 @@ def temarioAgregar(request, pk):
 
 @login_required(login_url='ingreso')
 def temarioEliminar(request, pk):
+    materia = Materia.objects.get(id=pk)
     if request.method == 'POST':
         asesor = Asesor.objects.get(usuario=request.user.id)
-        materia = Materia.objects.get(id=pk)
         TemarioAsesor.objects.filter(asesor=asesor, materia=materia).delete()
 
         messages.success(request, 'Materia eliminada')
         return redirect('temario')
-    return render(request, 'accounts/temario_eliminar.html')
+    context = {'materia': materia}
+    return render(request, 'accounts/temario_eliminar.html', context)
 
 
 @login_required(login_url='ingreso')

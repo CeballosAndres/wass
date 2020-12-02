@@ -29,7 +29,8 @@
                     <th scope="row">{{materia.materia.clave_materia}}</th>
                     <td>{{ materia.materia.nombre }}</td>
                     <td>
-                        <a href="{% url 'temario_materia_editar' materia.materia.id %}" class="btn btn-warning">Editar</a>
+                        <a href="{% url 'temario_materia_editar' materia.materia.id %}"
+                            class="btn btn-warning">Editar</a>
                         <a href="{% url 'temario_eliminar' materia.materia.id %}" class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>
@@ -45,31 +46,20 @@
         </div>
     </div>
 
-    <div class="container w-75">
-        <div class="form">
-            <form method='GET' action="/temario/agregar/">
-                <div class="col">
-                    <label for="nombre_materia">Nombre de la materia</label>
-                    {% render_field filtro.form.nombre_materia class="form-control" %}
+
+    <div class="col-auto">
+        <form method='GET' action="/temario/agregar/">
+            <div class="form-row align-items-center">
+                <div class="col-8">
+                    {% render_field filtro.form.query class="form-control" placeholder="Nombre o clave de materia" %}
                 </div>
-    
-                <div class="col">
-                    <label for="clave_materia">Clave de la materia</label>
-                    {% render_field filtro.form.clave_materia class="form-control" %}
-                </div>
-                <div class="col">
-                    <label for="carrera">Carrera</label>
-                    {% render_field filtro.form.carrera class="form-control" %}
-                </div>
-                <div class="col text-center">
+                <div class="col-4">
                     <button class="my-btn small my-4" type="submit">Buscar</button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 
-
 </div>
-
 
 {% endblock %}
