@@ -95,3 +95,9 @@ i {
 #agenda {
     display: none;
 }
+
+/* Estilo para notas de advertencia, en este caso resultado de una busqueda*/ 
+.note-empty {
+    background-color: rgba(255, 135, 135, 0.535);
+    padding: 10px;
+}

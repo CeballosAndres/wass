@@ -41,24 +41,23 @@
     </div>
 
     <div class="row text-center">
-        <div class="col-md-12">
-            <button onclick="myFunction()" class="my-btn big">Agregar materia</button>
+        <div class="col my-4">
+            <h3>Agregar materia</h3>
         </div>
-    </div>
-
-
-    <div class="col-auto">
-        <form method='GET' action="/temario/agregar/">
-            <div class="form-row align-items-center">
-                <div class="col-8">
+        <div class="container">
+            <form class="form-row align-items-center" method='GET' action="/temario/agregar/">
+                <div class="col-md-8 col-xm-12">
                     {% render_field filtro.form.query class="form-control" placeholder="Nombre o clave de materia" %}
                 </div>
-                <div class="col-4">
-                    <button class="my-btn small my-4" type="submit">Buscar</button>
+                <div class="col-md-4">
+                    <button class="my-btn small" type="submit">Buscar</button>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
+    
     </div>
+
+
 
 </div>
 

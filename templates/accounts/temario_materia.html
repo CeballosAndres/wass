@@ -7,12 +7,12 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-6 col-md-9">
-            <h1 id="title"><a href="#"><i class="fas fa-arrow-circle-left"></i></a>Temario</h1>
+            <h1 id="title" class="my-3"><a href="#"><i class="fas fa-arrow-circle-left px-4"></i></a>Temario</h1>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-9 text-center">
+    <div class="row text-center">
+        <div class="col my-4">
             <h2>Materias</h2>
         </div>
     </div>
@@ -39,18 +39,18 @@
             </tbody>
         </table>
         {% else %}
-        <p> No se encontraron resultados a la búsqueda</p>
+            <p class="note-empty"> No se encontraron resultados a la búsqueda</p>
         {% endif %}
     </div>
 
-    <div class="col-auto">
+    <div class="container text-center">
         <form method='GET' action="/temario/agregar/">
             <div class="form-row align-items-center">
-                <div class="col-8">
+                <div class="col-md-8 col-xm-12">
                     {% render_field filtro.form.query class="form-control" placeholder="Nombre o clave de materia" %}
                 </div>
-                <div class="col-4">
-                    <button class="btn btn-primary" type="submit">Buscar</button>
+                <div class="col-md-4 my-3">
+                    <button class="my-btn small" type="submit">Buscar</button>
                 </div>
             </div>
         </form>
