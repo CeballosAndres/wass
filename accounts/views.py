@@ -216,7 +216,6 @@ def temarioMateriaEditar(request, pk):
     materia = Materia.objects.get(id=pk)
 
     temas = TemarioAsesor.objects.filter(asesor=asesor, materia=materia).order_by('tema', 'subtema')
-    print(temas.values())
 
     if request.method == 'POST':
         print(request.POST)

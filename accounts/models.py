@@ -154,7 +154,7 @@ class TemarioAsesor(models.Model):
     tema = models.ForeignKey(Tema, null=False, blank=False, on_delete=models.CASCADE)
     subtema = models.ForeignKey(Subtema, null=False, blank=False, on_delete=models.CASCADE)
     asesor = models.ForeignKey(Asesor, null=False, blank=False, on_delete=models.CASCADE)
-    activo = models.BooleanField('Activo/no activo', default=True)
+    activo = models.BooleanField('Activo/no activo', default=False)
 
     class Meta:
         verbose_name = 'Temario del asesor'

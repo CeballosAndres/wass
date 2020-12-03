@@ -12,22 +12,31 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">Tema</th>
-                        <th scope="col">Subtema</th>
+                        <th scope="col">No.</th>
+                        <th scope="col">Tema - Subtema</th>
                         <th scope="col">Activo</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for tema in temas %}
-                    <tr>
-                        <td>{{ tema.tema.numero|slugify|add:". "|add:tema.tema.nombre}}</td>
-                        <td>{{ tema.subtema.numero|slugify|add:". "|add:tema.subtema.nombre}}</td>
-                        {% if tema.activo %}
-                        <td><input type="checkbox" checked="checked" name="{{tema.id}}"></td>
-                        {% else %}
-                        <td><input type="checkbox" name="{{tema.id}}"></td>
+
+                        {% if tema.subtema.numero == 1 %}
+                            <tr>
+                                <th>{{tema.tema.numero}}</th>
+                                <th>{{ tema.tema.nombre}}</th>
+                                <th><input type="checkbox" name="tema_{{ tema.tema.numero }}" class="select_all"></th>
+                            <tr>
                         {% endif %}
-                    </tr>
+
+                        <tr>
+                            <td>{{ tema.tema.numero }}.{{ tema.subtema.numero}} </td>
+                            <td>{{ tema.subtema.nombre }}</td>
+                            {% if tema.activo %}
+                            <td><input type="checkbox" checked="checked" name="{{tema.id}}" class="tema_{{tema.tema.numero}}"></td>
+                            {% else %}
+                            <td><input type="checkbox" name="{{tema.id}}" class="tema_{{tema.tema.numero}}"></td>
+                            {% endif %}
+                        </tr>
                     {% endfor %}
                 </tbody>
             </table>
