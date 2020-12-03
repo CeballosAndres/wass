@@ -58,7 +58,7 @@ i {
 .alert {
     display: table;
     margin: auto; 
-    width: 300px;   
+    width: 18.75rem;   
 }
 
 /* Estilo de los estados posibles */

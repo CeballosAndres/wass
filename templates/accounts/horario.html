@@ -3,21 +3,32 @@
 {% block content %}
 
 
-{% for agenda in agendas %}
-    {{agenda.dia}}
-    {{agenda.hora}}
-    <a href="{% url 'eliminar_horario' agenda.id %}">x</a>
-    <br>
-{% endfor %}
+<div class="container">
+    <h1 id="title" class="my-3"><a href="#"><i class="fas fa-arrow-circle-left px-4"></i></a>Horario</h1>
+
+    <div class="row">
+        <div class="col">
+            {% for agenda in agendas %}
+            {{agenda.dia}}
+            {{agenda.hora}}
+            <a href="{% url 'eliminar_horario' agenda.id %}">x</a>
+            <br>
+        {% endfor %}
 
 
-<br>
+            <br>
 
-<form method="POST" action="">
-    {% csrf_token %}
-    {{form.dia}}
-    {{form.hora}}
-    <input type="submit" value="Agregar">
-</form>
+            <form method="POST" action="">
+                {% csrf_token %}
+                {{form.dia}}
+                {{form.hora}}
+                <input type="submit" class = "my-btn small mx-3" value="Agregar">
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
 
 {% endblock %}
