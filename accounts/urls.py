@@ -17,6 +17,7 @@ urlpatterns = [
     path('ver-asesorias/', views.verAsesorias, name='ver-asesorias'),
     path('index/', views.index, name='index'),
     path('reportes/', views.reportes, name='reportes'),
+    path('rep-sem/', views.repSem, name='rep-sem'),
     path('materia/', ListarMaterias.as_view(), name='listar_materias'),
 
     path('temario/', views.temario, name='temario'),

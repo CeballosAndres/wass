@@ -27,22 +27,24 @@
     .my-card {
         width: 40rem;
     }
+    #search {
+        margin-top: 10px;
+    }
 
 
 }
 
 /* // Large devices (desktops, 992px and up) md */
 @media (min-width: 992px) { 
-    #title {
-        font-size: 2.5rem;
-    }
-
     #filter {
         width: 200px; 
         height: 50px;
     }
     .my-card {
         width: 70rem;
+    }
+    #search {
+        margin-top: 10px;
     }
 
 

@@ -9,4 +9,5 @@
 
 - new Wireframe : 'Contrasenia' 
 
+- change reportes types
 
