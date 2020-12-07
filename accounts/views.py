@@ -127,7 +127,12 @@ def index(request):
 
 @login_required(login_url='ingreso')
 def reportes(request):
-    return render(request, 'accounts/ver-reportes.html')
+    return render(request, 'accounts/reportes.html')
+
+
+@login_required(login_url='ingreso')
+def repSem(request):
+    return render(request, 'accounts/rep-sem.html')
 
 
 @login_required(login_url='ingreso')
