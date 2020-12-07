@@ -163,6 +163,7 @@ def eliminarHorario(request, pk):
 def temario(request):
     asesor = Asesor.objects.get(usuario=request.user.id)
     materias = TemarioAsesor.objects.filter(asesor=asesor).distinct('materia')
+
     if len(materias) == 0:
         messages.warning(request, 'No existen materias registradas.')
     filtro = MateriaFilter()
@@ -173,7 +174,18 @@ def temario(request):
 
 @login_required(login_url='ingreso')
 def temarioAgregarModal(request):
-    materias = Materia.objects.all()
+    asesor = Asesor.objects.get(usuario=request.user.id)
+    materias_asesor = TemarioAsesor.objects.filter(asesor=asesor).distinct('materia').values('materia')
+
+    # En caso de tener departamento asignado(asesor) se filtra por este
+    if asesor.departamento:
+        carreras_departamento = asesor.departamento.carrera_set.all()
+        materias = Materia.objects.filter(carrera__in=carreras_departamento)
+    else:
+        materias = Materia.objects.all()
+
+    # Quitar de las materias a mostrar aquellas que ya fueron agregadas
+    materias = materias.exclude(pk__in=materias_asesor)
 
     filtro = MateriaFilter(request.GET, queryset=materias)
     materias = filtro.qs

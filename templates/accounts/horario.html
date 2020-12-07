@@ -1,4 +1,5 @@
 {% include 'accounts/nav.html' %}
+{% load widget_tweaks %}
 
 {% block content %}
 
@@ -20,9 +21,12 @@
 
             <form method="POST" action="">
                 {% csrf_token %}
-                {{form.dia}}
-                {{form.hora}}
-                <input type="submit" class = "my-btn small mx-3" value="Agregar">
+                <div class="form-inline">
+                {% render_field form.dia class="form-control" placeholder="Día" %}
+                {% render_field form.hora_inicio class="form-control" %}
+                {% render_field form.hora_fin class="form-control" %}
+                <input type="submit" class = "btn my-btn small mx-3" value="Agregar">
+                </div>
             </form>
 
         </div>

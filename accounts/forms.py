@@ -6,11 +6,19 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from .models import Asesorado, Asesor, Agenda
 
+HOURS = ['07:00','07:30']
+BIRTH_YEAR_CHOICES = ['1980', '1981', '1982']
 
 class AgendaForm(ModelForm):
+    hora_inicio = forms.TimeField(widget=forms.TimeInput(attrs={
+        'type': 'time',
+        'min':'07:00',
+        'max':'20:00'}))
+    hora_fin = forms.TimeField(required=True, widget=forms.TimeInput(attrs={'type': 'time'}, format='%I:%M %p'))
     class Meta:
         model = Agenda
-        fields = ['dia', 'hora']
+        fields = ['dia', 'hora_inicio']
+
 
 
 class AsesoradoForm(ModelForm):
