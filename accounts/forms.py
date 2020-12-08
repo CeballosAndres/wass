@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from .models import Asesorado, Asesor, Agenda
 
-from django.utils.dateparse import parse_time 
+from django.utils.dateparse import parse_time
 import datetime as dt
 
 
@@ -43,7 +43,7 @@ class AgendaForm(ModelForm):
             )
         else:
             return cleaned_data
-            
+
 
 class AsesoradoForm(ModelForm):
     class Meta:

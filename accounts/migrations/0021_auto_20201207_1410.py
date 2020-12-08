@@ -14,8 +14,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='CatalogoDia',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('nombre', models.CharField(choices=[('1', 'Lunes'), ('2', 'Martes'), ('3', 'Miércoles'), ('4', 'Jueves')], max_length=10, unique=True)),
+                ('id', models.AutoField(auto_created=True, primary_key=True,
+                                        serialize=False, verbose_name='ID')),
+                ('nombre', models.CharField(choices=[('1', 'Lunes'),
+                                                     ('2', 'Martes'), ('3', 'Miércoles'),
+                                                     ('4', 'Jueves')], max_length=10, unique=True)),
             ],
             options={
                 'verbose_name': 'Catalogo día',
@@ -26,7 +29,8 @@ class Migration(migrations.Migration):
             name='CatalogoHora',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('nombre', models.TimeField(choices=[('0700', '07:00'), ('0730', '07:30'), ('0800', '08:00'), ('0830', '08:30'), ('0900', '09:00'), ('0930', '09:30')], max_length=10, unique=True)),
+                ('nombre', models.TimeField(choices=[('0700', '07:00'), ('0730', '07:30'), ('0800', '08:00'), (
+                    '0830', '08:30'), ('0900', '09:00'), ('0930', '09:30')], max_length=10, unique=True)),
             ],
             options={
                 'verbose_name': 'Catalogo hora',
@@ -46,7 +50,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='agenda',
             name='hora',
-            field=models.ForeignKey(choices=[('0700', '07:00'), ('0730', '07:30'), ('0800', '08:00'), ('0830', '08:30'), ('0900', '09:00'), ('0930', '09:30')], null=True, on_delete=django.db.models.deletion.SET_NULL, to='accounts.catalogohora'),
+            field=models.ForeignKey(choices=[('0700', '07:00'), ('0730', '07:30'),
+                                             ('0800', '08:00'), ('0830', '08:30'),
+                                             ('0900', '09:00'), ('0930', '09:30')],
+                                    null=True, on_delete=django.db.models.deletion.SET_NULL,
+                                    to='accounts.catalogohora'),
         ),
         migrations.AlterField(
             model_name='asesor',

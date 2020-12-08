@@ -1,3 +1,4 @@
+from datetime import date, datetime, time, timedelta
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
@@ -137,6 +138,7 @@ def repSem(request):
 
 @login_required(login_url='ingreso')
 def horario(request):
+    dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']
     asesor = Asesor.objects.get(usuario=request.user.id)
     agendas = Agenda.objects.filter(asesor=asesor).order_by('dia', 'hora')
 
@@ -144,13 +146,23 @@ def horario(request):
 
     if request.method == 'POST':
         form = AgendaForm(request.POST)
-        print(form.non_field_errors)
         if form.is_valid():
-            agenda = form.save(commit=False)
-            agenda.asesor = asesor
-            agenda.save()
+            dia_semana = form.cleaned_data.get('dia_semana')
+            hora_inicio = form.cleaned_data.get('hora_inicio')
+            hora_final = form.cleaned_data.get('hora_final')
 
-    context = {'agendas': agendas, 'form': form}
+            while hora_inicio < hora_final:
+                Agenda.objects.get_or_create(
+                    asesor=asesor,
+                    dia=CatalogoDia.objects.get(nombre=dia_semana),
+                    hora=CatalogoHora.objects.get(nombre=hora_inicio)
+                )
+                print(type(hora_inicio))
+                print(hora_inicio)
+                new_date = datetime.combine(date.today(), hora_inicio) + timedelta(minutes=30)
+                hora_inicio = new_date.time()
+
+    context = {'agendas': agendas, 'form': form, 'dias': dias}
     return render(request, 'accounts/horario.html', context)
 
 
