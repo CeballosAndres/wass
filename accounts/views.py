@@ -144,11 +144,11 @@ def horario(request):
 
     if request.method == 'POST':
         form = AgendaForm(request.POST)
+        print(form.non_field_errors)
         if form.is_valid():
             agenda = form.save(commit=False)
             agenda.asesor = asesor
             agenda.save()
-        form = AgendaForm()
 
     context = {'agendas': agendas, 'form': form}
     return render(request, 'accounts/horario.html', context)

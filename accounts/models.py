@@ -1,5 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
+import datetime as dt
+
+HORAS = [(dt.time(hour=h, minute=m), '{:02d}:{:02d}'.format(h, m)) for h in range(7, 19) for m in [0, 30]]
+DIAS = [
+    ('lunes', 'Lunes'),
+    ('martes', 'Martes'),
+    ('miercoles', 'Miércoles'),
+    ('jueves', 'Jueves'),
+    ('viernes', 'Viernes'),
+]
 
 
 class Jefe(models.Model):
@@ -72,26 +82,26 @@ class Asesorado(models.Model):
         return self.usuario.username
 
 
-class DiaAtencion(models.Model):
-    nombre = models.CharField(max_length=10)
+class CatalogoDia(models.Model):
+    nombre = models.CharField(null=False, blank=False, max_length=10, choices=DIAS, unique=True)
 
     class Meta:
-        verbose_name = 'Día de atención'
-        verbose_name_plural = 'Días de atención'
+        verbose_name = 'Catalogo día'
+        verbose_name_plural = 'Catalogo días'
 
     def __str__(self):
         return self.nombre
 
 
-class HorarioAtencion(models.Model):
-    inicio = models.TimeField()
+class CatalogoHora(models.Model):
+    nombre = models.TimeField(null=False, blank=False, max_length=10, choices=HORAS, unique=True)
 
     class Meta:
-        verbose_name = 'Horario de atención'
-        verbose_name_plural = 'Horarios de atención'
+        verbose_name = 'Catalogo hora'
+        verbose_name_plural = 'Catalogo horas'
 
     def __str__(self):
-        return str(self.inicio)
+        return str(self.nombre)
 
 
 class Tema(models.Model):
@@ -129,7 +139,7 @@ class Asesor(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     departamento = models.ForeignKey(Departamento, null=True, on_delete=models.SET_NULL, blank=True)
     subtetmas = models.ManyToManyField(Subtema, through='TemarioAsesor')
-    horarios = models.ManyToManyField(DiaAtencion, through='Agenda')
+    horarios = models.ManyToManyField(CatalogoDia, through='Agenda')
 
     class Meta:
         verbose_name = 'Asesor'
@@ -141,12 +151,13 @@ class Asesor(models.Model):
 
 class Agenda(models.Model):
     asesor = models.ForeignKey(Asesor, null=False, on_delete=models.CASCADE)
-    dia = models.ForeignKey(DiaAtencion, null=True, on_delete=models.SET_NULL)
-    hora = models.ForeignKey(HorarioAtencion, null=True, on_delete=models.SET_NULL)
+    dia = models.ForeignKey(CatalogoDia, null=True, on_delete=models.SET_NULL, choices=DIAS)
+    hora = models.ForeignKey(CatalogoHora, null=True, on_delete=models.SET_NULL, choices=HORAS)
 
     class Meta:
         verbose_name = 'Agenda'
         verbose_name_plural = 'Agendas'
+        unique_together = (('asesor', 'dia', 'hora'),)
 
 
 class TemarioAsesor(models.Model):

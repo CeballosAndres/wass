@@ -6,20 +6,44 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from .models import Asesorado, Asesor, Agenda
 
-HOURS = ['07:00','07:30']
-BIRTH_YEAR_CHOICES = ['1980', '1981', '1982']
+from django.utils.dateparse import parse_time 
+import datetime as dt
+
+
+HORAS = [(dt.time(hour=h, minute=m), '{:02d}:{:02d}'.format(h, m)) for h in range(7, 19) for m in [0, 30]]
+DIAS = [
+    ('lunes', 'Lunes'),
+    ('martes', 'Martes'),
+    ('miercoles', 'Miércoles'),
+    ('jueves', 'Jueves'),
+    ('viernes', 'Viernes'),
+]
+
 
 class AgendaForm(ModelForm):
-    hora_inicio = forms.TimeField(widget=forms.TimeInput(attrs={
-        'type': 'time',
-        'min':'07:00',
-        'max':'20:00'}))
-    hora_fin = forms.TimeField(required=True, widget=forms.TimeInput(attrs={'type': 'time'}, format='%I:%M %p'))
+    error_messages = {
+        'wrong_time': _('La hora de inicio debe ser menor a la de final.'),
+    }
+    dia_semana = forms.CharField(widget=forms.Select(choices=DIAS))
+    hora_inicio = forms.TimeField(widget=forms.Select(choices=HORAS))
+    hora_final = forms.TimeField(widget=forms.Select(choices=HORAS))
+
     class Meta:
         model = Agenda
-        fields = ['dia', 'hora_inicio']
+        fields = ['dia_semana', 'hora_inicio', 'hora_final']
 
-
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        hora_inicio = self.cleaned_data.get('hora_inicio')
+        hora_final = self.cleaned_data.get('hora_final')
+        if hora_inicio >= hora_final:
+            raise ValidationError(
+                self.error_messages['wrong_time'],
+                code='wrong_time',
+            )
+        else:
+            return cleaned_data
+            
 
 class AsesoradoForm(ModelForm):
     class Meta:
