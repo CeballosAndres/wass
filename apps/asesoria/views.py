@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 from apps.accounts.models import Asesorado
 
+
 @login_required(login_url='ingreso')
 def seleccionMateria(request):
     asesorado = Asesorado.objects.get(usuario=request.user.id)

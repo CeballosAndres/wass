@@ -69,7 +69,6 @@ def principal(request):
     return render(request, 'accounts/principal.html', context)
 
 
-
 @login_required(login_url='ingreso')
 def verAsesorias(request):
     return render(request, 'accounts/ver-asesorias.html')
