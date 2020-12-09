@@ -32,7 +32,7 @@
                 <tr>
                     <th scope="row">{{materia.clave_materia}}</th>
                     <td>{{ materia.nombre }}</td>
-                    <td><a href="{% url 'temario_agregar' materia.id %}"><button
+                    <td><a href="{% url 'accounts:temario_agregar' materia.id %}"><button
                                 class="btn btn-success">Agregar</button></td>
                 </tr>
                 {% endfor %}

@@ -19,7 +19,7 @@
                         {% if agenda.dia.get_nombre_display == dia %}
                             <li class="list-group-item">
                                 {{agenda.hora.get_nombre_display}}
-                                <a href="{% url 'eliminar_horario' agenda.id %}">x</a>
+                                <a href="{% url 'accounts:eliminar_horario' agenda.id %}">x</a>
                             </li>
                         {% endif %}
                     {% endfor %}

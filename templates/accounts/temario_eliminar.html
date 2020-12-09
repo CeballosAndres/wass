@@ -12,7 +12,7 @@
                 {% csrf_token %}
                 <h2>¿Está seguro de eliminar {{materia.nombre}} de sus asesorias?</h2>
                 <input type="submit" value="Eliminar" class="btn btn-danger">
-                <a href="{% url 'temario'%}" class="btn btn-primary">Cancelar</a>
+                <a href="{% url 'accounts:temario'%}" class="btn btn-primary">Cancelar</a>
             </form>
         </div>
     </div>

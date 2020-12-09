@@ -21,7 +21,7 @@ def registro(request):
             # Add some flash messages before to redirect
             email = form.cleaned_data.get('email')
             messages.success(request, 'Registro exitoso para ' + email)
-            return redirect('ingreso')
+            return redirect('accounts:ingreso')
     context = {'form': form}
     return render(request, 'accounts/registro.html', context)
 
@@ -34,7 +34,7 @@ def ingreso(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('principal')
+            return redirect('accounts:principal')
         else:
             messages.warning(request, 'Combinación incorrecta de usuario y contraseña.')
     context = {}
@@ -43,7 +43,7 @@ def ingreso(request):
 
 def salir(request):
     logout(request)
-    return redirect('ingreso')
+    return redirect('accounts:ingreso')
 
 
 @login_required(login_url='ingreso')
@@ -53,17 +53,17 @@ def principal(request):
     group = request.user.groups.all()[0].name
     if group == 'asesorados':
         opciones = {'asesoria:seleccion_materia': 'Agendar',
-                    'ver-asesorias': 'Ver Asesorías'}
+                    'accounts:ver-asesorias': 'Ver Asesorías'}
         asesorado = Asesorado.objects.get(usuario=request.user.id)
         if not asesorado.carrera:
             messages.info(request, 'Ingrese a datos personales y seleccione su carrera.')
     elif group == 'asesores':
-        opciones = {'ver-asesorias': 'Mis asesorías',
-                    'horario': 'Horario',
-                    'temario': 'Temario',
-                    'reportes': 'Reportes'}
+        opciones = {'accounts:ver-asesorias': 'Mis asesorías',
+                    'accounts:horario': 'Horario',
+                    'accounts:temario': 'Temario',
+                    'accounts:reportes': 'Reportes'}
     elif group == 'jefes':
-        opciones = {'index': 'Carrera',
+        opciones = {'accounts:index': 'Carrera',
                     'reportes': 'Reportes'}
     context = {'opciones': opciones}
     return render(request, 'accounts/principal.html', context)
@@ -94,7 +94,7 @@ def configurar(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Datos personales actualizados.')
-            return redirect('principal')
+            return redirect('accounts:principal')
     else:
         if group == 'asesorados':
             form = AsesoradoForm(instance=user_profile)
@@ -113,7 +113,7 @@ def contrasena(request):
             user = form.save()
             update_session_auth_hash(request, user)  # solve autologin!
             messages.success(request, 'Contraseña actualizada')
-            return redirect('configurar')
+            return redirect('accounts:configurar')
     else:
         form = PasswordChangeForm(request.user)
     context = {'form': form}
@@ -171,7 +171,7 @@ def eliminarHorario(request, pk):
     agenda = Agenda.objects.get(id=pk)
     if agenda in agendas:
         agenda.delete()
-    return redirect('horario')
+    return redirect('accounts:horario')
 
 
 @login_required(login_url='ingreso')
@@ -221,7 +221,7 @@ def temarioAgregar(request, pk):
             TemarioAsesor.objects.get_or_create(asesor=asesor, materia=materia, tema=tema, subtema=subtema)
 
     messages.success(request, 'Materia agregada')
-    return redirect('temario')
+    return redirect('accounts:temario')
 
 
 @login_required(login_url='ingreso')
@@ -232,7 +232,7 @@ def temarioEliminar(request, pk):
         TemarioAsesor.objects.filter(asesor=asesor, materia=materia).delete()
 
         messages.success(request, 'Materia eliminada')
-        return redirect('temario')
+        return redirect('accounts:temario')
     context = {'materia': materia}
     return render(request, 'accounts/temario_eliminar.html', context)
 
@@ -253,7 +253,7 @@ def temarioMateriaEditar(request, pk):
                 tema.activo = False
             tema.save()
         messages.success(request, 'Materia actualizada.')
-        return redirect('temario')
+        return redirect('accounts:temario')
 
     context = {'materia': materia, 'temas': temas}
     return render(request, 'accounts/temario_temas.html', context)

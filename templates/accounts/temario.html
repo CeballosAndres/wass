@@ -25,9 +25,9 @@
                     <th scope="row">{{materia.materia.clave_materia}}</th>
                     <td>{{ materia.materia.nombre }}</td>
                     <td>
-                        <a href="{% url 'temario_materia_editar' materia.materia.id %}"
+                        <a href="{% url 'accounts:temario_materia_editar' materia.materia.id %}"
                             class="btn btn-warning mr-3">Editar</a>
-                        <a href="{% url 'temario_eliminar' materia.materia.id %}" class="btn btn-danger">Eliminar</a>
+                        <a href="{% url 'accounts:temario_eliminar' materia.materia.id %}" class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>
                 {% endfor %}

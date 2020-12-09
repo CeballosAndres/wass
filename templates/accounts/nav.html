@@ -6,13 +6,13 @@
 {% block content %}
 
 <nav class="navbar navbar-dark bg-dark">
-    <a href="{% url 'principal' %}"><img src="{% static 'images/Logo.png' %}" class="ml-3" width="75" height="40"
+    <a href="{% url 'accounts:principal' %}"><img src="{% static 'images/Logo.png' %}" class="ml-3" width="75" height="40"
             alt="Wass logo"></a>
     <div>
         {% if not hide_config %}
-        <a href="{% url 'configurar' %}"><i style="color: #BFBFBF;" class="fas fa-user-circle mr-3"></i></a>
+        <a href="{% url 'accounts:configurar' %}"><i style="color: #BFBFBF;" class="fas fa-user-circle mr-3"></i></a>
         {% endif %}
-        <a href="{% url 'salir'%}"><i style="color: #BFBFBF;" class="fas fa-sign-out-alt"></i></a>
+        <a href="{% url 'accounts:salir'%}"><i style="color: #BFBFBF;" class="fas fa-sign-out-alt"></i></a>
     </div>
 </nav>
 
