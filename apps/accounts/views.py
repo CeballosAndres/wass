@@ -58,7 +58,7 @@ def principal(request):
         if not asesorado.carrera:
             messages.info(request, 'Ingrese a datos personales y seleccione su carrera.')
     elif group == 'asesores':
-        opciones = {'accounts:agendar': 'Mis asesorías',
+        opciones = {'accounts:ver-asesorias': 'Mis asesorías',
                     'accounts:horario': 'Horario',
                     'accounts:temario': 'Temario',
                     'accounts:reportes': 'Reportes'}
