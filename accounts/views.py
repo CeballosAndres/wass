@@ -56,8 +56,8 @@ def principal(request):
                     'ver-asesorias': 'Ver Asesorías'}
     elif group == 'asesores':
         opciones = {'agendar': 'Mis asesorías',
+                    'temario': 'Temas a asesorar',
                     'horario': 'Horario',
-                    'temario': 'Temario',
                     'reportes': 'Reportes'}
     elif group == 'jefes':
         opciones = {'index': 'Carrera',

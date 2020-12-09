@@ -3,15 +3,22 @@
 /* // Small devices (landscape phones, 300px and up) xs */
 @media (min-width: 300px) { 
     #title {
-        font-size: 1.5rem;
+        font-size: 1.5rem
     }
     #filter {
         width: 130px; 
-        height: 50px;
+        height: 50px
     }
     .my-card {
-        width: 20rem;
+        width: 20rem
     }
+    #profile-pic{
+        width: 100%; 
+        text-align: center; 
+        margin-top:50%
+
+    }
+
 
 }
 
@@ -31,7 +38,6 @@
         margin-top: 10px;
     }
 
-
 }
 
 /* // Large devices (desktops, 992px and up) md */
@@ -46,8 +52,6 @@
     #search {
         margin-top: 10px;
     }
-
-
  }
 
 /* // Extra large devices (large desktops, 1200px and up) */

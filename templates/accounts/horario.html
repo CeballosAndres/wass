@@ -4,12 +4,16 @@
 {% block content %}
 
 
-<div class="container">
-    <h1 id="title" class="my-3"><a href="#"><i class="fas fa-arrow-circle-left px-4"></i></a>Horario</h1>
-
+<main class="container">
     <div class="row">
-    {% for dia in dias %}
         <div class="col">
+            <h1 id="title" class="my-3"><a href="{% url 'principal' %}"><i class="fas fa-arrow-circle-left px-4"></i></a>Horario</h1>
+        </div>
+    </div>
+
+    <div class="row my-4">
+    {% for dia in dias %}
+        <div class="col col-sm-2">
             <div class="card text-center">
                 <div class="card-header">
                     <strong>{{dia}}</strong>
@@ -27,23 +31,24 @@
             </div>
         </div>
     {% endfor %}
-    </div class="row">
+    </div>
 
+    <hr class="rounded">
 
-    <div class="row">
-        <form method="POST" action="">
-            <div class="form-inline">
+    <div class="container-fluid">
+        <form class="form-inline"method="POST" action="">
+            <div class="my-3">
             {% csrf_token %}
             {% render_field form.dia_semana class="form-control" %}
             {% render_field form.hora_inicio class="form-control" %}
             {% render_field form.hora_final class="form-control" %}
-            <input type="submit" class = "btn my-btn small mx-3" value="Agregar Bloques">
+            <input type="submit" class = "btn my-btn small mx-4" value="Agregar Bloques">
             </div>
         </form>
     </div>
 
     </div>
-</div>
+</main>
 
 
 
