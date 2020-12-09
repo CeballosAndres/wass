@@ -10,7 +10,7 @@ from django.utils.dateparse import parse_time
 import datetime as dt
 
 
-HORAS = [(dt.time(hour=h, minute=m), '{:02d}:{:02d}'.format(h, m)) for h in range(7, 19) for m in [0, 30]]
+HORAS = [(dt.time(hour=h, minute=m), '{:02d}:{:02d}'.format(h, m)) for h in range(7, 20) for m in [0, 30]]
 DIAS = [
     ('lunes', 'Lunes'),
     ('martes', 'Martes'),

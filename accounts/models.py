@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 import datetime as dt
 
-HORAS = [(dt.time(hour=h, minute=m), '{:02d}:{:02d}'.format(h, m)) for h in range(7, 19) for m in [0, 30]]
+HORAS = [(dt.time(hour=h, minute=m), '{:02d}:{:02d}'.format(h, m)) for h in range(7, 20) for m in [0, 30]]
 DIAS = [
     ('lunes', 'Lunes'),
     ('martes', 'Martes'),
@@ -153,6 +153,7 @@ class Agenda(models.Model):
     asesor = models.ForeignKey(Asesor, null=False, on_delete=models.CASCADE)
     dia = models.ForeignKey(CatalogoDia, null=True, on_delete=models.SET_NULL, choices=DIAS)
     hora = models.ForeignKey(CatalogoHora, null=True, on_delete=models.SET_NULL, choices=HORAS)
+    disponible = models.BooleanField('Disponible/no disponible', default=True, null=True, blank=True)
 
     class Meta:
         verbose_name = 'Agenda'
