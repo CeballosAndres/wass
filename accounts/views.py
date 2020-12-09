@@ -58,7 +58,7 @@ def principal(request):
         if not asesorado.carrera:
             messages.info(request, 'Ingrese a datos personales y seleccione su carrera.')
     elif group == 'asesores':
-        opciones = {'': 'Mis asesorías',
+        opciones = {'ver-asesorias': 'Mis asesorías',
                     'horario': 'Horario',
                     'temario': 'Temario',
                     'reportes': 'Reportes'}
@@ -156,8 +156,7 @@ def horario(request):
                     dia=CatalogoDia.objects.get(nombre=dia_semana),
                     hora=CatalogoHora.objects.get(nombre=hora_inicio)
                 )
-                print(type(hora_inicio))
-                print(hora_inicio)
+                # Agrega 30 minutos a hora_inicio
                 new_date = datetime.combine(date.today(), hora_inicio) + timedelta(minutes=30)
                 hora_inicio = new_date.time()
 
