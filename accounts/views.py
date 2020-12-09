@@ -1,9 +1,9 @@
 from datetime import date, datetime, time, timedelta
-from django.shortcuts import render, redirect
-from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from .filters import MateriaFilter
 from .models import *
@@ -52,10 +52,13 @@ def principal(request):
     opciones = []
     group = request.user.groups.all()[0].name
     if group == 'asesorados':
-        opciones = {'agendar': 'Agendar',
+        opciones = {'asesoria:seleccion_materia': 'Agendar',
                     'ver-asesorias': 'Ver Asesorías'}
+        asesorado = Asesorado.objects.get(usuario=request.user.id)
+        if not asesorado.carrera:
+            messages.info(request, 'Ingrese a datos personales y seleccione su carrera.')
     elif group == 'asesores':
-        opciones = {'agendar': 'Mis asesorías',
+        opciones = {'': 'Mis asesorías',
                     'horario': 'Horario',
                     'temario': 'Temario',
                     'reportes': 'Reportes'}
@@ -65,10 +68,6 @@ def principal(request):
     context = {'opciones': opciones}
     return render(request, 'accounts/principal.html', context)
 
-
-@login_required(login_url='ingreso')
-def agendar(request):
-    return render(request, 'accounts/agendar.html')
 
 
 @login_required(login_url='ingreso')
@@ -95,7 +94,7 @@ def configurar(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Datos personales actualizados.')
-            return redirect('configurar')
+            return redirect('principal')
     else:
         if group == 'asesorados':
             form = AsesoradoForm(instance=user_profile)
