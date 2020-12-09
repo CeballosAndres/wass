@@ -19,7 +19,12 @@ form a {
 /* tamanio de iconos */  
 i {
     color: #BFBFBF;
-    font-size: 30px;  
+    font-size: 1.875rem; 
+}
+
+hr{
+    border-top: 10px solid #e8aa00;
+    border-radius: 5px;
 }
 
 .card {    

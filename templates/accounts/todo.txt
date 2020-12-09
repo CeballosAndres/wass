@@ -1,13 +1,23 @@
 
-- Buttons events
-
-- add topic to the 'asesoria' card (thats not in Figma)
+- Agregar 'Tema' en los wireframes de 'Mis asesorias' y 'rechazar asesorias'
 
 - check height for the 2nd column between status and option
 
-- change title 'Agenda' for 'Asesorias' in Asesores Wireframes 
+- Cambiar 'Agenda' por 'Asesorias' en los Wireframes
 
-- new Wireframe : 'Contrasenia' 
+- El cambio de contrasenia se manejara aparte, no en la misma pagina de configuracion
 
-- change reportes types
+- Nuevo Wireframe : 'Contrasenia' 
+
+- Cada usuario tendra 1 tipo de reporte, no tres
+
+- El Wireframe de 'p3a.3 Temario' cambio radicalmente
+
+- El Wireframe de 'p3a.2 Horario' cambio radicalmente
+
+- El Wireframe de 'p3a.3 Config...' se ha cambiado 3 veces
+
+- la vista de 'p3a.1.1 agregar temas cambio', no sera un modal sino una nueva pagina
+
+- 
 

@@ -5,14 +5,14 @@
 {% block content %}
 
 <main class="container">
-    <div class="row">
+    <div class="row mb-4">
         <div class="col-xs-6 col-md-9">
             <h1 id="title" class="my-3"><a href="#"><i class="fas fa-arrow-circle-left px-4"></i></a>Temario</h1>
         </div>
     </div>
 
     <div class="row text-center">
-        <div class="col my-4">
+        <div class="col">
             <h2>Materias</h2>
         </div>
     </div>
@@ -32,8 +32,9 @@
                 <tr>
                     <th scope="row">{{materia.clave_materia}}</th>
                     <td>{{ materia.nombre }}</td>
-                    <td><a href="{% url 'accounts:temario_agregar' materia.id %}"><button
-                                class="btn btn-success">Agregar</button></td>
+                    <td><a href="{% url 'accounts:temario_agregar' materia.id %}">
+                        <button class="btn btn-success">Agregar</button>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

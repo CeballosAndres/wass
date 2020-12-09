@@ -6,12 +6,15 @@
 
 
 <main class="container">
-    <h1 id="title" class="my-3"><a href="#"><i class="fas fa-arrow-circle-left px-4"></i></a>Materias</h1>
-
     <div class="row">
-        {% if materias %}
+        <div class="col">
+            <h1 id="title" class="my-3"><a href="{% url 'principal' %}"><i class="fas fa-arrow-circle-left px-4"></i></a>Materias</h1>
+        </div>
+    </div>
 
-        <table class="table table-hover mt-4">
+    <div class="container">
+        {% if materias %}
+        <table class="table table-hover table-responsive-sm my-5">
             <thead class="thead-dark ">
                 <tr>
                     <th scope="col">Clave</th>
@@ -26,8 +29,8 @@
                     <td>{{ materia.materia.nombre }}</td>
                     <td>
                         <a href="{% url 'accounts:temario_materia_editar' materia.materia.id %}"
-                            class="btn btn-warning mr-3">Editar</a>
-                        <a href="{% url 'accounts:temario_eliminar' materia.materia.id %}" class="btn btn-danger">Eliminar</a>
+                                class="btn btn-warning mr-3 mb-3">Editar</a>
+                        <a href="{% url 'accounts:temario_eliminar' materia.materia.id %}" class="btn btn-danger mb-3">Eliminar</a>
                     </td>
                 </tr>
                 {% endfor %}
@@ -45,7 +48,7 @@
                 <div class="col-md-8 col-xm-12">
                     {% render_field filtro.form.query class="form-control" placeholder="Nombre o clave de materia" %}
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 my-4">
                     <button id="search" class="my-btn small" type="submit">Buscar</button>
                 </div>
             </form>
