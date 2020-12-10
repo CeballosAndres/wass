@@ -23,7 +23,7 @@ def registro(request):
             email = form.cleaned_data.get('email')
             messages.success(request, 'Registro exitoso para ' + email)
             return redirect('accounts:ingreso')
-    context = {'form': form}
+    context = {'hide_navbar': True, 'form': form}
     return render(request, 'accounts/registro.html', context)
 
 
@@ -38,7 +38,7 @@ def ingreso(request):
             return redirect('accounts:principal')
         else:
             messages.warning(request, 'Combinación incorrecta de usuario y contraseña.')
-    context = {}
+    context = {'hide_navbar': True}
     return render(request, 'accounts/ingreso.html', context)
 
 
@@ -56,12 +56,23 @@ def principal(request):
                     'accounts:ver-asesorias': 'Ver Asesorías'}
         asesorado = Asesorado.objects.get(usuario=request.user.id)
         if not asesorado.carrera:
-            messages.info(request, 'Ingrese a datos personales y seleccione su carrera.')
+            messages.warning(request, 'Ingrese sus datos personales.')
+
     elif group == 'asesores':
         opciones = {'accounts:ver-asesorias': 'Mis asesorías',
                     'accounts:horario': 'Horario',
                     'accounts:temario': 'Temario',
                     'accounts:reportes': 'Reportes'}
+        asesor = Asesor.objects.get(usuario=request.user.id)
+        materias = TemarioAsesor.objects.filter(asesor=asesor).distinct('materia')
+        agendas = Agenda.objects.filter(asesor=asesor).exists()
+        if len(materias) == 0:
+            messages.warning(request, '<a href="/temario/">Registre materias a asesorar.</a>', extra_tags='safe')
+        if not agendas:
+            messages.warning(request,
+                             '<a href="/configurar/horario/">Registre los horarios en los que asesorará.</a>',
+                             extra_tags='safe')
+
     elif group == 'jefes':
         opciones = {'accounts:index': 'Carrera',
                     'reportes': 'Reportes'}
@@ -72,6 +83,7 @@ def principal(request):
 @login_required(login_url='accounts:ingreso')
 def verAsesorias(request):
     return render(request, 'accounts/ver-asesorias.html')
+
 
 @login_required(login_url='accounts:ingreso')
 def configurar(request):
@@ -243,7 +255,6 @@ def temarioEliminar(request, pk):
 
 @login_required(login_url='accounts:ingreso')
 @allowed_users(['asesores'])
-
 def temarioMateriaEditar(request, pk):
     asesor = Asesor.objects.get(usuario=request.user.id)
     materia = Materia.objects.get(id=pk)

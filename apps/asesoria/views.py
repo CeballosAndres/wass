@@ -13,9 +13,17 @@ def seleccionMateria(request):
         return redirect('accounts:configurar')
 
     materias = Materia.objects.filter(carrera=asesorado.carrera)
-    
     context = {
         'materias': materias,
     }
     return render(request, 'asesoria/seleccion_materia.html', context)
 
+
+@login_required(login_url='accounts:ingreso')
+def seleccionTema(request, tema):
+    return render(request, 'asesoria/seleccion_materia.html', context)
+
+
+@login_required(login_url='accounts:ingreso')
+def seleccionSubtema(request, tema, subtema):
+    return render(request, 'asesoria/seleccion_materia.html', context)
