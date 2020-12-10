@@ -12,12 +12,13 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import sys
 from decouple import config
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+sys.path.insert(0, os.path.join(BASE_DIR, "apps"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -42,8 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.accounts',
-    'apps.asesoria',
+    'accounts.apps.AccountsConfig',
+    'asesoria.apps.AsesoriaConfig',
     'widget_tweaks',
     'django_filters',
 ]

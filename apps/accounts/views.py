@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
+
 from .filters import MateriaFilter
 from .models import *
 from .forms import *
@@ -46,8 +47,7 @@ def salir(request):
     return redirect('accounts:ingreso')
 
 
-@login_required(login_url='ingreso')
-@allowed_users(['asesorados', 'asesores', 'jefes'])
+@login_required(login_url='accounts:ingreso')
 def principal(request):
     opciones = []
     group = request.user.groups.all()[0].name
@@ -69,11 +69,11 @@ def principal(request):
     return render(request, 'accounts/principal.html', context)
 
 
-@login_required(login_url='ingreso')
+@login_required(login_url='accounts:ingreso')
 def verAsesorias(request):
     return render(request, 'accounts/ver-asesorias.html')
 
-
+@login_required(login_url='accounts:ingreso')
 def configurar(request):
     group = request.user.groups.all()[0].name
     user_profile = None
@@ -104,7 +104,7 @@ def configurar(request):
     return render(request, 'accounts/configurar.html', context)
 
 
-@login_required(login_url='ingreso')
+@login_required(login_url='accounts:ingreso')
 def contrasena(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -119,22 +119,22 @@ def contrasena(request):
     return render(request, 'accounts/contrasena.html', context)
 
 
-@login_required(login_url='ingreso')
 def index(request):
     return render(request, 'accounts/index.html')
 
 
-@login_required(login_url='ingreso')
+@login_required(login_url='accounts:ingreso')
 def reportes(request):
     return render(request, 'accounts/reportes.html')
 
 
-@login_required(login_url='ingreso')
+@login_required(login_url='accounts:ingreso')
 def repSem(request):
     return render(request, 'accounts/rep-sem.html')
 
 
-@login_required(login_url='ingreso')
+@login_required(login_url='accounts:ingreso')
+@allowed_users(['asesores'])
 def horario(request):
     dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']
     asesor = Asesor.objects.get(usuario=request.user.id)
@@ -163,7 +163,8 @@ def horario(request):
     return render(request, 'accounts/horario.html', context)
 
 
-@login_required(login_url='ingreso')
+@login_required(login_url='accounts:ingreso')
+@allowed_users(['asesores'])
 def eliminarHorario(request, pk):
     asesor = Asesor.objects.get(usuario=request.user.id)
     agendas = Agenda.objects.filter(asesor=asesor)
@@ -173,7 +174,8 @@ def eliminarHorario(request, pk):
     return redirect('accounts:horario')
 
 
-@login_required(login_url='ingreso')
+@login_required(login_url='accounts:ingreso')
+@allowed_users(['asesores'])
 def temario(request):
     asesor = Asesor.objects.get(usuario=request.user.id)
     materias = TemarioAsesor.objects.filter(asesor=asesor).distinct('materia')
@@ -186,7 +188,8 @@ def temario(request):
     return render(request, 'accounts/temario.html', context)
 
 
-@login_required(login_url='ingreso')
+@login_required(login_url='accounts:ingreso')
+@allowed_users(['asesores'])
 def temarioAgregarModal(request):
     asesor = Asesor.objects.get(usuario=request.user.id)
     materias_asesor = TemarioAsesor.objects.filter(asesor=asesor).distinct('materia').values('materia')
@@ -208,7 +211,8 @@ def temarioAgregarModal(request):
     return render(request, 'accounts/temario_materia.html', context)
 
 
-@login_required(login_url='ingreso')
+@login_required(login_url='accounts:ingreso')
+@allowed_users(['asesores'])
 def temarioAgregar(request, pk):
     asesor = Asesor.objects.get(usuario=request.user.id)
     materia = Materia.objects.get(id=pk)
@@ -223,7 +227,8 @@ def temarioAgregar(request, pk):
     return redirect('accounts:temario')
 
 
-@login_required(login_url='ingreso')
+@login_required(login_url='accounts:ingreso')
+@allowed_users(['asesores'])
 def temarioEliminar(request, pk):
     materia = Materia.objects.get(id=pk)
     if request.method == 'POST':
@@ -236,7 +241,9 @@ def temarioEliminar(request, pk):
     return render(request, 'accounts/temario_eliminar.html', context)
 
 
-@login_required(login_url='ingreso')
+@login_required(login_url='accounts:ingreso')
+@allowed_users(['asesores'])
+
 def temarioMateriaEditar(request, pk):
     asesor = Asesor.objects.get(usuario=request.user.id)
     materia = Materia.objects.get(id=pk)
