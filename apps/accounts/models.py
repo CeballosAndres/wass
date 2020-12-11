@@ -60,6 +60,7 @@ class Materia(models.Model):
     carrera = models.ForeignKey(Carrera, null=True, blank=True, on_delete=models.SET_NULL)
 
     class Meta:
+        ordering = ['nombre']
         verbose_name = 'Materia'
         verbose_name_plural = 'Materias'
 

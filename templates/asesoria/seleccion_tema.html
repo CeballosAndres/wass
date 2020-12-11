@@ -15,13 +15,13 @@
   <div class="container text-center">
     <div class="card text-center">
       <div class="card-header">
-        <strong>{{carrera}}</strong>
+        <strong>{{materia}}</strong>
       </div>
       <ul class="list-group list-group-flush">
-        {% for materia in materias %}
-        <a href="{% url 'asesoria:seleccion_tema' materia.id %}">
+        {% for tema in temas %}
+        <a href="{% url 'asesoria:seleccion_subtema' materia.id tema.id %}">
           <li class="list-group-item">
-            {{materia.nombre}}
+            {{tema.nombre}}
           </li>
         </a>
         {% endfor %}

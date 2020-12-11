@@ -1,0 +1,87 @@
+{% include 'root.html' %}
+
+{% block content %}
+
+
+<main class="container">
+    <!---Titulo-->
+  <div class="row">
+    <div class="col">
+      <h1 id="title" class="my-3"><a href="#"><i class="fas fa-arrow-circle-left px-4"></i></a> Agendar asesoría</h1>
+    </div>
+  </div>
+
+  {% for materia in object_list %}
+    <li><a hrfe="{% url 'seleccion_tema' materia.id %}">{{materia.nombre}}</a></li>
+  {% endfor %}
+  <div class="container text-center">
+  
+    <div class="row">
+        <div class="col-12">
+          <!-- Mostrar las materias de acuerdo a su kardex-->
+          <select class="browser-default custom-select mb-5">
+            <option selected>Materia</option>
+            <option value="1">Calculo Diferencial</option>
+            <option value="2">Fundamentos de programacion</option>
+            <option value="3">Matematicas discretas</option>
+            <option value="4">Calculo Integral</option>
+          </select>
+        </div>
+    </div>
+    
+   
+    <div> 
+      <button class="small my-btn">Siguiente</button> 
+    </div>
+  </div>
+
+</main>
+
+
+<!-- The result window -->
+<div id="agenda" class="result">
+
+  <div>
+    <button class="my-btn"><i class="fas fa-chevron-right"></i></button>
+    <p>fechas</p>
+    <button class="my-btn"><i class="fas fa-chevron-left"></i></button>
+  </div>
+
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <table class="table table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Asesor</th>
+          <th scope="col">Lunes</th>
+          <th scope="col">Martes</th>
+          <th scope="col">Miercoles</th>
+          <th scope="col">Jueves</th>
+          <th scope="col">Viernes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Octavio Paz</th>
+          <td>13:00</td>
+          <td>11:00</td>
+          <td></td>
+          <td>13:00</td>
+          <td></td>
+        </tr>
+        <tr>
+          <th scope="row">Jose Sonora</th>
+          <td>14:00</td>
+          <td></td>
+          <td>10:00</td>
+          <td>9:00</td>
+          <td>11:00</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+{% endblock %}
+

@@ -1,0 +1,38 @@
+{% include 'root.html' %}
+
+{% block content %}
+
+
+<main class="container">
+  <!---Titulo-->
+  <div class="row">
+    <div class="col">
+      <h1 id="title" class="my-3"><a href="#"><i class="fas fa-arrow-circle-left px-4"></i></a> Agendar asesoría</h1>
+    </div>
+  </div>
+
+
+  <div class="container text-center">
+
+    {% for asesor in asesores %}
+      <div class="card text-center">
+        <div class="card-header">
+          <strong>{{asesor.asesor.nombre}}</strong>
+        </div>
+        <ul class="list-group list-group-flush">
+          {% for agenda in agendas %}
+            {% if asesor.asesor == agenda.asesor %}
+              <a href="#">
+                <li class="list-group-item">
+                  {{agenda.dia.get_nombre_display}} {{agenda.hora.get_nombre_display}}
+                </li>
+              </a>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  </div>  
+</main>
+
+{% endblock %}

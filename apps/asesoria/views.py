@@ -1,29 +1,62 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-from accounts.models import Asesorado, Materia
+from accounts.models import Asesorado, Asesor, Materia, Tema, Subtema, Agenda, TemarioAsesor
 
 
 @login_required(login_url='accounts:ingreso')
 def seleccionMateria(request):
-    asesorado = Asesorado.objects.get(usuario=request.user.id)
+    asesorado = get_object_or_404(Asesorado, usuario=request.user.id)
     if not asesorado.carrera:
         messages.info(request, 'Es necesario ingresar la carrera.')
         return redirect('accounts:configurar')
 
-    materias = Materia.objects.filter(carrera=asesorado.carrera)
+    carrera = asesorado.carrera
+    materias = get_list_or_404(Materia, carrera=carrera)
     context = {
         'materias': materias,
+        'carrera': carrera,
     }
     return render(request, 'asesoria/seleccion_materia.html', context)
 
 
 @login_required(login_url='accounts:ingreso')
-def seleccionTema(request, tema):
-    return render(request, 'asesoria/seleccion_materia.html', context)
+def seleccionTema(request, materia):
+    temas = get_list_or_404(Tema, materia=materia)
+    materia_object = get_object_or_404(Materia, id=materia)
+
+    context = {
+        'temas': temas,
+        'materia': materia_object,
+    }
+    return render(request, 'asesoria/seleccion_tema.html', context)
 
 
 @login_required(login_url='accounts:ingreso')
-def seleccionSubtema(request, tema, subtema):
-    return render(request, 'asesoria/seleccion_materia.html', context)
+def seleccionSubtema(request, materia, tema):
+    subtemas = get_list_or_404(Subtema, tema=tema)
+    materia_object = get_object_or_404(Materia, id=materia)
+    tema_object = get_object_or_404(Tema, id=tema)
+
+    context = {
+        'subtemas': subtemas,
+        'materia': materia_object,
+        'tema': tema_object,
+
+    }
+    return render(request, 'asesoria/seleccion_subtema.html', context)
+
+
+@login_required(login_url='accounts:ingreso')
+def seleccionAsesor(request, materia, tema, subtema):
+
+    asesores = TemarioAsesor.objects.filter(subtema=subtema, activo=True)
+
+    agendas = Agenda.objects.filter(asesor__in=asesores.values('asesor'), disponible=True)
+
+    context = {
+        'asesores': asesores,
+        'agendas': agendas,
+    }
+    return render(request, 'asesoria/seleccion_asesor.html', context)
