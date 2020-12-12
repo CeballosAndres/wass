@@ -22,7 +22,7 @@
         <ul class="list-group list-group-flush">
           {% for agenda in agendas %}
             {% if asesor.asesor == agenda.asesor %}
-              <a href="#">
+              <a href="{% url 'asesoria:nueva_asesoria' materia tema subtema asesor.id agenda.id %}">
                 <li class="list-group-item">
                   {{agenda.dia.get_nombre_display}} {{agenda.hora.get_nombre_display}}
                 </li>

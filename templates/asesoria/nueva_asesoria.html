@@ -1,0 +1,25 @@
+{% include 'root.html' %}
+
+{% block content %}
+
+
+<main class="container">
+
+¿Desea confirmar la siguiente asesoria? <br>
+Materia:<br>
+Tema:<br>
+Subtema: <br>
+Asesor:<br>
+Horario:<br>
+<a href="{{request.META.HTTP_REFERER}}">Go back</a>
+<form method="POST" action="">
+{% csrf_token %}
+<label for="materia">Materia</label>
+<input type="text" value="{{materia.nombre}}" id="materia" name="materia" class="form-control" readonly>
+<input type="button" value="Confirmar">
+</form>
+
+
+  
+
+{% endblock %}

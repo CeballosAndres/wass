@@ -21,7 +21,7 @@
         {% for subtema in subtemas %}
         <a href="{% url 'asesoria:seleccion_asesor' materia.id tema.id subtema.id %}">
           <li class="list-group-item">
-            {{tema.nombre}}
+            {{subtema.nombre}}
           </li>
         </a>
         {% endfor %}

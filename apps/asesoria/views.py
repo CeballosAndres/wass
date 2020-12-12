@@ -43,20 +43,34 @@ def seleccionSubtema(request, materia, tema):
         'subtemas': subtemas,
         'materia': materia_object,
         'tema': tema_object,
-
     }
     return render(request, 'asesoria/seleccion_subtema.html', context)
 
 
 @login_required(login_url='accounts:ingreso')
 def seleccionAsesor(request, materia, tema, subtema):
-
     asesores = TemarioAsesor.objects.filter(subtema=subtema, activo=True)
-
     agendas = Agenda.objects.filter(asesor__in=asesores.values('asesor'), disponible=True)
+
+    if len(asesores) == 0 and len(agendas) == 0:
+        messages.warning(request, 'No existen asesores o disponibilidad de horario.')
 
     context = {
         'asesores': asesores,
         'agendas': agendas,
+        'materia': materia,
+        'tema': tema,
+        'subtema': subtema,
+
     }
     return render(request, 'asesoria/seleccion_asesor.html', context)
+
+
+@login_required(login_url='accounts:ingreso')
+def nuevaAsesoria(request, materia, tema, subtema, asesor, hora):
+    materia = get_object_or_404(Materia, id=materia)
+
+    context = {
+        'materia': materia,
+    }
+    return render(request, 'asesoria/nueva_asesoria.html', context)
