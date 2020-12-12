@@ -11,30 +11,6 @@
         </div>
     </div>
 
-    <div class="row my-4">
-    {% for dia in dias %}
-        <div class="col col-sm-2">
-            <div class="card text-center">
-                <div class="card-header">
-                    <strong>{{dia}}</strong>
-                </div>
-                <ul class="list-group list-group-flush">
-                    {% for agenda in agendas %}
-                        {% if agenda.dia.get_nombre_display == dia %}
-                            <li class="list-group-item">
-                                {{agenda.hora.get_nombre_display}}
-                                <a href="{% url 'accounts:eliminar_horario' agenda.id %}">x</a>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    {% endfor %}
-    </div>
-
-    <hr class="rounded">
-
     <div class="container-fluid">
         <form class="form-inline"method="POST" action="">
             <div class="my-3">
@@ -47,7 +23,30 @@
         </form>
     </div>
 
-    </div>
+    <hr class="rounded">
+
+    <div class="row my-4">
+        {% for dia in dias %}
+            <div class="col col-sm-2">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <strong>{{dia}}</strong>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        {% for agenda in agendas %}
+                            {% if agenda.dia.get_nombre_display == dia %}
+                                <li class="list-group-item">
+                                    {{agenda.hora.get_nombre_display}}
+                                    <a href="{% url 'accounts:eliminar_horario' agenda.id %}">x</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+
 </main>
 
 

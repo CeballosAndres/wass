@@ -22,10 +22,12 @@ i {
     font-size: 1.875rem; 
 }
 
+/* Estilo de la linea divisora */
 hr{
-    border-top: 10px solid #e8aa00;
+    border-top: 5px solid #e8aa00;
     border-radius: 5px;
 }
+
 
 .card {    
     background-color: #C4C4C4; 
@@ -62,8 +64,7 @@ hr{
 
 .alert {
     display: table;
-    margin: auto; 
-    width: 18.75rem;   
+    margin: auto;  
 }
 
 /* Estilo de los estados posibles */
@@ -106,3 +107,4 @@ hr{
     background-color: rgba(255, 135, 135, 0.535);
     padding: 10px;
 }
+
