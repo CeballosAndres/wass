@@ -134,7 +134,7 @@ def reportes(request):
 
 @login_required(login_url='accounts:ingreso')
 def repSem(request):
-    context = {'titulo': 'Reporte de aseorías por semestre' }
+    context = {'titulo': 'Reporte de aseorías por semestre'}
     return render(request, 'accounts/rep-sem.html', context)
 
 
