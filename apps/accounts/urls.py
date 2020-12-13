@@ -13,12 +13,10 @@ urlpatterns = [
     path('configurar/contrasena/', views.contrasena, name='contrasena'),
     path('configurar/horario/', views.horario, name='horario'),
     path('configurar/horario/eliminar/<str:pk>/', views.eliminarHorario, name='eliminar_horario'),
-    path('ver-asesorias/', views.verAsesorias, name='ver-asesorias'),
     path('index/', views.index, name='index'),
     path('reportes/', views.reportes, name='reportes'),
     path('rep-sem/', views.repSem, name='rep-sem'),
     path('materia/', ListarMaterias.as_view(), name='listar_materias'),
-
     path('temario/', views.temario, name='temario'),
     path('temario/materia/<str:pk>', views.temarioMateriaEditar, name='temario_materia_editar'),
     path('temario/agregar/', views.temarioAgregarModal, name='temario_agregar_modal'),

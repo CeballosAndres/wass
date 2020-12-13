@@ -14,7 +14,10 @@
     <!--- Fonts Icon  -->
     <link rel="shortcut icon" type="image/png" href="{% static 'images/icon.png' %}"/>
     <script src="https://kit.fontawesome.com/cf8f2989e3.js" crossorigin="anonymous"></script>
-    <title>WASS</title>
+    <title>
+    WASS
+    {% if titulo %} | {{titulo}}{% endif %}
+    </title>
 </head>
 
 <body>

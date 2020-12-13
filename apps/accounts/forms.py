@@ -12,11 +12,11 @@ import datetime as dt
 
 HORAS = [(dt.time(hour=h, minute=m), '{:02d}:{:02d}'.format(h, m)) for h in range(7, 20) for m in [0, 30]]
 DIAS = [
-    ('lunes', 'Lunes'),
-    ('martes', 'Martes'),
-    ('miercoles', 'Miércoles'),
-    ('jueves', 'Jueves'),
-    ('viernes', 'Viernes'),
+    ('0', 'Lunes'),
+    ('1', 'Martes'),
+    ('2', 'Miércoles'),
+    ('3', 'Jueves'),
+    ('4', 'Viernes'),
 ]
 
 

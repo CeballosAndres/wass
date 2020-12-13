@@ -1,7 +1,8 @@
+import datetime as dt
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
+from .forms import *
 from accounts.models import Asesorado, Asesor, Materia, Tema, Subtema, Agenda, TemarioAsesor
 
 
@@ -17,6 +18,7 @@ def seleccionMateria(request):
     context = {
         'materias': materias,
         'carrera': carrera,
+        'titulo': 'Agendar asesoría'
     }
     return render(request, 'asesoria/seleccion_materia.html', context)
 
@@ -61,16 +63,63 @@ def seleccionAsesor(request, materia, tema, subtema):
         'materia': materia,
         'tema': tema,
         'subtema': subtema,
-
     }
     return render(request, 'asesoria/seleccion_asesor.html', context)
 
 
 @login_required(login_url='accounts:ingreso')
 def nuevaAsesoria(request, materia, tema, subtema, asesor, hora):
+    asesor = get_object_or_404(Asesor, id=asesor)
+    subtema = get_object_or_404(Subtema, id=subtema)
     materia = get_object_or_404(Materia, id=materia)
+    agenda = get_object_or_404(Agenda, id=hora)
+    # agregar diferencia de dias
+    hoy = dt.date.today().weekday()
+    if hoy <= 4:
+        faltantes = int(agenda.dia.nombre) - hoy
+    else:
+        faltantes = 7 - hoy + int(agenda.dia.nombre)
+    dia = dt.date.today() + dt.timedelta(days=faltantes)
+    fecha_asesoria = dt.datetime.combine(dia, agenda.hora.nombre)
+
+    form = AseroriaSolicitudForm(initial={
+        'asesor': asesor,
+        'fecha_asesoria': fecha_asesoria,
+        'subtema': subtema,
+    })
+
+    if request.method == 'POST':
+        print('post')
+        form = AseroriaSolicitudForm(request.POST)
+        if form.is_valid():
+            asesoria = form.save(commit=False)
+            asesorado = get_object_or_404(Asesorado, usuario=request.user.id)
+            asesoria.asesorado = asesorado
+            asesoria.save()
+            # bloquear el horario del asesor
+            agenda.disponible = False
+            agenda.save()
+            messages.success(request, 'Solicitud de asesoría enviada.')
+            return redirect('accounts:principal')
 
     context = {
+        'form': form,
         'materia': materia,
     }
     return render(request, 'asesoria/nueva_asesoria.html', context)
+
+
+@login_required(login_url='accounts:ingreso')
+def verAsesorias(request):
+    group = request.user.groups.all()[0].name
+    if group == 'asesorados':
+        asesorado = get_object_or_404(Asesorado, usuario=request.user.id)
+        asesorias = Asesoria.objects.filter(asesorado=asesorado)
+    else:
+        asesor = get_object_or_404(Asesor, usuario=request.user.id)
+        asesorias = Asesoria.objects.filter(asesor=asesor)
+
+    context = {
+        'asesorias': asesorias
+    }
+    return render(request, 'asesoria/ver_asesorias.html', context)

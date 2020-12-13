@@ -1,13 +1,12 @@
 from django.forms import ModelForm
 from django import forms
-from accounts.models import Materia
+from asesoria.models import Asesoria
 
 
-class MateriaForm(ModelForm):
-    nombre = forms.CharField(
-        widget=forms.Select()
-    )
+class AseroriaSolicitudForm(ModelForm):
+    subtema = forms.CharField(widget=forms.TextInput())
+    asesor = forms.CharField(widget=forms.TextInput())
 
     class Meta:
-        model = Materia
-        fields = ['nombre']
+        model = Asesoria
+        fields = ['fecha_asesoria', 'subtema', 'asesor', 'descripcion', ]

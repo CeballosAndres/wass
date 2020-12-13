@@ -8,12 +8,25 @@
             alt="Wass logo"></a>
     <div>
         {% if not hide_config %}
-            <a href="{% url 'accounts:configurar' %}"><i style="color: #BFBFBF;" class="fas fa-user-circle mr-3"></i></a>
+        <a href="{% url 'accounts:configurar' %}"><i style="color: #BFBFBF;" class="fas fa-user-circle mr-3"></i></a>
         {% endif %}
         {% if not hide_logauth %}
-            <a href="{% url 'accounts:salir'%}"><i style="color: #BFBFBF;" class="fas fa-sign-out-alt"></i></a>
+        <a href="{% url 'accounts:salir'%}"><i style="color: #BFBFBF;" class="fas fa-sign-out-alt"></i></a>
         {% endif %}
     </div>
 </nav>
+<div class="container">
+    {% if titulo %}
+    <div class="row align-items-center">
+        <a href="{{request.META.HTTP_REFERER}}">
+            <i class="fas fa-arrow-circle-left px-4"></i>
+        </a>
+        <h1 id="title" class="my-3">
+            {{titulo}}
+        </h1>
+    </div>
+    {% endif %}
+</div>
+
 
 {% endblock %}

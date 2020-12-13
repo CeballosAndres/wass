@@ -53,13 +53,13 @@ def principal(request):
     group = request.user.groups.all()[0].name
     if group == 'asesorados':
         opciones = {'asesoria:seleccion_materia': 'Agendar',
-                    'accounts:ver-asesorias': 'Ver Asesorías'}
+                    'asesoria:ver_asesorias': 'Ver Asesorías'}
         asesorado = Asesorado.objects.get(usuario=request.user.id)
         if not asesorado.carrera:
             messages.warning(request, 'Ingrese sus datos personales.')
 
     elif group == 'asesores':
-        opciones = {'accounts:ver-asesorias': 'Mis asesorías',
+        opciones = {'asesoria:ver_asesorias': 'Mis asesorías',
                     'accounts:horario': 'Horario',
                     'accounts:temario': 'Temario',
                     'accounts:reportes': 'Reportes'}
@@ -78,11 +78,6 @@ def principal(request):
                     'reportes': 'Reportes'}
     context = {'opciones': opciones}
     return render(request, 'accounts/principal.html', context)
-
-
-@login_required(login_url='accounts:ingreso')
-def verAsesorias(request):
-    return render(request, 'accounts/ver-asesorias.html')
 
 
 @login_required(login_url='accounts:ingreso')
@@ -112,7 +107,7 @@ def configurar(request):
         else:
             form = AsesorForm(instance=user_profile)
     context = {'hide_config': True, 'group': group, 'form': form,
-               'user_email': user_email}
+               'user_email': user_email, 'titulo': 'Datos personales'}
     return render(request, 'accounts/configurar.html', context)
 
 

@@ -1,25 +1,23 @@
 {% include 'root.html' %}
-
+{% load widget_tweaks %}
 {% block content %}
 
 
 <main class="container">
+  <form class="container" method="POST" action="">
+    {% csrf_token %}
 
-¿Desea confirmar la siguiente asesoria? <br>
-Materia:<br>
-Tema:<br>
-Subtema: <br>
-Asesor:<br>
-Horario:<br>
-<a href="{{request.META.HTTP_REFERER}}">Go back</a>
-<form method="POST" action="">
-{% csrf_token %}
-<label for="materia">Materia</label>
-<input type="text" value="{{materia.nombre}}" id="materia" name="materia" class="form-control" readonly>
-<input type="button" value="Confirmar">
-</form>
+    <label for="fecha_asesoria">{{form.fecha_asesoria.label}}</label>
+    {% render_field form.fecha_asesoria|append_attr:"readonly" class="form-control" %}
+    {% render_field form.subtema|append_attr:"readonly" class="form-control" %}
+    {% render_field form.asesor|append_attr:"readonly" class="form-control" %}
+    {% render_field form.descripcion %}
+  <br>¿Desea confirmar la siguiente asesoria? <br>
+    <a href="{% url 'accounts:principal'%}" class="small my-btn">Cancelar</a>
+    <input type="submit" class="small my-btn" value="Confirmar">
+  </form>
 
 
-  
 
-{% endblock %}
+
+  {% endblock %}

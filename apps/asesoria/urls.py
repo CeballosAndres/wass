@@ -10,4 +10,6 @@ urlpatterns = [
          seleccionAsesor, name='seleccion_asesor'),
     path('materia/<str:materia>/tema/<str:tema>/subtema/<str:subtema>/asesor/<str:asesor>/hora/<str:hora>',
          nuevaAsesoria, name='nueva_asesoria'),
+    path('ver-asesorias/', verAsesorias, name='ver_asesorias'),
+
 ]
