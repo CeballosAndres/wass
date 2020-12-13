@@ -4,15 +4,13 @@
 
 
 <main class="container">
-  <!---Titulo-->
-  <div class="row">
+
+  <div class="row my-3">
     <div class="col">
-      <h1 id="title" class="my-3"><a href="#"><i class="fas fa-arrow-circle-left px-4"></i></a> Agendar asesoría</h1>
+      <p class="text-secondary"><strong>Paso 3.</strong> Finalmente indique el subtema que se relaciona con su tema de asesoría para buscar a un profesor disponible.</p>
     </div>
   </div>
 
-
-  <div class="container text-center">
     <div class="card text-center">
       <div class="card-header">
         <strong>{{materia.nombre}} - {{tema.nombre}}</strong>
@@ -27,6 +25,8 @@
         {% endfor %}
       </ul>
     </div>
+
 </main>
+
 
 {% endblock %}

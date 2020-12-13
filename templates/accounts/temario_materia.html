@@ -5,22 +5,31 @@
 {% block content %}
 
 <main class="container">
-    <div class="row mb-4">
-        <div class="col-xs-6 col-md-9">
-            <h1 id="title" class="my-3"><a href="#"><i class="fas fa-arrow-circle-left px-4"></i></a>Temario</h1>
-        </div>
-    </div>
 
-    <div class="row text-center">
+    <div class="row mt-5">
         <div class="col">
-            <h2>Materias</h2>
+            <p class="text-secondary">A continuacion se presentan las materias que puede agregar de acuerdo a su Departamento. O puede buscar directamente: </p>
         </div>
     </div>
 
-    <div class="row">
+    <div class="container text-center my-3">
+        <form method='GET' action="/temario/agregar/">
+            <div class="form-row align-items-center">
+                <div class="col-md-8 col-xm-12">
+                    {% render_field filtro.form.query class="form-control" placeholder="Nombre o clave de materia" %}
+                </div>
+                <div class="col-md-4">
+                    <button class="my-btn small" type="submit">Buscar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="row mt-5">
         {% if materias %}
         <table class="table">
-            <thead>
+            <thead class="thead-dark">
                 <tr>
                     <th scope="col">Clave</th>
                     <th scope="col">Materia</th>
@@ -42,19 +51,6 @@
         {% else %}
             <p class="note-empty"> No se encontraron resultados a la búsqueda</p>
         {% endif %}
-    </div>
-
-    <div class="container text-center">
-        <form method='GET' action="/temario/agregar/">
-            <div class="form-row align-items-center">
-                <div class="col-md-8 col-xm-12">
-                    {% render_field filtro.form.query class="form-control" placeholder="Nombre o clave de materia" %}
-                </div>
-                <div class="col-md-4 my-3">
-                    <button class="my-btn small" type="submit">Buscar</button>
-                </div>
-            </div>
-        </form>
     </div>
 
 </main>

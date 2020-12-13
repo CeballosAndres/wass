@@ -4,10 +4,17 @@
 
 
 <main class="container">
+
+  {% for asesor in asesores %}
+    <div class="row my-3">
+      <div class="col">
+        <p class="text-secondary">Seleccione el horario con un lapso de 30min. para solicitar su asesoría con su asesor de preferencia.</p>
+      </div>
+    </div>
  
   <div class="container text-center">
 
-    {% for asesor in asesores %}
+    
       <div class="card text-center">
         <div class="card-header">
           <strong>

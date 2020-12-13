@@ -6,16 +6,11 @@
 
 
 <main class="container">
-    <div class="row">
-        <div class="col">
-            <h1 id="title" class="my-3"><a href="{% url 'accounts:principal' %}"><i class="fas fa-arrow-circle-left px-4"></i></a>Materias</h1>
-        </div>
-    </div>
 
     <div class="container">
         {% if materias %}
         <table class="table table-hover table-responsive-sm my-5">
-            <thead class="thead-dark ">
+            <thead class="thead-dark">
                 <tr>
                     <th scope="col">Clave</th>
                     <th scope="col">Materia</th>
@@ -39,9 +34,11 @@
         {% endif %}
     </div>
 
-    <div class="row text-center">
+    <hr class="rounded">
+
+    <div class="row text-center my-5">
         <div class="col my-4">
-            <h3>Agregar materia</h3>
+            <h2>Agregar materia</h2>
         </div>
         <div class="container">
             <form class="form-row align-items-center" method='GET' action="/temario/agregar/">

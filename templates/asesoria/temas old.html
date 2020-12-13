@@ -4,12 +4,6 @@
 
 
 <main class="container">
-    <!---Titulo-->
-  <div class="row">
-    <div class="col">
-      <h1 id="title" class="my-3"><a href="#"><i class="fas fa-arrow-circle-left px-4"></i></a> Agendar asesoría</h1>
-    </div>
-  </div>
 
   {% for materia in object_list %}
     <li><a hrfe="{% url 'seleccion_tema' materia.id %}">{{materia.nombre}}</a></li>

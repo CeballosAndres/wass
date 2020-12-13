@@ -4,16 +4,15 @@
 
 
 <main class="container">
-  <!---Titulo-->
-  <div class="row">
+
+  <div class="row my-3">
     <div class="col">
-      <h1 id="title" class="my-3"><a href="#"><i class="fas fa-arrow-circle-left px-4"></i></a> Agendar asesoría</h1>
+      <p class="text-secondary"><strong>Paso 2.</strong> Seleccione la unidad a la cual pertenezca su tema a asesorar.</p>
     </div>
   </div>
 
 
-  <div class="container text-center">
-    <div class="card text-center">
+  <div class="card text-center">
       <div class="card-header">
         <strong>{{materia}}</strong>
       </div>
@@ -25,8 +24,9 @@
           </li>
         </a>
         {% endfor %}
-      </ul>
-    </div>
+    </ul>
+  </div>
+    
 </main>
 
 {% endblock %}

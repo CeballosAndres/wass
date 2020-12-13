@@ -13,7 +13,6 @@ urlpatterns = [
     path('configurar/contrasena/', views.contrasena, name='contrasena'),
     path('configurar/horario/', views.horario, name='horario'),
     path('configurar/horario/eliminar/<str:pk>/', views.eliminarHorario, name='eliminar_horario'),
-    path('index/', views.index, name='index'),
     path('reportes/', views.reportes, name='reportes'),
     path('rep-sem/', views.repSem, name='rep-sem'),
     path('materia/', ListarMaterias.as_view(), name='listar_materias'),
