@@ -122,19 +122,19 @@ def contrasena(request):
             return redirect('accounts:configurar')
     else:
         form = PasswordChangeForm(request.user)
-    context = {'form': form, 'titulo':'Cambiar contraseña'}
+    context = {'form': form, 'titulo': 'Cambiar contraseña'}
     return render(request, 'accounts/contrasena.html', context)
 
 
 @login_required(login_url='accounts:ingreso')
 def reportes(request):
-    context = {'titulo':'Tipos de reportes'}
+    context = {'titulo': 'Tipos de reportes'}
     return render(request, 'accounts/reportes.html', context)
 
 
 @login_required(login_url='accounts:ingreso')
 def repSem(request):
-    context = {'titulo':'Reporte de aseorías por semestre' }
+    context = {'titulo': 'Reporte de aseorías por semestre' }
     return render(request, 'accounts/rep-sem.html', context)
 
 
@@ -189,7 +189,7 @@ def temario(request):
         messages.warning(request, 'No existen materias registradas.')
     filtro = MateriaFilter()
 
-    context = {'materias': materias, 'filtro': filtro, 'titulo':'Materias'}
+    context = {'materias': materias, 'filtro': filtro, 'titulo': 'Materias'}
     return render(request, 'accounts/temario.html', context)
 
 
@@ -212,7 +212,7 @@ def temarioAgregarModal(request):
     filtro = MateriaFilter(request.GET, queryset=materias)
     materias = filtro.qs
 
-    context = {'materias': materias, 'filtro': filtro, 'titulo':'Agregar materias'}
+    context = {'materias': materias, 'filtro': filtro, 'titulo': 'Agregar materias'}
     return render(request, 'accounts/temario_materia.html', context)
 
 
