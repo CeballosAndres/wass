@@ -11,23 +11,25 @@
         </div>
     </div>
 
-    <div class="container-fluid my-5">
-        <form class="form-inline"method="POST" action="">
-            <div class="my-3">
-            {% csrf_token %}
-            {% render_field form.dia_semana class="form-control" %}
-            {% render_field form.hora_inicio class="form-control" %}
-            {% render_field form.hora_final class="form-control" %}
-            <input type="submit" class = "btn my-btn small mx-4" value="Agregar Bloques">
-            </div>
-        </form>
+    <div class="row">
+        <div class="col">
+            <form class="form-inline"method="POST" action="">
+                <div class="my-4">
+                {% csrf_token %}
+                {% render_field form.dia_semana class="form-control" %}
+                {% render_field form.hora_inicio class="form-control" %}
+                {% render_field form.hora_final class="form-control" %}
+                <input type="submit" class = "btn my-btn small m-4" value="Agregar bloque">
+                </div>
+            </form>
+        </div>
     </div>
 
     <hr class="rounded">
 
-    <div class="row my-5">
+    <div class="row my-5 justify-content-around">
         {% for dia in dias %}
-            <div class="col col-sm-2">
+            <div class="col-md-2">
                 <div class="card text-center">
                     <div class="card-header">
                         <strong>{{dia}}</strong>

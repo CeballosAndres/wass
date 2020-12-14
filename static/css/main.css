@@ -108,3 +108,42 @@ hr{
     padding: 10px;
 }
 
+
+  /* Ocultar estados posibles */
+.s-rechazada {
+   display: none;
+}
+
+.s-aceptada {
+    /*display: none;*/
+}
+
+.s-cancelada {
+    display: none;
+}
+
+.s-finalizada {
+    display: none;
+}
+
+.s-pendiente {
+    display: none;
+ }
+
+/* Ocultar opciones posibles */
+.o-rechazar {
+    display: none;
+}
+
+.o-aceptar {
+    display: none;
+}
+
+.o-cancelar {
+    display: none;
+}
+
+.o-finalizar {
+    display: inline;
+    /* display: none; */
+}
