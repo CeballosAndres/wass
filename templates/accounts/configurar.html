@@ -38,14 +38,14 @@
             <div class="col col-md-5 mt-4">
                 {% if group == 'asesorados' %}
                     <label for="carrera">Carrera</label>
-                    {% render_field form.carrera|append_attr:"readonly:readonly" class="form-control" type="text"  %}    
-
+                    {% render_field form.carrera|append_attr:"readonly:readonly" class="form-control" type="text"  %}
                     {% else %}
-                <label for="carrera">Clave empleado</label>
-                    {% render_field form.clave_empleado class="form-control" type="text"  %}
- 
-                <label class="mt-4" for="carrera">Departamento</label>
-                    {% render_field form.departamento|append_attr:"readonly:readonly" class="form-control" type="text"  %}
+                    <label for="lugar_asesoria">Lugar asesoría</label>
+                        {% render_field form.lugar_asesoria class="form-control" type="text"%}
+                    <label for="clave_empleado">Clave empleado</label>
+                        {% render_field form.clave_empleado class="form-control" type="text"  %}
+                    <label class="mt-4" for="departamento">Departamento</label>
+                        {% render_field form.departamento|append_attr:"readonly:readonly" class="form-control" type="text"  %}
 
                 {% endif %}
             </div>

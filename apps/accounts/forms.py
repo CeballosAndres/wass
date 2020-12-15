@@ -54,7 +54,7 @@ class AsesoradoForm(ModelForm):
 class AsesorForm(ModelForm):
     class Meta:
         model = Asesor
-        fields = ['celular', 'nombre', 'departamento', 'clave_empleado', ]
+        fields = ['celular', 'nombre', 'departamento', 'clave_empleado', 'lugar_asesoria']
 
 
 class CreateUserForm(UserCreationForm):

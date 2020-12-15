@@ -109,13 +109,13 @@ hr{
 }
 
 
-  /* Ocultar estados posibles */
+/*  Ocultar estados posibles
 .s-rechazada {
    display: none;
 }
 
 .s-aceptada {
-    /*display: none;*/
+    display: none;
 }
 
 .s-cancelada {
@@ -130,7 +130,7 @@ hr{
     display: none;
  }
 
-/* Ocultar opciones posibles */
+//Ocultar opciones posibles
 .o-rechazar {
     display: none;
 }
@@ -145,5 +145,5 @@ hr{
 
 .o-finalizar {
     display: inline;
-    /* display: none; */
+    display: none;
 }

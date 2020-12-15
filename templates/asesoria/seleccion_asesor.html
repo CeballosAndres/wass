@@ -2,43 +2,40 @@
 
 {% block content %}
 
-
 <main class="container">
+  <div class="row my-3">
+    <div class="col">
+      <p class="text-secondary">Seleccione el horario con un lapso de 30min. para solicitar su asesoría con su asesor de
+        preferencia.</p>
+    </div>
+  </div>
 
   {% for asesor in asesores %}
-    <div class="row my-3">
-      <div class="col">
-        <p class="text-secondary">Seleccione el horario con un lapso de 30min. para solicitar su asesoría con su asesor de preferencia.</p>
-      </div>
-    </div>
- 
-  <div class="container text-center">
-
-    
+    <div class="container text-center">
       <div class="card text-center">
         <div class="card-header">
           <strong>
-          {% if asesor.asesor.nombre %}
-          {{asesor.asesor.nombre}}
-          {% else %}
-          {{asesor.asesor}}
-          {% endif %}
+            {% if asesor.asesor.nombre %}
+            {{asesor.asesor.nombre}}
+            {% else %}
+            {{asesor.asesor}}
+            {% endif %}
           </strong>
         </div>
         <ul class="list-group list-group-flush">
           {% for agenda in agendas %}
-            {% if asesor.asesor == agenda.asesor %}
-              <a href="{% url 'asesoria:nueva_asesoria' materia tema subtema asesor.asesor.id agenda.id %}">
-                <li class="list-group-item">
-                  {{agenda.dia.get_nombre_display}} {{agenda.hora.get_nombre_display}}
-                </li>
-              </a>
-            {% endif %}
+          {% if asesor.asesor == agenda.asesor %}
+          <a href="{% url 'asesoria:nueva_asesoria' materia tema subtema asesor.asesor.id agenda.id %}">
+            <li class="list-group-item">
+              {{agenda.dia.get_nombre_display}} {{agenda.hora.get_nombre_display}}
+            </li>
+          </a>
+          {% endif %}
           {% endfor %}
         </ul>
       </div>
-    {% endfor %}
-  </div>  
+    </div>
+  {% endfor %}
 </main>
 
 {% endblock %}
