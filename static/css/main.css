@@ -90,7 +90,7 @@ hr{
     border-color: #17A2B8;
 }
 .cancelada {
-    border-color: #FFC107;
+    border-color:  #e8aa00;
 }
 
 /* Tamanio de fuente para indicaciones en el cambio de contrasenia */
@@ -146,4 +146,14 @@ hr{
 .o-finalizar {
     display: inline;
     /* display: none; */
+}
+
+/* Sombra par adar un estilo flotante */
+.float {
+    background-color: #f2f2f2;
+    box-shadow: 1px 1px 5px #9b9b9b8c;
+}
+
+mark {
+    background-color: #ffc72d80;
 }
