@@ -31,6 +31,7 @@ def seleccionTema(request, materia):
     context = {
         'temas': temas,
         'materia': materia_object,
+        'titulo': 'Selección de Tema'
     }
     return render(request, 'asesoria/seleccion_tema.html', context)
 
@@ -45,6 +46,7 @@ def seleccionSubtema(request, materia, tema):
         'subtemas': subtemas,
         'materia': materia_object,
         'tema': tema_object,
+        'titulo': 'Selección de Subtema'
     }
     return render(request, 'asesoria/seleccion_subtema.html', context)
 
@@ -63,6 +65,7 @@ def seleccionAsesor(request, materia, tema, subtema):
         'materia': materia,
         'tema': tema,
         'subtema': subtema,
+        'titulo': 'Selección de Asesor'
     }
     return render(request, 'asesoria/seleccion_asesor.html', context)
 
@@ -86,6 +89,8 @@ def nuevaAsesoria(request, materia, tema, subtema, asesor, hora):
         'asesor_nombre': asesor.nombre,
         'fecha_asesoria': fecha_asesoria,
         'subtema_nombre': subtema,
+        'subtema': subtema,
+        'titulo': 'Confirmacion'
     })
 
     if request.method == 'POST':

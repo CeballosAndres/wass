@@ -1,5 +1,6 @@
 {% extends 'root.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block content %}
 
@@ -15,14 +16,15 @@
         </div>
     </div>
 
-    {% if messages %}
+<!--     {% if messages %}
     {% for message in messages %}
     <div class="alert alert-{{message.tags}} alert-dismissible">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>{{ message }}</strong>
     </div>
     {% endfor %}
-    {% endif %}
+    {% endif %} -->
+    
     <div class="container">
         <div class="row">
             <div class="col">

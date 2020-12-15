@@ -5,123 +5,84 @@
 <link rel="stylesheet" href="{% static '/css/responsive.css' %}">
 
 <style>
-  /* Ocultar estados posibles */
-  .s-rechazada {
-    display: none;
-  }
-
-  .s-aceptada {
-    /*display: none;*/
-  }
-
-  .s-cancelada {
-    display: none;
-  }
-
-  .s-finalizada {
-    display: none;
-  }
-
-  .s-pendiente {
-    display: none;
-  }
-
-  /* Ocultar opciones posibles */
-  .o-rechazar {
-    display: none;
-  }
-
-  .o-aceptar {
-    display: none;
-  }
-
-  .o-cancelar {
-    display: none;
-  }
-
-  .o-finalizar {
-    display: inline;
-    /* display: none; */
-  }
 </style>
 
-<!---Titulo-->
-<div class="container-fluid my-3">
-  <div class="row">
-    <div class="col-xs-6 col-md-9">
-      <h1 id="title"><a href="#"><i class="fas fa-arrow-circle-left"></i></a> Asesorias</h1>
-    </div>
-    <!-- Opcion de filtrado-->
-    <div class="col-xs-6 col-md-3">
-      <select id="filter" class="custom-select">
-        <option selected>Filtrar por</option>
-        <option value="1">Pendientes</option>
-        <option value="2">Aceptadas</option>
-        <option value="2">Rechazadas</option>
-        <option value="2">Finalizadas</option>
-        <option value="2">Canceladas</option>
-      </select>
-    </div>
-  </div>
-</div>
-
-<!-- Asesoria card-->
-<div class="container">
-  <div class="row">
-    <div class="col">
-      {% for asesoria in asesorias %}
-      <div class="my-card card border-light">
-        <div class="row no-gutters">
-
-          <div class="col-md-2 my-auto text-center">
-            <img src="{% static 'images/user.svg' %}" class="m-5" height="80" alt="Foto de perfil">
-          </div>
-
-          <div class="col-md-7">
-            <div class="card-body">
-              <h5 class="card-title">{{asesoria.asesor.nombre}}</h5>
-              <p class="card-text">{{asesoria.subtema.nombre}}</p>
-              <p class="card-text">Lugar</p>
-              <p class="card-text">{{asesoria.fecha_asesoria}}</p>
-            </div>
-          </div>
-
-          <div class="col-md-3 text-center mt-4">
-            <div class="col">
-              <div class="s-pendiente">
-                <p class="status pendiente">Pendiente</p>
-              </div>
-              <div class="s-aceptada">
-                <p class="status aceptada">Aceptada</p>
-              </div>
-              <div class="s-rechazada">
-                <p class="status rechazada">Rechazada</p>
-              </div>
-              <div class="s-finalizada">
-                <p class="status finalizada">Finalizada</p>
-              </div>
-              <div class="s-cancelada">
-                <p class="status cancelada">Cancelada</p>
-              </div>
-            </div>
-            <div class="col h-50"></div>
-
-            <div class="col mb-2" style="background-color: #C4C4C4;">
-              <button type="button" class="o-finalizar btn btn-primary">Finalizar</button>
-              <button type="button" class="o-aceptar btn btn-success">Aceptar</button>
-              <button type="button" class="o-rechazar btn btn-danger">Rechazar</button>
-              <button type="button" class="o-cancelar btn btn-warning">Cancelar</button>
-            </div>
-
-          </div>
-
-        </div>
-
+<main>
+  
+  <div class="container-fluid my-3">
+    <div class="row">
+      <!-- Opcion de filtrado-->
+      <div class="col-xs-6 col-md-3">
+        <select id="filter" class="custom-select">
+          <option selected>Filtrar por</option>
+          <option value="1">Pendientes</option>
+          <option value="2">Aceptadas</option>
+          <option value="2">Rechazadas</option>
+          <option value="2">Finalizadas</option>
+          <option value="2">Canceladas</option>
+        </select>
       </div>
-      {% endfor %}
     </div>
   </div>
-</div>
+  
+  <!-- Asesoria card-->
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        {% for asesoria in asesorias %}
+        <div class="my-card card border-light">
+          <div class="row no-gutters">
+  
+            <div class="col-md-2 my-auto text-center">
+              <img src="{% static 'images/user.svg' %}" class="m-5" height="80" alt="Foto de perfil">
+            </div>
+  
+            <div class="col-md-7">
+              <div class="card-body">
+                <h5 class="card-title">{{asesoria.asesor.nombre}}</h5>
+                <p class="card-text">{{asesoria.subtema.nombre}}</p>
+                <p class="card-text">Lugar</p>
+                <p class="card-text">{{asesoria.fecha_asesoria}}</p>
+              </div>
+            </div>
+  
+            <div class="col-md-3 text-center mt-4">
+              <div class="col">
+                <div class="s-pendiente">
+                  <p class="status pendiente">Pendiente</p>
+                </div>
+                <div class="s-aceptada">
+                  <p class="status aceptada">Aceptada</p>
+                </div>
+                <div class="s-rechazada">
+                  <p class="status rechazada">Rechazada</p>
+                </div>
+                <div class="s-finalizada">
+                  <p class="status finalizada">Finalizada</p>
+                </div>
+                <div class="s-cancelada">
+                  <p class="status cancelada">Cancelada</p>
+                </div>
+              </div>
+              <div class="col h-50"></div>
+  
+              <div class="col mb-2" style="background-color: #C4C4C4;">
+                <button type="button" class="o-finalizar btn btn-primary">Finalizar</button>
+                <button type="button" class="o-aceptar btn btn-success">Aceptar</button>
+                <button type="button" class="o-rechazar btn btn-danger">Rechazar</button>
+                <button type="button" class="o-cancelar btn btn-warning">Cancelar</button>
+              </div>
+  
+            </div>
+  
+          </div>
+  
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</main>
 
 
 {% endblock %}

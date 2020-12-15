@@ -1,14 +1,10 @@
 {% include 'root.html' %}
 {% load widget_tweaks %}
+
 {% block content %}
 
 
 <main class="container">
-    <div class="row">
-        <div class="col">
-            <h1 id="title" class="my-3"><a href="#"><i class="fas fa-arrow-circle-left px-4 mb-5"></i></a>Cambiar contraseña</h1>
-        </div>
-    </div>
 
     {% if form.errors %}
     {% for field in form %}
