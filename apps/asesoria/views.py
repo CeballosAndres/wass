@@ -83,9 +83,9 @@ def nuevaAsesoria(request, materia, tema, subtema, asesor, hora):
     fecha_asesoria = dt.datetime.combine(dia, agenda.hora.nombre)
 
     form = AseroriaSolicitudForm(initial={
-        'asesor': asesor,
+        'asesor_nombre': asesor.nombre,
         'fecha_asesoria': fecha_asesoria,
-        'subtema': subtema,
+        'subtema_nombre': subtema,
     })
 
     if request.method == 'POST':
@@ -93,8 +93,10 @@ def nuevaAsesoria(request, materia, tema, subtema, asesor, hora):
         form = AseroriaSolicitudForm(request.POST)
         if form.is_valid():
             asesoria = form.save(commit=False)
+            asesoria.asesor = asesor
             asesorado = get_object_or_404(Asesorado, usuario=request.user.id)
             asesoria.asesorado = asesorado
+            asesoria.subtema = subtema
             asesoria.save()
             # bloquear el horario del asesor
             agenda.disponible = False

@@ -4,9 +4,9 @@ from asesoria.models import Asesoria
 
 
 class AseroriaSolicitudForm(ModelForm):
-    subtema = forms.CharField(widget=forms.TextInput())
-    asesor = forms.CharField(widget=forms.TextInput())
+    subtema_nombre = forms.CharField(widget=forms.TextInput())
+    asesor_nombre = forms.CharField(widget=forms.TextInput())
 
     class Meta:
         model = Asesoria
-        fields = ['fecha_asesoria', 'subtema', 'asesor', 'descripcion', ]
+        fields = ['fecha_asesoria', 'asesor_nombre', 'subtema_nombre', 'descripcion', ]
