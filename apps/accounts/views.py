@@ -53,7 +53,8 @@ def principal(request):
     group = request.user.groups.all()[0].name
     if group == 'asesorados':
         opciones = {'asesoria:seleccion_materia': 'Agendar',
-                    'asesoria:ver_asesorias': 'Ver Asesorías'}
+                    'asesoria:ver_asesorias': 'Ver Asesorías',
+                    'accounts:reportes': 'Reportes'}
         asesorado = Asesorado.objects.get(usuario=request.user.id)
         if not asesorado.carrera:
             messages.warning(request, 'Acceda al ícono de usuaior y registre sus datos.')

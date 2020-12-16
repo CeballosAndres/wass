@@ -14,14 +14,20 @@
         </div>
         <div class="col mt-3">
             <h3>{% if request.user|has_group:"asesorados" %}
-                {{asesoria.asesor.nombre}}
+                Asesor: {{asesoria.asesor.nombre}}
                 {% else %}
-                {{asesoria.asesorado.nombre}}
+                Alumno: {{asesoria.asesorado.nombre}}
                 {% endif %}
             </h3>
-            <p class="lead">{{ asesoria.subtema.nombre}}</p>
-            <p>{{ asesoria.asesor.lugar_asesoria}}</p>
-            <p>{{ asesoria.fecha_asesoria }}</p>
+            <p class="lead">Subtema: {{ asesoria.subtema.nombre }}</p>
+            <p>Lugar:           
+                {% if asesoria.asesor.lugar_asesoria %}
+                  {{asesoria.asesor.lugar_asesoria}}
+                {% else %}
+                  Acordar con el asesor.
+                {% endif %}
+            </p>
+            <p>Fecha: {{ asesoria.fecha_asesoria }}</p>
         </div>
     </div>
 
@@ -31,7 +37,7 @@
                 {% csrf_token %}
                 <div class="form-group">
                     {% if entrada %}
-                    <label class="lead" for="razones">{{ entrada }}</label>
+                        <label class="lead" for="razones">{{ entrada }}</label>
                         {% if form.comentario_finalizada %}
                         {% render_field form.comentario_finalizada class="form-control" rows="3" %}
                         {% endif %}
@@ -41,7 +47,12 @@
                         {% if form.razon_rechazada %}
                         {% render_field form.razon_rechazada class="form-control" rows="3" %}
                         {% endif %}
-
+                        {% if form.descripcion %}
+                        {% render_field form.descripcion class="form-control" rows="3" %}
+                        {% endif %}
+                        {% if form.requisitos %}
+                        {% render_field form.requisitos class="form-control" rows="3" %}
+                        {% endif %}
                     {% endif %}
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary m-3">Confirmar</button>
