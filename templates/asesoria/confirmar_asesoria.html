@@ -7,35 +7,37 @@
 {% block content %}
 
 <main class="container">
-    <div class="container w-75 m-6 bg-light">
+    <div class="container m-6 bg-light">
         <div class="row mx-3"></div>
         <div class="col-md-2 mt-3">
             <img src="{% static 'images/user.svg' %}" width="75" alt="foto de perfil">
         </div>
-        <div class="col mt-3">
-            <h3>{% if request.user|has_group:"asesorados" %}
-                Asesor:   
-                    {% if asesoria.asesor.nombre %}
-                        {{asesoria.asesor.nombre}}
-                        {% else %}
-                        {{asesoria.asesor}}
+        <div class="row">
+            <div class="col mt-3">
+                <h3>{% if request.user|has_group:"asesorados" %}
+                    Asesor:   
+                        {% if asesoria.asesor.nombre %}
+                            {{asesoria.asesor.nombre}}
+                            {% else %}
+                            {{asesoria.asesor}}
+                        {% endif %}
+                    {% else %}
+                    Alumno: {{asesoria.asesorado.nombre}}
                     {% endif %}
-                {% else %}
-                Alumno: {{asesoria.asesorado.nombre}}
+                </h3>
+                <p class="lead">Subtema: {{ asesoria.subtema.nombre }}</p>
+                <p>Lugar:
+                    {% if asesoria.asesor.lugar_asesoria %}
+                    {{asesoria.asesor.lugar_asesoria}}
+                    {% else %}
+                    Acordar con el asesor.
+                    {% endif %}
+                </p>
+                {% if asesoria.fecha_solicitud %}
+                    <p>Fecha de solicitud: {{ asesoria.fecha_solicitud }}</p>
                 {% endif %}
-            </h3>
-            <p class="lead">Subtema: {{ asesoria.subtema.nombre }}</p>
-            <p>Lugar:
-                {% if asesoria.asesor.lugar_asesoria %}
-                {{asesoria.asesor.lugar_asesoria}}
-                {% else %}
-                Acordar con el asesor.
-                {% endif %}
-            </p>
-            {% if asesoria.fecha_solicitud %}
-                <p>Fecha de solicitud: {{ asesoria.fecha_solicitud }}</p>
-            {% endif %}
-            <p>Fecha de asesoría: {{ asesoria.fecha_asesoria }}</p>
+                <p>Fecha de asesoría: {{ asesoria.fecha_asesoria }}</p>
+            </div>
         </div>
     </div>
 
