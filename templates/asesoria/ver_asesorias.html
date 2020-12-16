@@ -1,5 +1,7 @@
 {% include 'root.html' %}
 {% load static %}
+{% load widget_tweaks %}
+
 {% load auth_extras %}
 
 
@@ -11,22 +13,17 @@
 
 <main>
 
+  <!-- Opcion de filtrado-->
   <div class="container-fluid my-3">
     <div class="row">
-      <!-- Opcion de filtrado-->
       <div class="col-xs-6 col-md-3">
-        <select id="filter" class="custom-select">
-          <option selected>Filtrar por</option>
-          <option value="1">Pendientes</option>
-          <option value="2">Aceptadas</option>
-          <option value="2">Rechazadas</option>
-          <option value="2">Finalizadas</option>
-          <option value="2">Canceladas</option>
-        </select>
+        <form method="get">
+          {% render_field filtro.form.estado class="custom-select" %}
       </div>
+      <button class="btn my-btn" type="submit">Filtrar</button>
+      </form>
     </div>
   </div>
-
   <!-- Asesoria card-->
   <div class="container">
     <div class="row">
@@ -49,12 +46,12 @@
                   {% endif %}
                 </h5>
                 <p class="card-text">Subtema: {{asesoria.subtema.nombre}}</p>
-                <p class="card-text">Lugar: 
-                {% if asesoria.asesor.lugar_asesoria %}
+                <p class="card-text">Lugar:
+                  {% if asesoria.asesor.lugar_asesoria %}
                   {{asesoria.asesor.lugar_asesoria}}
-                {% else %}
+                  {% else %}
                   Acordar con el asesor.
-                {% endif %}
+                  {% endif %}
                 </p>
                 <p class="card-text">Fecha: {{asesoria.fecha_asesoria}}</p>
               </div>
@@ -69,17 +66,22 @@
               <div class="col h-50"></div>
               <div class="col mb-2" style="background-color: #C4C4C4;">
                 {% if request.user|has_group:"asesorados" %}
-                  {% if asesoria.estado == 'pendiente' or asesoria.estado == 'aceptada' %}
-                  <a role="button" href="{% url 'asesoria:cancelar_asesoria' asesoria.id %}" class="o-cancelar btn btn-warning">Cancelar</a>
-                  {% endif %}
+                {% if asesoria.estado == 'pendiente' or asesoria.estado == 'aceptada' %}
+                <a role="button" href="{% url 'asesoria:cancelar_asesoria' asesoria.id %}"
+                  class="o-cancelar btn btn-warning">Cancelar</a>
+                {% endif %}
                 {% else %}
-                  {% if asesoria.estado == 'pendiente' %}
-                  <a role="button" href="{% url 'asesoria:aceptar_asesoria' asesoria.id %}"class="o-aceptar btn btn-success">Aceptar</a>
-                  <a role="button" href="{% url 'asesoria:rechazar_asesoria' asesoria.id %}" class="o-rechazar btn btn-danger">Rechazar</a>
-                  {% elif asesoria.estado == 'aceptada' %}
-                  <a role="button" href="{% url 'asesoria:cancelar_asesoria' asesoria.id %}" class="o-cancelar btn btn-warning">Cancelar</a>
-                  <a role="button" href="{% url 'asesoria:finalizar_asesoria' asesoria.id %}"class="o-finalizar btn btn-primary">Finalizar</a>
-                  {% endif %}
+                {% if asesoria.estado == 'pendiente' %}
+                <a role="button" href="{% url 'asesoria:aceptar_asesoria' asesoria.id %}"
+                  class="o-aceptar btn btn-success">Aceptar</a>
+                <a role="button" href="{% url 'asesoria:rechazar_asesoria' asesoria.id %}"
+                  class="o-rechazar btn btn-danger">Rechazar</a>
+                {% elif asesoria.estado == 'aceptada' %}
+                <a role="button" href="{% url 'asesoria:cancelar_asesoria' asesoria.id %}"
+                  class="o-cancelar btn btn-warning">Cancelar</a>
+                <a role="button" href="{% url 'asesoria:finalizar_asesoria' asesoria.id %}"
+                  class="o-finalizar btn btn-primary">Finalizar</a>
+                {% endif %}
                 {% endif %}
               </div>
             </div>

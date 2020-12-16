@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404, get_list_or_40
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import *
+from .filters import *
 from accounts.models import Asesorado, Asesor, Jefe, Materia, Tema, Subtema, Agenda, TemarioAsesor
 
 from accounts.decorators import allowed_users
@@ -140,9 +141,13 @@ def verAsesorias(request):
     if len(asesorias) == 0:
         messages.warning(request, 'No existen asesorías agendadas.')
 
+    filtro = AsesoriaFilter(request.GET, queryset=asesorias)
+    asesorias = filtro.qs
+
     context = {
         'asesorias': asesorias,
-        'titulo': 'Mis asesorías'
+        'titulo': 'Mis asesorías',
+        'filtro': filtro,
     }
     return render(request, 'asesoria/ver_asesorias.html', context)
 
