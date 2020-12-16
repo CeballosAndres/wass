@@ -40,7 +40,12 @@
               <div class="card-body">
                 <h5 class="card-title">
                   {% if request.user|has_group:"asesorados" %}
-                  Asesor: {{asesoria.asesor.nombre}}
+                  Asesor: 
+                    {% if asesoria.asesor.nombre %}
+                      {{asesoria.asesor.nombre}}
+                      {% else %}
+                      {{asesoria.asesor}}
+                    {% endif %}
                   {% else %}
                   Alumno: {{asesoria.asesorado.nombre}}
                   {% endif %}
