@@ -7,12 +7,13 @@
 {% block content %}
 
 <main class="container">
-    <div class="container m-6 bg-light my-3">
-        
-        <div class="col-md-2 w-75 mt-3">
-            <img src="{% static 'images/user.svg' %}" width="75" alt="foto de perfil">
+    <div class="container m-6 bg-light my-3"> 
+        <div class="row mx-3">
+            <div class="col-md-2 w-75 mt-3">
+                <img src="{% static 'images/user.svg' %}" width="75" alt="foto de perfil">
+            </div>
         </div>
-        <div class="row">
+        <div class="row mx-3">
             <div class="col mt-3">
                 <h3>{% if request.user|has_group:"asesorados" %}
                     Asesor:   
