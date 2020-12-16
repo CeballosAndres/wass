@@ -54,7 +54,7 @@ def principal(request):
     if group == 'asesorados':
         opciones = {'asesoria:seleccion_materia': 'Agendar',
                     'asesoria:ver_asesorias': 'Ver Asesorías',
-                    'accounts:reportes': 'Reportes'}
+                    'asesoria:reportes': 'Reportes'}
         asesorado = Asesorado.objects.get(usuario=request.user.id)
         if not asesorado.carrera:
             messages.warning(request, 'Acceda al ícono de usuaior y registre sus datos.')
@@ -63,7 +63,7 @@ def principal(request):
         opciones = {'asesoria:ver_asesorias': 'Mis asesorías',
                     'accounts:horario': 'Horario',
                     'accounts:temario': 'Temario',
-                    'accounts:reportes': 'Reportes'}
+                    'asesoria:reportes': 'Reportes'}
         asesor = Asesor.objects.get(usuario=request.user.id)
         materias = TemarioAsesor.objects.filter(asesor=asesor).distinct('materia')
         agendas = Agenda.objects.filter(asesor=asesor).exists()
@@ -75,8 +75,9 @@ def principal(request):
                              extra_tags='safe')
 
     elif group == 'jefes':
-        opciones = {'accounts:index': 'Carrera',
-                    'reportes': 'Reportes'}
+        opciones = {
+            'asesoria:reportes': 'Reportes'
+        }
     context = {'opciones': opciones}
     return render(request, 'accounts/principal.html', context)
 
@@ -125,18 +126,6 @@ def contrasena(request):
         form = PasswordChangeForm(request.user)
     context = {'form': form, 'titulo': 'Cambiar contraseña'}
     return render(request, 'accounts/contrasena.html', context)
-
-
-@login_required(login_url='accounts:ingreso')
-def reportes(request):
-    context = {'titulo': 'Tipos de reportes'}
-    return render(request, 'accounts/reportes.html', context)
-
-
-@login_required(login_url='accounts:ingreso')
-def repSem(request):
-    context = {'titulo': 'Reporte de aseorías por semestre'}
-    return render(request, 'accounts/rep-sem.html', context)
 
 
 @login_required(login_url='accounts:ingreso')

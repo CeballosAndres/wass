@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404, get_list_or_40
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import *
-from accounts.models import Asesorado, Asesor, Materia, Tema, Subtema, Agenda, TemarioAsesor
+from accounts.models import Asesorado, Asesor, Jefe, Materia, Tema, Subtema, Agenda, TemarioAsesor
 
 from accounts.decorators import allowed_users
 
@@ -258,3 +258,32 @@ def detalleAsesoria(request, pk):
         'asesoria': asesoria,
     }
     return render(request, 'asesoria/confirmar_asesoria.html', context)
+
+
+@login_required(login_url='accounts:ingreso')
+def reportes(request):
+    context = {'titulo': 'Tipos de reportes'}
+    return render(request, 'asesoria/reportes.html', context)
+
+
+@login_required(login_url='accounts:ingreso')
+def repSem(request):
+    group = request.user.groups.all()[0].name
+    if group == 'asesorados':
+        asesorado = Asesorado.objects.get(usuario=request.user.id)
+        asesorias = Asesoria.objects.filter(asesorado=asesorado).order_by('fecha_asesoria')
+    elif group == 'asesores':
+        asesor = Asesor.objects.get(usuario=request.user.id)
+        asesorias = Asesoria.objects.filter(asesor=asesor).order_by('fecha_asesoria')
+    else:
+        # TODO: falta filtrar por jefe
+        asesorias = Asesoria.objects.order_by('fecha_asesoria')
+
+    if len(asesorias) == 0:
+        messages.warning(request, 'No existen asesorias.')
+
+    context = {
+        'titulo': 'Reporte de aseorías por semestre',
+        'asesorias': asesorias,
+    }
+    return render(request, 'asesoria/rep-sem.html', context)

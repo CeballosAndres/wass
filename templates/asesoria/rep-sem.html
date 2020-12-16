@@ -1,0 +1,61 @@
+{% include 'root.html' %}
+{% load widget_tweaks %}
+{% load auth_extras %}
+{% load static %}
+
+{% block content %}
+<main class="container">
+{% if asesorias %}
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Tema</th>
+        <th scope="col">
+          {% if request.user|has_group:"asesorados" %}
+          Asesor
+          {% else %}
+          Alumno
+          {% endif %}
+        </th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for asesoria in asesorias %}
+      <tr class='clickable-row' data-href="{% url 'asesoria:detalle_asesoria' asesoria.id %}">
+        <th scope="row">{{ asesoria.subtema }}</th>
+        <td>
+          {% if request.user|has_group:"asesorados" %}
+          {{asesoria.asesor.nombre}}
+          {% else %}
+          {{asesoria.asesorado.nombre}}
+          {% endif %}
+        </td>
+        <td>{{ asesoria.fecha_asesoria.date }}</td>
+        <td>{{ asesoria.get_estado_display }}</td>
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+{% endif %}
+
+</main>
+<script>
+jQuery(document).ready(function($) {
+
+    $(".clickable-row").click(function() {
+
+        window.location = $(this).data("href");
+
+    });
+
+$("#container").on('click-row.bs.table', function (e, row, $element) {
+
+    window.location = $element.data('href');
+
+});
+</script>
+
+{% endblock %}

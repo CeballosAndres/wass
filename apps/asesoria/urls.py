@@ -11,6 +11,8 @@ urlpatterns = [
          seleccionAsesor, name='seleccion_asesor'),
     path('materia/<str:materia>/tema/<str:tema>/subtema/<str:subtema>/asesor/<str:asesor>/hora/<str:hora>',
          nuevaAsesoria, name='nueva_asesoria'),
+    path('reportes/', reportes, name='reportes'),
+    path('rep-sem/', repSem, name='rep-sem'),
     path('<str:pk>/', detalleAsesoria, name='detalle_asesoria'),
     path('<str:pk>/aceptar/', aceptarAsesoria, name='aceptar_asesoria'),
     path('<str:pk>/cancelar/', cancelarAsesoria, name='cancelar_asesoria'),
