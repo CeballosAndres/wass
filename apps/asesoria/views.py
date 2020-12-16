@@ -250,11 +250,9 @@ def cancelarAsesoria(request, pk):
     return render(request, 'asesoria/confirmar_asesoria.html', context)
 
 
-
 @login_required(login_url='accounts:ingreso')
 def detalleAsesoria(request, pk):
     asesoria = get_object_or_404(Asesoria, id=pk)
-
     context = {
         'titulo': 'Detalle asesoría',
         'asesoria': asesoria,
