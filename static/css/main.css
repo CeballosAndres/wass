@@ -109,13 +109,13 @@ hr{
 }
 
 
-  /* Ocultar estados posibles */
+/*  Ocultar estados posibles
 .s-rechazada {
    display: none;
 }
 
 .s-aceptada {
-    /*display: none;*/
+    display: none;
 }
 
 .s-cancelada {
@@ -130,7 +130,7 @@ hr{
     display: none;
  }
 
-/* Ocultar opciones posibles */
+//Ocultar opciones posibles
 .o-rechazar {
     display: none;
 }
@@ -145,15 +145,23 @@ hr{
 
 .o-finalizar {
     display: inline;
-    /* display: none; */
+    display: none; 
 }
 
-/* Sombra par adar un estilo flotante */
+/* Sombra para dar un estilo flotante */
 .float {
     background-color: #f2f2f2;
     box-shadow: 1px 1px 5px #9b9b9b8c;
 }
+/* Estilo de la ventana de ayuda*/
+.fixedbutton {
+    position: fixed;
+    bottom: 0px;
+    right: -50px; 
+    left: 0px;
+}
 
-mark {
-    background-color: #ffc72d80;
+.scroll {
+    max-height: 450px;
+    overflow-y: auto;
 }

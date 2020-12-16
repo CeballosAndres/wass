@@ -134,11 +134,12 @@ class Subtema(models.Model):
 
 class Asesor(models.Model):
     usuario = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-    nombre = models.CharField(max_length=255, null=True, blank=True)
+    nombre = models.CharField(max_length=255, null=True, blank=False)
     celular = models.CharField(max_length=200, null=True, blank=True)
     clave_empleado = models.CharField(max_length=200, null=True, blank=True)
+    lugar_asesoria = models.CharField(max_length=300, null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
-    departamento = models.ForeignKey(Departamento, null=True, on_delete=models.SET_NULL, blank=True)
+    departamento = models.ForeignKey(Departamento, null=True, on_delete=models.SET_NULL, blank=False)
     subtetmas = models.ManyToManyField(Subtema, through='TemarioAsesor')
     horarios = models.ManyToManyField(CatalogoDia, through='Agenda')
 
@@ -152,11 +153,12 @@ class Asesor(models.Model):
 
 class Agenda(models.Model):
     asesor = models.ForeignKey(Asesor, null=False, on_delete=models.CASCADE)
-    dia = models.ForeignKey(CatalogoDia, null=True, on_delete=models.SET_NULL, choices=DIAS)
-    hora = models.ForeignKey(CatalogoHora, null=True, on_delete=models.SET_NULL, choices=HORAS)
+    dia = models.ForeignKey(CatalogoDia, null=True, blank=True, on_delete=models.SET_NULL, choices=DIAS)
+    hora = models.ForeignKey(CatalogoHora, null=True, blank=True, on_delete=models.SET_NULL, choices=HORAS)
     disponible = models.BooleanField('Disponible/no disponible', default=True, null=True, blank=True)
 
     class Meta:
+        ordering = ['asesor', 'dia', 'hora']
         verbose_name = 'Agenda'
         verbose_name_plural = 'Agendas'
         unique_together = (('asesor', 'dia', 'hora'),)

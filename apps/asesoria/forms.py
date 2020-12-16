@@ -3,10 +3,32 @@ from django import forms
 from asesoria.models import Asesoria
 
 
-class AseroriaSolicitudForm(ModelForm):
-    subtema_nombre = forms.CharField(widget=forms.TextInput())
-    asesor_nombre = forms.CharField(widget=forms.TextInput())
+class SolicitudAseroriaForm(ModelForm):
+    class Meta:
+        model = Asesoria
+        fields = ['descripcion']
+
+
+class CancelacionAsesoriaForm(ModelForm):
 
     class Meta:
         model = Asesoria
-        fields = ['fecha_asesoria', 'asesor_nombre', 'subtema_nombre', 'descripcion', ]
+        fields = ['razon_cancelada']
+
+
+class AceptarAsesoriaForm(ModelForm):
+    class Meta:
+        model = Asesoria
+        fields = ['requisitos']
+
+
+class FinalizarAsesoriaForm(ModelForm):
+    class Meta:
+        model = Asesoria
+        fields = ['comentario_finalizada']
+
+
+class RechazarAsesoriaForm(ModelForm):
+    class Meta:
+        model = Asesoria
+        fields = ['razon_rechazada']

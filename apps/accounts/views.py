@@ -56,7 +56,7 @@ def principal(request):
                     'asesoria:ver_asesorias': 'Ver Asesorías'}
         asesorado = Asesorado.objects.get(usuario=request.user.id)
         if not asesorado.carrera:
-            messages.warning(request, 'Ingrese sus datos personales.')
+            messages.warning(request, 'Acceda al ícono de usuaior y registre sus datos.')
 
     elif group == 'asesores':
         opciones = {'asesoria:ver_asesorias': 'Mis asesorías',

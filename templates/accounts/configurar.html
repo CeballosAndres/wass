@@ -18,12 +18,12 @@
          {% csrf_token %}
         <!--Apartado de nombre y correo -->  
         <div class="row justify-content-md-center">
-            <div class="col col-md-5 mt-4">
+            <div class="col-md-5 mt-4">
                 <label for="name">Nombre completo</label>
                 {% render_field form.nombre class="form-control" type="text" %}
             </div>
             <div class="col-md-auto"></div>
-            <div class="col col-md-5 mt-4">
+            <div class="col-md-5 mt-4">
                 <label for="email">Correo</label>
                 <input type="email" name="email" class="form-control disable" id="correo"
                      placeholder="Correo Institucional" value="{{user_email}}" readonly>
@@ -31,26 +31,34 @@
         </div>
         <!--Apartado de telefono y carrera/dpto -->  
         <div class="row justify-content-md-center">
-            <div class="col col-md-5 mt-4"><label for="tel">Teléfono</label>
+            <div class="col-md-5 mt-4"><label for="tel">Teléfono</label>
                 {% render_field form.celular class="form-control" type="tel"%}
             </div>
             <div class="col-md-auto"></div>
-            <div class="col col-md-5 mt-4">
+            <div class="col-md-5 mt-4">
                 {% if group == 'asesorados' %}
-                    <label for="carrera">Carrera</label>
-                    {% render_field form.carrera|append_attr:"readonly:readonly" class="form-control" type="text"  %}    
-
-                    {% else %}
-                <label for="carrera">Clave empleado</label>
-                    {% render_field form.clave_empleado class="form-control" type="text"  %}
- 
-                <label class="mt-4" for="carrera">Departamento</label>
-                    {% render_field form.departamento|append_attr:"readonly:readonly" class="form-control" type="text"  %}
-
-                {% endif %}
+                <label for="carrera">Carrera</label>
+                {% render_field form.carrera|append_attr:"readonly:readonly" class="form-control" type="text"  %}
+                {% else %}
+                <label for="lugar_asesoria">Lugar asesoría</label>
+                {% render_field form.lugar_asesoria class="form-control" type="text"%}                
             </div>
         </div>
-
+        <!--Apartado de Clave empleado y Departamento --> 
+        <div class="row justify-content-md-center">
+            <div class="col-md-5 mt-4">
+                <label for="clave_empleado">Clave empleado</label>
+                {% render_field form.clave_empleado class="form-control" type="text"  %}
+            </div>
+            <div class="col-md-auto"></div>
+            <div class="col-md-5 mt-4">
+                <label for="departamento">Departamento</label>
+                {% render_field form.departamento|append_attr:"readonly:readonly" class="form-control" type="text"  %}
+            </div>
+            {% endif %}
+        </div>
+            
+        <!--Botones cambiar contrasenia y actualizar--> 
         <div class="row justify-content-md-center text-center">
             <div class="col-md-5 mt-5">
                 <a class="btn btn-warning btn-lg" href={% url 'accounts:contrasena' %}>Cambiar contraseña</a>
