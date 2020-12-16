@@ -16,12 +16,13 @@
   <!-- Opcion de filtrado-->
   <div class="container-fluid my-3">
     <div class="row">
-      <div class="col-xs-6 col-md-3">
+      <div class="col-xs-6 col-md-2">
         <form method="get">
           {% render_field filtro.form.estado class="custom-select" %}
+        </form>
+        <button class="btn my-btn" type="submit">Filtrar</button>
       </div>
-      <button class="btn my-btn" type="submit">Filtrar</button>
-      </form>
+      
     </div>
   </div>
   <!-- Asesoria card-->

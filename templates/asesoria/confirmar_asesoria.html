@@ -62,7 +62,7 @@
                     {% render_field form.requisitos class="form-control" rows="3" %}
                     {% endif %}
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary m-3">Confirmar</button>
+                        <button type="submit" class="my-btn small m-3">Confirmar</button>
                     </div>
                 </div>
             </form>
@@ -70,42 +70,52 @@
     </div>
     {% else %}
         {% if asesoria.descripcion %}
-        <div class="container w-75 m-6 bg-light">
-            <div class="col mt-3">
-                <h4>Descripción de la asesoría</h4>
-                <p>{{ asesoria.descripcion }}</p>
+        <div class="container m-6 bg-light">
+            <div class="row">
+                <div class="col mt-3">
+                    <h4>Descripción de la asesoría</h4>
+                    <p>{{ asesoria.descripcion }}</p>
+                </div>
             </div>
         </div>
         {% endif %}
         {% if asesoria.requisitos %}
-        <div class="container w-75 m-6 bg-light">
-            <div class="col mt-3">
-                <h4>Requisitos previos a la asesoría</h4>
-                <p>{{ asesoria.requisitos }}</p>
+        <div class="container m-6 bg-light">
+            <div class="row">
+                <div class="col mt-3">
+                    <h4>Requisitos previos a la asesoría</h4>
+                    <p>{{ asesoria.requisitos }}</p>
+                </div>
             </div>
         </div>
         {% endif %}
         {% if asesoria.razon_cancelada %}
-        <div class="container w-75 m-6 bg-light">
-            <div class="col mt-3">
-                <h4>Razón de cancelación</h4>
-                <p>{{ asesoria.razon_cancelada }}</p>
+        <div class="container m-6 bg-light">
+            <div class="row">
+            	<div class="col mt-3">
+            	    <h4>Razón de cancelación</h4>
+            	    <p>{{ asesoria.razon_cancelada }}</p>
+            	</div>
             </div>
         </div>
         {% endif %}
         {% if asesoria.razon_rechazada %}
-        <div class="container w-75 m-6 bg-light">
-            <div class="col mt-3">
-                <h4>Razón de rechazo</h4>
-                <p>{{ asesoria.razon_rechazada }}</p>
+        <div class="container m-6 bg-light">
+            <div class="row">
+                <div class="col mt-3">
+                    <h4>Razón de rechazo</h4>
+                    <p>{{ asesoria.razon_rechazada }}</p>
+                </div>
             </div>
         </div>
         {% endif %}
         {% if asesoria.comentario_finalizada %}
-        <div class="container w-75 m-6 bg-light">
-            <div class="col mt-3">
-                <h4>Comentario fianl</h4>
-                <p>{{ asesoria.comentario_finalizada }}</p>
+        <div class="container m-6 bg-light">
+            <div class="row">
+                <div class="col mt-3">
+                    <h4>Comentario fianl</h4>
+                    <p>{{ asesoria.comentario_finalizada }}</p>
+                </div>
             </div>
         </div>
         {% endif %}
