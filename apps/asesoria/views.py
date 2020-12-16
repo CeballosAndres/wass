@@ -3,12 +3,13 @@ from django.shortcuts import render, redirect, get_object_or_404, get_list_or_40
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import *
-from accounts.models import Asesorado, Asesor, Materia, Tema, Subtema, Agenda, TemarioAsesor, CatalogoDia, CatalogoHora
+from accounts.models import Asesorado, Asesor, Materia, Tema, Subtema, Agenda, TemarioAsesor
 
 from accounts.decorators import allowed_users
 
 
 @login_required(login_url='accounts:ingreso')
+@allowed_users(['asesorados'])
 def seleccionMateria(request):
     asesorado = get_object_or_404(Asesorado, usuario=request.user.id)
     if not asesorado.carrera:
@@ -26,6 +27,7 @@ def seleccionMateria(request):
 
 
 @login_required(login_url='accounts:ingreso')
+@allowed_users(['asesorados'])
 def seleccionTema(request, materia):
     temas = get_list_or_404(Tema, materia=materia)
     materia_object = get_object_or_404(Materia, id=materia)
@@ -39,6 +41,7 @@ def seleccionTema(request, materia):
 
 
 @login_required(login_url='accounts:ingreso')
+@allowed_users(['asesorados'])
 def seleccionSubtema(request, materia, tema):
     subtemas = get_list_or_404(Subtema, tema=tema)
     materia_object = get_object_or_404(Materia, id=materia)
@@ -54,6 +57,7 @@ def seleccionSubtema(request, materia, tema):
 
 
 @login_required(login_url='accounts:ingreso')
+@allowed_users(['asesorados'])
 def seleccionAsesor(request, materia, tema, subtema):
     asesores = TemarioAsesor.objects.filter(subtema=subtema, activo=True)
     agendas = Agenda.objects.filter(asesor__in=asesores.values('asesor'), disponible=True)
@@ -73,6 +77,7 @@ def seleccionAsesor(request, materia, tema, subtema):
 
 
 @login_required(login_url='accounts:ingreso')
+@allowed_users(['asesorados'])
 def nuevaAsesoria(request, materia, tema, subtema, asesor, hora):
     asesor = get_object_or_404(Asesor, id=asesor)
     subtema = get_object_or_404(Subtema, id=subtema)
@@ -241,5 +246,17 @@ def cancelarAsesoria(request, pk):
         'entrada': 'Razón de cancelación',
         'asesoria': asesoria,
         'form': form,
+    }
+    return render(request, 'asesoria/confirmar_asesoria.html', context)
+
+
+
+@login_required(login_url='accounts:ingreso')
+def detalleAsesoria(request, pk):
+    asesoria = get_object_or_404(Asesoria, id=pk)
+
+    context = {
+        'titulo': 'Detalle asesoría',
+        'asesoria': asesoria,
     }
     return render(request, 'asesoria/confirmar_asesoria.html', context)

@@ -62,7 +62,9 @@
 
             <div class="col-md-3 text-center mt-4">
               <div class="col">
-                <p class="status {{asesoria.estado}}">{{asesoria.get_estado_display}}</p>
+                <a href="{% url 'asesoria:detalle_asesoria' asesoria.id %}">
+                  <p class="status {{asesoria.estado}}">{{asesoria.get_estado_display}}</p>
+                </a>
               </div>
               <div class="col h-50"></div>
               <div class="col mb-2" style="background-color: #C4C4C4;">

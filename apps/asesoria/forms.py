@@ -9,6 +9,12 @@ class SolicitudAseroriaForm(ModelForm):
         fields = ['descripcion']
 
 
+class DetalleAseroriaForm(ModelForm):
+    class Meta:
+        model = Asesoria
+        fields = ['descripcion', 'requisitos','razon_cancelada','razon_rechazada', 'comentario_finalizada']
+
+
 class CancelacionAsesoriaForm(ModelForm):
 
     class Meta:
