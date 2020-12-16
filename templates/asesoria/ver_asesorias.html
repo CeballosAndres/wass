@@ -43,14 +43,20 @@
               <div class="card-body">
                 <h5 class="card-title">
                   {% if request.user|has_group:"asesorados" %}
-                  {{asesoria.asesor.nombre}}
+                  Asesor: {{asesoria.asesor.nombre}}
                   {% else %}
-                  {{asesoria.asesorado.nombre}}
+                  Alumno: {{asesoria.asesorado.nombre}}
                   {% endif %}
                 </h5>
-                <p class="card-text">{{asesoria.subtema.nombre}}</p>
-                <p class="card-text">{{asesoria.asesor.lugar_asesoria}}</p>
-                <p class="card-text">{{asesoria.fecha_asesoria}}</p>
+                <p class="card-text">Subtema: {{asesoria.subtema.nombre}}</p>
+                <p class="card-text">Lugar: 
+                {% if asesoria.asesor.lugar_asesoria %}
+                  {{asesoria.asesor.lugar_asesoria}}
+                {% else %}
+                  Acordar con el asesor.
+                {% endif %}
+                </p>
+                <p class="card-text">Fecha: {{asesoria.fecha_asesoria}}</p>
               </div>
             </div>
 

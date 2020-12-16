@@ -87,24 +87,20 @@ def nuevaAsesoria(request, materia, tema, subtema, asesor, hora):
     dia = dt.date.today() + dt.timedelta(days=faltantes)
     fecha_asesoria = dt.datetime.combine(dia, agenda.hora.nombre)
 
-    form = AseroriaSolicitudForm(initial={
-        'asesor_nombre': asesor.nombre,
-        'fecha_asesoria': fecha_asesoria,
-        'subtema_nombre': subtema,
-        'subtema': subtema,
-        'titulo': 'Confirmacion'
-    })
+    form = SolicitudAseroriaForm()
 
     if request.method == 'POST':
         print('post')
-        form = AseroriaSolicitudForm(request.POST)
+        form = SolicitudAseroriaForm(request.POST)
         if form.is_valid():
             asesoria = form.save(commit=False)
-            asesoria.asesor = asesor
             asesorado = get_object_or_404(Asesorado, usuario=request.user.id)
+            asesoria.fecha_asesoria = fecha_asesoria
+            #almacena el id de la agenda para faciliar consutlas TODO: mejorar
+            asesoria.agenda = hora 
             asesoria.asesorado = asesorado
+            asesoria.asesor = asesor
             asesoria.subtema = subtema
-            asesoria.agenda = hora
             asesoria.save()
             # bloquear el horario del asesor
             agenda.disponible = False
@@ -113,10 +109,17 @@ def nuevaAsesoria(request, materia, tema, subtema, asesor, hora):
             return redirect('accounts:principal')
 
     context = {
+        'titulo': 'Confirmar asesoría',
+        'entrada': 'Describe brevemente la problemática',
         'form': form,
-        'materia': materia,
+        'asesoria': {
+            'asesor': asesor,
+            'materia': materia,
+            'subtema': subtema,
+            'fecha_asesoria': fecha_asesoria,
+        }
     }
-    return render(request, 'asesoria/nueva_asesoria.html', context)
+    return render(request, 'asesoria/confirmar_asesoria.html', context)
 
 
 @login_required(login_url='accounts:ingreso')
@@ -144,15 +147,22 @@ def verAsesorias(request):
 def aceptarAsesoria(request, pk):
     asesoria = get_object_or_404(Asesoria, id=pk)
 
+    form = AceptarAsesoriaForm(instance=asesoria)
+
     if request.method == 'POST':
-        asesoria.estado = 'aceptada'
-        asesoria.save()
-        messages.success(request, 'Asesoría aceptada exitosamente.')
-        return redirect('asesoria:ver_asesorias')
+        form = AceptarAsesoriaForm(request.POST, instance=asesoria)
+        if form.is_valid():
+            asesoria = form.save(commit=False)
+            asesoria.estado = 'aceptada'
+            asesoria.save()
+            messages.success(request, 'Asesoría aceptada exitosamente.')
+            return redirect('asesoria:ver_asesorias')
 
     context = {
         'titulo': 'Aceptar asesoría',
+        'entrada': 'Requisitos previos a la asesoría',
         'asesoria': asesoria,
+        'form': form,
     }
     return render(request, 'asesoria/confirmar_asesoria.html', context)
 
@@ -209,6 +219,7 @@ def finalizarAsesoria(request, pk):
 
 
 @login_required(login_url='accounts:ingreso')
+@allowed_users(['asesores', 'asesorados'])
 def cancelarAsesoria(request, pk):
     asesoria = get_object_or_404(Asesoria, id=pk)
     form = CancelacionAsesoriaForm(instance=asesoria)
