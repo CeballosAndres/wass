@@ -96,8 +96,8 @@ def nuevaAsesoria(request, materia, tema, subtema, asesor, hora):
             asesoria = form.save(commit=False)
             asesorado = get_object_or_404(Asesorado, usuario=request.user.id)
             asesoria.fecha_asesoria = fecha_asesoria
-            #almacena el id de la agenda para faciliar consutlas TODO: mejorar
-            asesoria.agenda = hora 
+            # almacena el id de la agenda para faciliar consutlas TODO: mejorar
+            asesoria.agenda = hora
             asesoria.asesorado = asesorado
             asesoria.asesor = asesor
             asesoria.subtema = subtema

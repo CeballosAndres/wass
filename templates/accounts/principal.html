@@ -18,6 +18,12 @@
         </div>
     {% endfor %}
 
+    {% if request.user|has_group:"asesorados" %}
+        soy asesorado
+    {% else %}
+        soy asesor u otro
+    {% endif %}
+
 </main>
 
 
