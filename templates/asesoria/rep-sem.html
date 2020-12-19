@@ -42,20 +42,25 @@
 {% endif %}
 
 </main>
+
 <script>
-jQuery(document).ready(function($) {
+  jQuery(document).ready(function($) {
 
-    $(".clickable-row").click(function() {
+      $(".clickable-row").click(function() {
 
-        window.location = $(this).data("href");
+          window.location = $(this).data("href");
+      
+
+      });
+
+    $("#container").on('click-row.bs.table', function (e, row, $element) {
+      
+      window.location = $element.data('href');
 
     });
+  });
 
-$("#container").on('click-row.bs.table', function (e, row, $element) {
-
-    window.location = $element.data('href');
-
-});
 </script>
+
 
 {% endblock %}
