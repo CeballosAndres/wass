@@ -52,21 +52,25 @@ def principal(request):
     opciones = []
     group = request.user.groups.all()[0].name
     if group == 'asesorados':
-        opciones = {'asesoria:seleccion_materia': {'text':'Nueva asesoría','title':'Solicitar una asesoría nueva',
-                    'icon':'fas fa-calendar-plus'},
-                    'asesoria:ver_asesorias': {'text':'Ver asesorías','title':'Ver mi lista de asesorías',
-                    'icon':'fas fa-chalkboard-teacher'},
-                    'asesoria:reportes': {'text':'Reportes','title':'Mostar reportes de mi historial','icon':'fas fa-chart-pie'}}
+        opciones = {'asesoria:seleccion_materia': {'text': 'Nueva asesoría', 'title': 'Solicitar una asesoría nueva',
+                                                   'icon': 'fas fa-calendar-plus'},
+                    'asesoria:ver_asesorias': {'text': 'Ver asesorías', 'title': 'Ver mi lista de asesorías',
+                                               'icon': 'fas fa-chalkboard-teacher'},
+                    'asesoria:reportes': {'text': 'Reportes', 'title': 'Mostar reportes de mi historial',
+                                          'icon': 'fas fa-chart-pie'}}
         asesorado = Asesorado.objects.get(usuario=request.user.id)
         if not asesorado.carrera:
             messages.warning(request, 'Acceda al ícono de usuaior y registre sus datos.')
 
     elif group == 'asesores':
-        opciones = {'asesoria:ver_asesorias': {'text':'Ver asesorías','title':'Ver mi lista de asesorías',
-                    'icon':'fas fa-chalkboard-teacher'},
-                    'accounts:horario': {'text':'Horario','title':'Editar horario de atención', 'icon':'fas fa-calendar-alt'},
-                    'accounts:temario': {'text':'Temario','title':'Elegir mis temas para asesorar','icon':'fas fa-list'},
-                    'asesoria:reportes': {'text':'Reportes','title':'Mostar reportes de mi historial','icon':'fas fa-chart-pie'}
+        opciones = {'asesoria:ver_asesorias': {'text': 'Ver asesorías', 'title': 'Ver mi lista de asesorías',
+                                               'icon': 'fas fa-chalkboard-teacher'},
+                    'accounts:horario': {'text': 'Horario', 'title': 'Editar horario de atención',
+                                         'icon': 'fas fa-calendar-alt'},
+                    'accounts:temario': {'text': 'Temario', 'title': 'Elegir mis temas para asesorar',
+                                         'icon': 'fas fa-list'},
+                    'asesoria:reportes': {'text': 'Reportes', 'title': 'Mostar reportes de mi historial',
+                                          'icon': 'fas fa-chart-pie'}
                     }
         asesor = Asesor.objects.get(usuario=request.user.id)
         materias = TemarioAsesor.objects.filter(asesor=asesor).distinct('materia')
@@ -80,7 +84,7 @@ def principal(request):
 
     elif group == 'jefes':
         opciones = {
-            'asesoria:reportes': {'text':'Reportes','title':'Mostar datos generados','icon':'fas fa-chart-pie'}
+            'asesoria:reportes': {'text': 'Reportes', 'title': 'Mostar datos generados', 'icon': 'fas fa-chart-pie'}
         }
     context = {'opciones': opciones}
     return render(request, 'accounts/principal.html', context)
