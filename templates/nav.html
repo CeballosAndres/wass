@@ -4,17 +4,29 @@
 {% block content %}
 
 <nav class="navbar navbar-dark bg-dark">
-    <a href="{% url 'accounts:principal' %}"><img src="{% static 'images/Logo.png' %}" width="75" height="40"
-            alt="Wass logo"></a>
-    <div>
-        {% if not hide_config %}
-        <a href="{% url 'accounts:configurar' %}"><i style="color: #BFBFBF;" class="fas fa-user-circle mr-3"></i></a>
-        {% endif %}
-        {% if not hide_logauth %}
-        <a href="{% url 'accounts:salir'%}"><i style="color: #BFBFBF;" class="fas fa-sign-out-alt"></i></a>
-        {% endif %}
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'accounts:principal' %}">
+            <img src="{% static 'images/Logo.png' %}" width="75" height="40" alt="Wass logo">
+        </a>
+        
+        <ul class="navbar-nav d-flex flex-row">
+            <li class="nav-item">
+                {% if not hide_config %}
+                <a href="{% url 'accounts:configurar' %}">
+                    <i class="icon fas fa-user-circle mr-3"></i>
+                </a>
+                {% endif %}
+                {% if not hide_logauth %}
+                <a href="{% url 'accounts:salir'%}">
+                    <i class="icon fas fa-sign-out-alt"></i>
+                </a>
+                {% endif %}
+            </li>
+        </ul>
+        
     </div>
 </nav>
+
 <div class="container">
     {% if titulo %}
     <div class="row align-items-center">

@@ -16,6 +16,9 @@
     .collap-text{
         font-size: 0.3rem;
     }
+    .big{
+        width: 150px;
+    }
 }
 
 /* // Medium devices (tablets, 768px and up) sm */
@@ -32,6 +35,9 @@
     }
     #search {
         margin-top: 10px;
+    }
+    .big{
+        width: 350px;
     }
 
 }
@@ -50,6 +56,9 @@
     }
     .collap-text{
         font-size: 1rem;
+    }
+    .big{
+        width: 350px;
     }
  }
 
