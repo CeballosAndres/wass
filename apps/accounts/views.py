@@ -60,7 +60,7 @@ def principal(request):
                                           'icon': 'fas fa-chart-pie'}}
         asesorado = Asesorado.objects.get(usuario=request.user.id)
         if not asesorado.carrera:
-            messages.warning(request, 'Acceda al ícono de usuaior y registre sus datos.')
+            messages.warning(request, 'Acceda al ícono de usuario y registre sus datos.')
 
     elif group == 'asesores':
         opciones = {'asesoria:ver_asesorias': {'text': 'Ver asesorías', 'title': 'Ver mi lista de asesorías',
@@ -262,7 +262,7 @@ def temarioMateriaEditar(request, pk):
         messages.success(request, 'Materia actualizada.')
         return redirect('accounts:temario')
 
-    context = {'materia': materia, 'temas': temas}
+    context = {'materia': materia, 'temas': temas, 'titulo': 'Selección de temas'}
     return render(request, 'accounts/temario_temas.html', context)
 
 

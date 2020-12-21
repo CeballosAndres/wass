@@ -13,17 +13,16 @@ form a {
 
 /* tamanio y estilo de iconos */  
 i{
-    font-size: 1.875rem; 
+    font-size: 1.875rem;
 }
 .icon {
-    color: #BFBFBF;
-    
+    color: #BFBFBF  
 }
 .help-icon {
-    color: #555;
+    color: #555
 }
 i:hover {
-    color: #e8aa00;
+    color: #e8aa00
 }
 
 /* Estilo de la linea divisora */
