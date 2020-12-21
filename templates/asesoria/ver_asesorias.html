@@ -11,20 +11,16 @@
 <style>
 </style>
 
-<main>
+<main class="container">
 
   <!-- Opcion de filtrado-->
-  <div class="container my-3">
-    <div class="row">
-      <div class="col-xs-6 col-md-2">
-        <form method="get">
-          {% render_field filtro.form.estado class="custom-select" %}
-        </form>
-        <button class="btn my-btn" type="submit">Filtrar</button>
-      </div>
-      
-    </div>
+  <div class="row float-right">
+    <form class="form-inline my-2 my-lg-0" method="get">
+      {% render_field filtro.form.estado class="custom-select" %}
+      <button class="btn my-btn ml-2" type="submit">Filtrar</button>
+    </form>
   </div>
+
   <!-- Asesoria card-->
   <div class="container">
     <div class="row">
