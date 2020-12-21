@@ -10,14 +10,14 @@
       </div>
     </div>
 
-    <div class="card text-center scroll">
-      <div class="card-header">
+    <div class="card text-center scroll text-white bg-dark border-light">
+      <div class="card-header ">
         <strong>{{carrera}}</strong>
       </div>
       <ul class="list-group list-group-flush">
         {% for materia in materias %}
         <a href="{% url 'asesoria:seleccion_tema' materia.id %}">
-          <li class="list-group-item">
+          <li class="list-group-item my-list">
             {{materia.nombre}}
           </li>
         </a>

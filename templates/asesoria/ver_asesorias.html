@@ -14,12 +14,15 @@
 <main class="container">
 
   <!-- Opcion de filtrado-->
-  <div class="row float-right">
-    <form class="form-inline my-2 my-lg-0" method="get">
-      {% render_field filtro.form.estado class="custom-select" %}
-      <button class="btn my-btn ml-2" type="submit">Filtrar</button>
+  <div class="form-row float-right my-3">
+    <form class="form-inline" method="get">
+      <div class="form-group">
+        {% render_field filtro.form.estado class="custom-select" %}
+        <button type="submit" class="btn my-btn ml-2">Filtrar</button>
+      </div>
     </form>
   </div>
+      
 
   <!-- Asesoria card-->
   <div class="container">

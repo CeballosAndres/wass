@@ -130,10 +130,12 @@ hr{
 }
 
 
-
 /* Quitar decoracion en a tags*/
 a:hover {
-    text-decoration: none;
-  
-  }
+    text-decoration: none;  
+}
 
+  .my-list:hover {
+    background-color: #e7e7e7;
+  }
+  

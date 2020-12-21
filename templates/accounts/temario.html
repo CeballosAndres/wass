@@ -8,6 +8,9 @@
 <main class="container">
 
     <div class="container">
+        <p class="text-secondary">A continuación se muestra la lista de materias a las que usted está dispuesto a asesorar. Puede seleccionar qué temas en particular desea poder brindar asesoría.
+        </p>
+
         {% if materias %}
         <table class="table table-hover table-responsive-sm my-5">
             <thead class="thead-dark">
@@ -24,8 +27,8 @@
                     <td>{{ materia.materia.nombre }}</td>
                     <td>
                         <a href="{% url 'accounts:temario_materia_editar' materia.materia.id %}"
-                                class="btn btn-warning mr-3 mb-3">Editar</a>
-                        <a href="{% url 'accounts:temario_eliminar' materia.materia.id %}" class="btn btn-danger mb-3">Eliminar</a>
+                                class="btn btn-warning mr-3 mb-3" title="Seleccione los temas a asesorar.">Editar</a>
+                        <a href="{% url 'accounts:temario_eliminar' materia.materia.id %}" class="btn btn-danger mb-3" title="Quitar esta materia de mi temario.">Eliminar</a>
                     </td>
                 </tr>
                 {% endfor %}
