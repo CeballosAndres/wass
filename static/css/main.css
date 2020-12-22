@@ -135,7 +135,14 @@ a:hover {
     text-decoration: none;  
 }
 
-  .my-list:hover {
+.my-list:hover {
     background-color: #e7e7e7;
-  }
-  
+}
+
+/* Hacer que el elemento se mantenga abajo de la pantalla en principal*/
+.bottom{
+    height : 10vh;
+    position : relative;
+    top : 20vh;
+    
+}
