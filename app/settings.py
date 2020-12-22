@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'asesoria.apps.AsesoriaConfig',
     'widget_tweaks',
     'django_filters',
+    'django_crontab',
 ]
 
 MIDDLEWARE = [
@@ -81,6 +82,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'app.wsgi.application'
 
+CRONJOBS = [
+    ('15 * * * 0-4', 'asesoria.cron.resetAvailability')
+]
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
