@@ -134,11 +134,10 @@ def verAsesorias(request):
     if group == 'asesorados':
         asesorado = get_object_or_404(Asesorado, usuario=request.user.id)
         asesorias = Asesoria.objects.filter(asesorado=asesorado)
-        text = 'popo'
+
     else:
         asesor = get_object_or_404(Asesor, usuario=request.user.id)
         asesorias = Asesoria.objects.filter(asesor=asesor)
-        text = 'papa'
 
     if len(asesorias) == 0:
         messages.warning(request, 'No existen asesorías agendadas.')
@@ -150,7 +149,6 @@ def verAsesorias(request):
         'asesorias': asesorias,
         'titulo': 'Mis asesorías',
         'filtro': filtro,
-        'text':text
     }
     return render(request, 'asesoria/ver_asesorias.html', context)
 
