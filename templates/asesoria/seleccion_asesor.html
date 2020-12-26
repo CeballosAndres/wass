@@ -11,15 +11,14 @@
     </div> 
   </div>
   
+  <div id="accordion" class="container text-center">
 
   {% for asesor in asesores %}
 
-
-    <div d="accordion" class="container text-center">
-
       <div class="card text-center">
         <div class="card-header text-white bg-dark border-light">
-          <a data-toggle="collapse" href="#schedule" aria-expanded="true" aria-controls="collapse-example" id="teacher" class="text-white">
+          <a data-toggle="collapse" href="#collapse{{asesor.id}}" aria-expanded="true" aria-controls="collapse-example" 
+          id="{{asesor.id}}" class="text-white">
             <strong>
               {% if asesor.asesor.nombre %}
               {{asesor.asesor.nombre}}
@@ -30,7 +29,7 @@
           </a>
           
         </div>
-        <div id="schedule" class="collapse" aria-labelledby="teacher">
+        <div id="collapse{{asesor.id}}" class="collapse" aria-labelledby="{{asesor.asesor.id}}" data-parent="#accordion">
           <ul class="list-group list-group-flush">
             {% for agenda in agendas %}
             {% if asesor.asesor == agenda.asesor %}
@@ -43,10 +42,11 @@
             {% endfor %}
           </ul>
         </div>
-      </div>
-
-    </div>
+      </div> 
+      
   {% endfor %}
+
+  </div>
 </main>
 
 {% endblock %}
