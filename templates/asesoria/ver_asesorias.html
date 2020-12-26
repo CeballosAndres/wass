@@ -12,20 +12,33 @@
 </style>
 
 <main class="container">
+  
+  <div class="row my-3">
+    <div class="col">
+      <!-- Datos de la ventan en caso de ser asesorado -->
+      {% if request.user|has_group:"asesorados" %}
+        <p class="text-secondary">Aquí se muestra la lista de tus asesorías registradas en el sistema, es posible cancelar aquellas en estado "pendiente" o escribir un comentario en las finalizadas.<b> Este historial será borrado al término de cada semestre</b>, puedes generar un respaldo en la opción de reportes.</p>
+      <!-- En caso de ser asesor -->
+      {% else %}
+        <p class="text-secondary">Aquí se muestra la lista de sus asesorías registradas en el sistema, podra aceptar o rechazar las solicitudes de alumnos, cancelar aquellas en estado "pendiente" y finalizar con un comentario las ya aceptadas.<b> Este historial será borrado al término de cada semestre</b>, puede generar un respaldo en la opción de reportes.</p>
+      {% endif %}
+    </div>
+  </div>
 
   <!-- Opcion de filtrado-->
-  <div class="form-row float-right my-3">
-    <form class="form-inline" method="get">
-      <div class="form-group">
-        {% render_field filtro.form.estado class="custom-select" %}
-        <button type="submit" class="btn my-btn ml-2">Filtrar</button>
-      </div>
-    </form>
-  </div>
-      
+    <div class="form-row justify-content-end">
+      <form class="form-inline" method="get">
+          <div class="form-group">
+            {% render_field filtro.form.estado class="custom-select" %}
+          </div>
+          <button class="btn my-btn" type="submit" >Filtrar</button>
+      </form>
+
+    </div>
+
 
   <!-- Asesoria card-->
-  <div class="container float-right">
+  <div class="container my-3"></div>
     <div class="row">
       <div class="col">
         {% for asesoria in asesorias %}

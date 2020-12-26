@@ -134,6 +134,7 @@ def verAsesorias(request):
     if group == 'asesorados':
         asesorado = get_object_or_404(Asesorado, usuario=request.user.id)
         asesorias = Asesoria.objects.filter(asesorado=asesorado)
+
     else:
         asesor = get_object_or_404(Asesor, usuario=request.user.id)
         asesorias = Asesoria.objects.filter(asesor=asesor)
