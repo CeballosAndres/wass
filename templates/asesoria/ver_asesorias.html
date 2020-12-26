@@ -71,7 +71,7 @@
                   Acordar con el asesor.
                   {% endif %}
                 </p>
-                <p class="card-text">Fecha: {{asesoria.fecha_asesoria}}</p>
+                <p class="card-text">Fecha: {{ asesoria.fecha_asesoria|date:"l d M Y" }} {{ asesoria.fecha_asesoria|time:"H:i" }}</p>
               </div>
             </div>
 

@@ -40,9 +40,9 @@
                     {% endif %}
                 </p>
                 {% if asesoria.fecha_solicitud %}
-                    <p>Fecha de solicitud: {{ asesoria.fecha_solicitud }}</p>
+                    <p>Fecha de solicitud: {{ asesoria.fecha_solicitud|date:"l d M Y" }} {{ asesoria.fecha_solicitud|time:"H:i" }}</p>
                 {% endif %}
-                <p>Fecha de asesoría: {{ asesoria.fecha_asesoria }}</p>
+                <p>Fecha de asesoría: {{ asesoria.fecha_asesoria|date:"l d M Y" }} {{ asesoria.fecha_asesoria|time:"H:i" }}</p>
             </div>
         </div>
     

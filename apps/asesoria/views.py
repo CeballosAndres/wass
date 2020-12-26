@@ -88,6 +88,9 @@ def nuevaAsesoria(request, materia, tema, subtema, asesor, hora):
     hoy = dt.date.today().weekday()
     if hoy <= 4:
         faltantes = int(agenda.dia.nombre) - hoy
+        # Ajuste para el supuesto de asesorías de la proxima semana
+        if faltantes < 0:
+            faltantes += 7
     else:
         faltantes = 7 - hoy + int(agenda.dia.nombre)
     dia = dt.date.today() + dt.timedelta(days=faltantes)
@@ -116,7 +119,7 @@ def nuevaAsesoria(request, materia, tema, subtema, asesor, hora):
 
     context = {
         'titulo': 'Confirmar asesoría',
-        'entrada': 'Describe brevemente la problemática',
+        'entrada': 'Describe brevemente la problemática (obligatorio)',
         'form': form,
         'asesoria': {
             'asesor': asesor,
@@ -171,7 +174,7 @@ def aceptarAsesoria(request, pk):
 
     context = {
         'titulo': 'Aceptar asesoría',
-        'entrada': 'Requisitos previos a la asesoría',
+        'entrada': 'Requisitos previos a la asesoría (opcional)',
         'asesoria': asesoria,
         'form': form,
     }
@@ -198,7 +201,7 @@ def rechazarAsesoria(request, pk):
 
     context = {
         'titulo': 'Rechazar asesoría',
-        'entrada': 'Razón de rechazo',
+        'entrada': 'Razón de rechazo (obligatorio)',
         'asesoria': asesoria,
         'form': form,
     }
@@ -222,7 +225,7 @@ def finalizarAsesoria(request, pk):
 
     context = {
         'titulo': 'Finalizar asesoría',
-        'entrada': 'Comentario final',
+        'entrada': 'Comentario final (obligatorio)',
         'asesoria': asesoria,
         'form': form,
     }
@@ -249,7 +252,7 @@ def cancelarAsesoria(request, pk):
 
     context = {
         'titulo': 'Cancelar asesoría',
-        'entrada': 'Razón de cancelación',
+        'entrada': 'Razón de cancelación (obligatorio)',
         'asesoria': asesoria,
         'form': form,
     }

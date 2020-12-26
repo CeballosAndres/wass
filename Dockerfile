@@ -2,6 +2,8 @@ FROM python:3
 RUN mkdir /code
 WORKDIR /code
 COPY requirements.txt .
+RUN apt-get -y update
+RUN apt-get -y install cron
 RUN pip install -r requirements.txt
 COPY . .
 RUN chmod 777 /code/app/runner.sh
