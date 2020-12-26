@@ -3,37 +3,48 @@
 {% block content %}
 
 <main class="container">
+  
+<!-- Hacer que aparezca esta instruccion solo cuando si haya asesores -->
   <div class="row my-3">
-    <div class="col">
-      <p class="text-secondary">Seleccione el horario con un lapso de 30min. para solicitar su asesoría con su asesor de
-        preferencia.</p>
-    </div>
+    <div class="col pl-4">
+      <p class="text-secondary">A continuación se muestran los asesores disponibles, seleccione en alguno para visualizar su horario.</p>
+    </div> 
   </div>
+  
 
   {% for asesor in asesores %}
-    <div class="container text-center">
+
+
+    <div d="accordion" class="container text-center">
+
       <div class="card text-center">
-        <div class="card-header">
-          <strong>
-            {% if asesor.asesor.nombre %}
-            {{asesor.asesor.nombre}}
-            {% else %}
-            {{asesor.asesor}}
-            {% endif %}
-          </strong>
-        </div>
-        <ul class="list-group list-group-flush">
-          {% for agenda in agendas %}
-          {% if asesor.asesor == agenda.asesor %}
-          <a href="{% url 'asesoria:nueva_asesoria' materia tema subtema asesor.asesor.id agenda.id %}">
-            <li class="list-group-item">
-              {{agenda.dia.get_nombre_display}} {{agenda.hora.get_nombre_display}}
-            </li>
+        <div class="card-header text-white bg-dark border-light">
+          <a data-toggle="collapse" href="#schedule" aria-expanded="true" aria-controls="collapse-example" id="teacher" class="text-white">
+            <strong>
+              {% if asesor.asesor.nombre %}
+              {{asesor.asesor.nombre}}
+              {% else %}
+              {{asesor.asesor}}
+              {% endif %}
+            </strong>
           </a>
-          {% endif %}
-          {% endfor %}
-        </ul>
+          
+        </div>
+        <div id="schedule" class="collapse" aria-labelledby="teacher">
+          <ul class="list-group list-group-flush">
+            {% for agenda in agendas %}
+            {% if asesor.asesor == agenda.asesor %}
+            <a href="{% url 'asesoria:nueva_asesoria' materia tema subtema asesor.asesor.id agenda.id %}">
+              <li class="list-group-item">
+                {{agenda.dia.get_nombre_display}} {{agenda.hora.get_nombre_display}}
+              </li>
+            </a>
+            {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
       </div>
+
     </div>
   {% endfor %}
 </main>

@@ -26,18 +26,19 @@
   </div>
 
   <!-- Opcion de filtrado-->
-  <div class="form-row float-right ">
-    <form class="form-inline" method="get">
-      <div class="form-group">
-        {% render_field filtro.form.estado class="custom-select" %}
-        <button type="submit" class="btn my-btn ml-2">Filtrar</button>
-      </div>
-    </form>
-  </div>
-      
+    <div class="form-row justify-content-end">
+      <form class="form-inline" method="get">
+          <div class="form-group">
+            {% render_field filtro.form.estado class="custom-select" %}
+          </div>
+          <button class="btn my-btn" type="submit" >Filtrar</button>
+      </form>
+
+    </div>
+
 
   <!-- Asesoria card-->
-  <div class="container float-center">
+  <div class="container my-3"></div>
     <div class="row">
       <div class="col">
         {% for asesoria in asesorias %}

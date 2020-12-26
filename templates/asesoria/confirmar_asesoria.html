@@ -7,13 +7,18 @@
 {% block content %}
 
 <main class="container">
+
+    <div class="row my-3">
+        <div class="col pl-4">
+          <p class="text-secondary">Verifique los datos y añada una descripción de su problemática a tratar.</p>
+        </div> 
+      </div>
+      
     <div class="container m-6 bg-light my-3"> 
-        <div class="row m-3">
-            <div class="col-md-2 w-75 mt-3">
+        <div class="row">
+            <div class="col-md-2 text-center m-auto">
                 <img src="{% static 'images/user.svg' %}" width="75" alt="foto de perfil">
             </div>
-        </div>
-        <div class="row mx-3">
             <div class="col mt-3">
                 <h3>{% if request.user|has_group:"asesorados" %}
                     Asesor:   
@@ -40,7 +45,7 @@
                 <p>Fecha de asesoría: {{ asesoria.fecha_asesoria }}</p>
             </div>
         </div>
-    </div>
+    
 
     {% if entrada %}
     <div class="row m-3">
@@ -123,6 +128,7 @@
         </div>
         {% endif %}
     {% endif %}
+    </div>
 </main>
 
 

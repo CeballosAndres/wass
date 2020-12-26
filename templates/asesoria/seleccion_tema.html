@@ -12,14 +12,14 @@
   </div>
 
 
-  <div class="card text-center scroll">
+  <div class="card text-center scroll text-white bg-dark border-light">
       <div class="card-header">
         <strong>{{materia}}</strong>
       </div>
       <ul class="list-group list-group-flush">
         {% for tema in temas %}
         <a href="{% url 'asesoria:seleccion_subtema' materia.id tema.id %}">
-          <li class="list-group-item">
+          <li class="list-group-item my-list">
             {{tema.nombre}}
           </li>
         </a>
