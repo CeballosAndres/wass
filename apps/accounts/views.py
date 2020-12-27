@@ -272,4 +272,3 @@ class ListarMaterias(ListView):
 
 class TemasDeMaterias(DetailView):
     model = Tema
-
