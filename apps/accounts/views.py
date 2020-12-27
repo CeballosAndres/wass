@@ -117,7 +117,7 @@ def configurar(request):
         else:
             form = AsesorForm(instance=user_profile)
     context = {'hide_config': True, 'group': group, 'form': form,
-               'user_email': user_email, 'titulo': 'Datos personales'}
+               'user_email': user_email, 'title': 'Datos personales'}
     return render(request, 'accounts/configurar.html', context)
 
 
@@ -132,7 +132,7 @@ def contrasena(request):
             return redirect('accounts:configurar')
     else:
         form = PasswordChangeForm(request.user)
-    context = {'form': form, 'titulo': 'Cambiar contraseña'}
+    context = {'form': form, 'title': 'Cambiar contraseña'}
     return render(request, 'accounts/contrasena.html', context)
 
 
@@ -187,7 +187,7 @@ def temario(request):
         messages.warning(request, 'No existen materias registradas.')
     filtro = MateriaFilter()
 
-    context = {'materias': materias, 'filtro': filtro, 'titulo': 'Materias'}
+    context = {'materias': materias, 'filtro': filtro, 'title': 'Materias'}
     return render(request, 'accounts/temario.html', context)
 
 
@@ -210,7 +210,7 @@ def temarioAgregarModal(request):
     filtro = MateriaFilter(request.GET, queryset=materias)
     materias = filtro.qs
 
-    context = {'materias': materias, 'filtro': filtro, 'titulo': 'Agregar materias'}
+    context = {'materias': materias, 'filtro': filtro, 'title': 'Agregar materias'}
     return render(request, 'accounts/temario_materia.html', context)
 
 
@@ -262,7 +262,7 @@ def temarioMateriaEditar(request, pk):
         messages.success(request, 'Materia actualizada.')
         return redirect('accounts:temario')
 
-    context = {'materia': materia, 'temas': temas, 'titulo': 'Selección de temas'}
+    context = {'materia': materia, 'temas': temas, 'title': 'Selección de temas'}
     return render(request, 'accounts/temario_temas.html', context)
 
 
@@ -272,3 +272,4 @@ class ListarMaterias(ListView):
 
 class TemasDeMaterias(DetailView):
     model = Tema
+

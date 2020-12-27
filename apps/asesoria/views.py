@@ -22,7 +22,7 @@ def seleccionMateria(request):
     context = {
         'materias': materias,
         'carrera': carrera,
-        'titulo': 'Agendar asesoría'
+        'title': 'Agendar asesoría'
     }
     return render(request, 'asesoria/seleccion_materia.html', context)
 
@@ -36,7 +36,7 @@ def seleccionTema(request, materia):
     context = {
         'temas': temas,
         'materia': materia_object,
-        'titulo': 'Selección de Tema'
+        'title': 'Selección de Tema'
     }
     return render(request, 'asesoria/seleccion_tema.html', context)
 
@@ -52,7 +52,7 @@ def seleccionSubtema(request, materia, tema):
         'subtemas': subtemas,
         'materia': materia_object,
         'tema': tema_object,
-        'titulo': 'Selección de Subtema'
+        'title': 'Selección de Subtema'
     }
     return render(request, 'asesoria/seleccion_subtema.html', context)
 
@@ -72,7 +72,7 @@ def seleccionAsesor(request, materia, tema, subtema):
         'materia': materia,
         'tema': tema,
         'subtema': subtema,
-        'titulo': 'Selección de Asesor'
+        'title': 'Selección de Asesor'
     }
     return render(request, 'asesoria/seleccion_asesor.html', context)
 
@@ -118,7 +118,7 @@ def nuevaAsesoria(request, materia, tema, subtema, asesor, hora):
             return redirect('accounts:principal')
 
     context = {
-        'titulo': 'Confirmar asesoría',
+        'title': 'Confirmar asesoría',
         'entrada': 'Describe brevemente la problemática (obligatorio)',
         'form': form,
         'asesoria': {
@@ -150,7 +150,7 @@ def verAsesorias(request):
 
     context = {
         'asesorias': asesorias,
-        'titulo': 'Mis asesorías',
+        'title': 'Mis asesorías',
         'filtro': filtro,
     }
     return render(request, 'asesoria/ver_asesorias.html', context)
@@ -173,7 +173,7 @@ def aceptarAsesoria(request, pk):
             return redirect('asesoria:ver_asesorias')
 
     context = {
-        'titulo': 'Aceptar asesoría',
+        'title': 'Aceptar asesoría',
         'entrada': 'Requisitos previos a la asesoría (opcional)',
         'asesoria': asesoria,
         'form': form,
@@ -200,7 +200,7 @@ def rechazarAsesoria(request, pk):
             return redirect('asesoria:ver_asesorias')
 
     context = {
-        'titulo': 'Rechazar asesoría',
+        'title': 'Rechazar asesoría',
         'entrada': 'Razón de rechazo (obligatorio)',
         'asesoria': asesoria,
         'form': form,
@@ -224,7 +224,7 @@ def finalizarAsesoria(request, pk):
             return redirect('asesoria:ver_asesorias')
 
     context = {
-        'titulo': 'Finalizar asesoría',
+        'title': 'Finalizar asesoría',
         'entrada': 'Comentario final (obligatorio)',
         'asesoria': asesoria,
         'form': form,
@@ -251,7 +251,7 @@ def cancelarAsesoria(request, pk):
             return redirect('asesoria:ver_asesorias')
 
     context = {
-        'titulo': 'Cancelar asesoría',
+        'title': 'Cancelar asesoría',
         'entrada': 'Razón de cancelación (obligatorio)',
         'asesoria': asesoria,
         'form': form,
@@ -263,7 +263,7 @@ def cancelarAsesoria(request, pk):
 def detalleAsesoria(request, pk):
     asesoria = get_object_or_404(Asesoria, id=pk)
     context = {
-        'titulo': 'Detalle asesoría',
+        'title': 'Detalle asesoría',
         'asesoria': asesoria,
     }
     return render(request, 'asesoria/confirmar_asesoria.html', context)
@@ -271,7 +271,7 @@ def detalleAsesoria(request, pk):
 
 @login_required(login_url='accounts:ingreso')
 def reportes(request):
-    context = {'titulo': 'Tipos de reportes'}
+    context = {'title': 'Tipos de reportes'}
     return render(request, 'asesoria/reportes.html', context)
 
 
@@ -292,7 +292,7 @@ def repSem(request):
         messages.warning(request, 'No existen asesorias.')
 
     context = {
-        'titulo': 'Reporte de asesorías por semestre',
+        'title': 'Reporte de asesorías por semestre',
         'asesorias': asesorias,
     }
     return render(request, 'asesoria/rep-sem.html', context)
