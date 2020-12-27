@@ -7,6 +7,7 @@ from .filters import *
 from accounts.models import Asesorado, Asesor, Jefe, Materia, Tema, Subtema, Agenda, TemarioAsesor
 
 from accounts.decorators import allowed_users
+from .helpers import enviarEmail
 
 
 @login_required(login_url='accounts:ingreso')
@@ -114,6 +115,8 @@ def nuevaAsesoria(request, materia, tema, subtema, asesor, hora):
             # bloquear el horario del asesor
             agenda.disponible = False
             agenda.save()
+
+            enviarEmail('solicitud', asesoria)
             messages.success(request, 'Solicitud de asesoría enviada.')
             return redirect('accounts:principal')
 
@@ -169,6 +172,7 @@ def aceptarAsesoria(request, pk):
             asesoria = form.save(commit=False)
             asesoria.estado = 'aceptada'
             asesoria.save()
+            enviarEmail('aceptación', asesoria)
             messages.success(request, 'Asesoría aceptada exitosamente.')
             return redirect('asesoria:ver_asesorias')
 
@@ -196,6 +200,7 @@ def rechazarAsesoria(request, pk):
             agenda = get_object_or_404(Agenda, id=asesoria.agenda)
             agenda.disponible = True
             agenda.save()
+            enviarEmail('rechazo', asesoria)
             messages.success(request, 'Asesoría rechazada exitosamente.')
             return redirect('asesoria:ver_asesorias')
 
@@ -220,6 +225,7 @@ def finalizarAsesoria(request, pk):
             asesoria = form.save(commit=False)
             asesoria.estado = 'finalizada'
             asesoria.save()
+            enviarEmail('finalización', asesoria)
             messages.success(request, 'Asesoría finalizada exitosamente.')
             return redirect('asesoria:ver_asesorias')
 
@@ -247,6 +253,7 @@ def cancelarAsesoria(request, pk):
             agenda = get_object_or_404(Agenda, id=asesoria.agenda)
             agenda.disponible = True
             agenda.save()
+            enviarEmail('cancelación', asesoria)
             messages.success(request, 'Asesoría cancelada exitosamente.')
             return redirect('asesoria:ver_asesorias')
 
