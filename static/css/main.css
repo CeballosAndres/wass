@@ -25,6 +25,7 @@ i:hover {
     color: #e8aa00
 }
 
+
 /* Estilo de la linea divisora */
 hr{
     border-top: 5px solid #e8aa00;
@@ -33,7 +34,7 @@ hr{
 
 /* Estilo de tarjeta para asesorias */
 .card {    
-    background-color: #C4C4C4; 
+    background-color: #e7e7e7;
     float: none; 
     margin: 0 auto; 
     margin-bottom: 10px; 
@@ -50,7 +51,7 @@ hr{
 .small {
     height: 50px;
     font-size: 20px;
-    width: 300px;
+    width: 18.75rem;
 }
 /* boton grande */
 .big {
@@ -72,28 +73,24 @@ hr{
 
 /* Estilo de los estados posibles */
 .status {
-    background-color: white;
-    border: 2px solid;
-    border-radius: 15px;
-    display: inline;
     text-align: center;
     padding: 5px 10px;
 }
 
 .pendiente {
-    border-color: rgb(67, 67, 67);
+    background-color: rgb(67, 67, 67);
 }
 .aceptada {
-    border-color: #28A745;
+    background-color: #28A745;
 }
 .rechazada {
-    border-color: #DC3545;
+    background-color: #DC3545;
 }
 .finalizada {
-    border-color: #17A2B8;
+    background-color: #17A2B8;
 }
 .cancelada {
-    border-color:  #e8aa00;
+    background-color: #e8aa00;
 }
 
 /* Tamanio de fuente para indicaciones en el cambio de contrasenia */

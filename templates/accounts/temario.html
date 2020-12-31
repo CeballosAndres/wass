@@ -8,7 +8,8 @@
 <main class="container">
 
     <div class="container">
-        <p class="text-secondary">A continuación se muestra la lista de materias a las que usted está dispuesto a asesorar. Puede seleccionar qué temas en particular desea poder brindar asesoría.
+        <p class="text-secondary">A continuación se muestra la lista de materias a las que usted está dispuesto a
+            asesorar. Puede seleccionar qué temas en particular desea poder brindar asesoría.
         </p>
 
         {% if materias %}
@@ -27,8 +28,9 @@
                     <td>{{ materia.materia.nombre }}</td>
                     <td>
                         <a href="{% url 'accounts:temario_materia_editar' materia.materia.id %}"
-                                class="btn btn-warning mr-3 mb-3" title="Seleccione los temas a asesorar.">Editar</a>
-                        <a href="{% url 'accounts:temario_eliminar' materia.materia.id %}" class="btn btn-danger mb-3" title="Quitar esta materia de mi temario.">Eliminar</a>
+                            class="btn btn-warning mr-3 mb-3" title="Seleccione los temas a asesorar.">Editar</a>
+                        <a href="{% url 'accounts:temario_eliminar' materia.materia.id %}" class="btn btn-danger mb-3"
+                            title="Quitar esta materia de mi temario.">Eliminar</a>
                     </td>
                 </tr>
                 {% endfor %}
@@ -39,24 +41,26 @@
 
     <hr class="rounded">
 
-    <div class="row text-center my-5">
-        <div class="col my-4">
-            <h2>Agregar materia</h2>
+    <div class="container">
+        <div class="row text-center my-3">
+            <div class="col my-4">
+                <h2>Agregar materia</h2>
+            </div>
         </div>
-        <div class="container">
-            <form class="form-row align-items-center" method='GET' action="/temario/agregar/">
-                <div class="col-md-8 col-xm-12">
-                    {% render_field filtro.form.query class="form-control" placeholder="Nombre o clave de materia" %}
-                </div>
-                <div class="col-md-4 my-4">
-                    <button id="search" class="my-btn small" type="submit">Buscar</button>
-                </div>
-            </form>
-        </div>
-    
+
+        <p class="text-secondary">
+            Busque la materia por nombre o clave. Para ver todas las materias de su Departamento presione directamente
+            en el boton "Buscar".
+        </p>
+        <form class="form-row align-items-center" method='GET' action="/temario/agregar/">
+            <div class="col-8">
+                {% render_field filtro.form.query class="form-control" placeholder="Nombre o clave de materia" %}
+            </div>
+            <div class="col-auto my-4">
+                <button id="search" class="my-btn smaller" type="submit">Buscar</button>
+            </div>
+        </form>
     </div>
-
-
 
 </main>
 

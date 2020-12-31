@@ -12,105 +12,112 @@
 </style>
 
 <main class="container">
-  
+  <!-- DEBE regresar a el menu principal. -->
+  <div class="row">
+    <div class="col">
+      <h1 id="title" class="my-3"><a href="{% url 'accounts:principal' %}"><i
+            class="icon fas fa-arrow-circle-left pr-4"></i></a>Mis asesorías</h1>
+    </div>
+  </div>
+
   <div class="row my-3">
     <div class="col">
       <!-- Datos de la ventan en caso de ser asesorado -->
       {% if request.user|has_group:"asesorados" %}
-        <p class="text-secondary">Aquí se muestra la lista de tus asesorías registradas en el sistema, es posible cancelar aquellas en estado "pendiente" o escribir un comentario en las finalizadas.<b> Este historial será borrado al término de cada semestre</b>, puedes generar un respaldo en la opción de reportes.</p>
+      <p class="text-secondary">Aquí se muestra la lista de tus asesorías registradas en el sistema, es posible cancelar
+        aquellas en estado "pendiente" o escribir un comentario en las finalizadas.<b> Este historial será borrado al
+          término de cada semestre</b>, puedes generar un respaldo en la opción de reportes.</p>
       <!-- En caso de ser asesor -->
       {% else %}
-        <p class="text-secondary">Aquí se muestra la lista de sus asesorías registradas en el sistema, podra aceptar o rechazar las solicitudes de alumnos, cancelar aquellas en estado "pendiente" y finalizar con un comentario las ya aceptadas.<b> Este historial será borrado al término de cada semestre</b>, puede generar un respaldo en la opción de reportes.</p>
+      <p class="text-secondary">Aquí se muestra la lista de sus asesorías registradas en el sistema, podra aceptar o
+        rechazar las solicitudes de alumnos, cancelar aquellas en estado "pendiente" y finalizar con un comentario las
+        ya aceptadas.<b> Este historial será borrado al término de cada semestre</b>, puede generar un respaldo en la
+        opción de reportes.</p>
       {% endif %}
     </div>
   </div>
 
   <!-- Opcion de filtrado-->
-    <div class="form-row justify-content-end">
-      <form class="form-inline" method="get">
-          <div class="form-group">
-            {% render_field filtro.form.estado class="custom-select" %}
-          </div>
-          <button class="btn my-btn" type="submit" >Filtrar</button>
-      </form>
-
+  <form class="form-inline justify-content-end" method="get">
+    <div class="form-group">
+      {% render_field filtro.form.estado class="custom-select" %}
     </div>
+    <button class="btn my-btn col-auto mb-auto ml-2" type="submit">Filtrar</button>
+  </form>
 
 
-  <!-- Asesoria card-->
-  <div class="container my-3"></div>
+  <!-- Tarjeta de asesoria -->
+  {% for asesoria in asesorias %}
+  <div class="card my-3">
     <div class="row">
-      <div class="col">
-        {% for asesoria in asesorias %}
-        <div class="my-card card border-light">
-          <div class="row no-gutters">
+      <!-- Datos -->
+      <div class="card-body col-md-auto mx-3">
+        <h6 class="card-text text-secondary">Asesoria con</h6>
+        <h3 class="card-title">
+          <img class="mr-2" src="{% static 'images/user.svg' %}" height="40" alt="Foto de perfil">
+          {% if request.user|has_group:"asesorados" %}
+          {% if asesoria.asesor.nombre %}
+          {{asesoria.asesor.nombre}}
+          {% else %}
+          {{asesoria.asesor}}
+          {% endif %}
+          {% else %}
+          {{asesoria.asesorado.nombre}}
+          {% endif %}
+        </h3>
+        <!-- Tema, Fecha, Hora, Lugar...  -->
+        <h5 class="card-text my-3"><strong>Sobre {{asesoria.subtema.nombre}}</strong></h5>
+        <ul class="list-unstyled my-1">
+          <li class="card-text">El dia <strong>{{ asesoria.fecha_asesoria|date:"l d M Y" }}</strong> a las <strong> {{
+              asesoria.fecha_asesoria|time:"H:i" }}</strong> hrs.</li>
 
-            <div class="col-md-2 my-auto text-center">
-              <img src="{% static 'images/user.svg' %}" class="m-5" height="80" alt="Foto de perfil">
-            </div>
-
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">
-                  {% if request.user|has_group:"asesorados" %}
-                  Asesor: 
-                    {% if asesoria.asesor.nombre %}
-                      {{asesoria.asesor.nombre}}
-                      {% else %}
-                      {{asesoria.asesor}}
-                    {% endif %}
-                  {% else %}
-                  Alumno: {{asesoria.asesorado.nombre}}
-                  {% endif %}
-                </h5>
-                <p class="card-text">Subtema: {{asesoria.subtema.nombre}}</p>
-                <p class="card-text">Lugar:
-                  {% if asesoria.asesor.lugar_asesoria %}
-                  {{asesoria.asesor.lugar_asesoria}}
-                  {% else %}
-                  Acordar con el asesor.
-                  {% endif %}
-                </p>
-                <p class="card-text">Fecha: {{ asesoria.fecha_asesoria|date:"l d M Y" }} {{ asesoria.fecha_asesoria|time:"H:i" }}</p>
-              </div>
-            </div>
-
-            <div class="col-md-3 text-center mt-4">
-              <div class="col">
-                <a href="{% url 'asesoria:detalle_asesoria' asesoria.id %}">
-                  <p class="status {{asesoria.estado}}">{{asesoria.get_estado_display}}</p>
-                </a>
-              </div>
-              <div class="col h-50"></div>
-              <div class="col mb-2" style="background-color: #C4C4C4;">
-                {% if request.user|has_group:"asesorados" %}
-                {% if asesoria.estado == 'pendiente' or asesoria.estado == 'aceptada' %}
-                <a role="button" href="{% url 'asesoria:cancelar_asesoria' asesoria.id %}"
-                  class="o-cancelar btn btn-warning">Cancelar</a>
-                {% endif %}
-                {% else %}
-                {% if asesoria.estado == 'pendiente' %}
-                <a role="button" href="{% url 'asesoria:aceptar_asesoria' asesoria.id %}"
-                  class="o-aceptar btn btn-success">Aceptar</a>
-                <a role="button" href="{% url 'asesoria:rechazar_asesoria' asesoria.id %}"
-                  class="o-rechazar btn btn-danger">Rechazar</a>
-                {% elif asesoria.estado == 'aceptada' %}
-                <a role="button" href="{% url 'asesoria:cancelar_asesoria' asesoria.id %}"
-                  class="o-cancelar btn btn-warning">Cancelar</a>
-                <a role="button" href="{% url 'asesoria:finalizar_asesoria' asesoria.id %}"
-                  class="o-finalizar btn btn-primary">Finalizar</a>
-                {% endif %}
-                {% endif %}
-              </div>
-            </div>
-
-          </div>
+          <li class="card-text font-weight-light">Lugar:
+            {% if asesoria.asesor.lugar_asesoria %}
+            {{asesoria.asesor.lugar_asesoria}}
+            {% else %}
+            Acordar con el asesor.
+            {% endif %}
+          </li>
+        </ul>
+      </div>
+      <div class="card-body text-center col-md-3 m-auto">
+        <!-- Estado de la asesoria -->
+        <div>
+          <h5 class="status {{asesoria.estado}}">{{asesoria.get_estado_display}}</h5>
         </div>
-        {% endfor %}
-
+        <!-- Boton/botones de accion -->
+        <div class="mt-4">
+          {% if request.user|has_group:"asesorados" %}
+          {% if asesoria.estado == 'pendiente' or asesoria.estado == 'aceptada' %}
+          <a role="button" href="{% url 'asesoria:cancelar_asesoria' asesoria.id %}"
+            class="btn btn-secondary">Cancelar</a>
+          {% endif %}
+          {% else %}
+          {% if asesoria.estado == 'pendiente' %}
+          <a role="button" href="{% url 'asesoria:aceptar_asesoria' asesoria.id %}"
+            class="aceptar btn btn btn-warning">Aceptar</a>
+          <a role="button" href="{% url 'asesoria:rechazar_asesoria' asesoria.id %}"
+            class="btn btn-secondary">Rechazar</a>
+          {% elif asesoria.estado == 'aceptada' %}
+          <a role="button" href="{% url 'asesoria:finalizar_asesoria' asesoria.id %}"
+            class="btn btn-warning">Finalizar</a>
+          <a role="button" href="{% url 'asesoria:cancelar_asesoria' asesoria.id %}"
+            class="btn btn-secondary">Cancelar</a>
+          {% endif %}
+          {% endif %}
+        </div>
       </div>
     </div>
+    <!-- Para ver detalles -->
+    <div class="card-footer text-right">
+      <a class="card-link" href="{% url 'asesoria:detalle_asesoria' asesoria.id %}">
+        Ver detalles
+      </a>
+    </div>
   </div>
+  {% endfor%}
+
+
 </main>
 
 

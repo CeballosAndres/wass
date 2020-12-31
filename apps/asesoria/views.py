@@ -22,8 +22,7 @@ def seleccionMateria(request):
     materias = get_list_or_404(Materia, carrera=carrera)
     context = {
         'materias': materias,
-        'carrera': carrera,
-        'title': 'Agendar asesoría'
+        'carrera': carrera
     }
     return render(request, 'asesoria/seleccion_materia.html', context)
 
@@ -36,8 +35,7 @@ def seleccionTema(request, materia):
 
     context = {
         'temas': temas,
-        'materia': materia_object,
-        'title': 'Selección de Tema'
+        'materia': materia_object
     }
     return render(request, 'asesoria/seleccion_tema.html', context)
 
@@ -153,8 +151,7 @@ def verAsesorias(request):
 
     context = {
         'asesorias': asesorias,
-        'title': 'Mis asesorías',
-        'filtro': filtro,
+        'filtro': filtro
     }
     return render(request, 'asesoria/ver_asesorias.html', context)
 

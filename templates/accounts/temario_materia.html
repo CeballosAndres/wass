@@ -6,27 +6,20 @@
 
 <main class="container">
 
-    <div class="row mt-5">
-        <div class="col">
-            <p class="text-secondary">A continuacion se presentan las materias que puede agregar de acuerdo a su Departamento. O puede buscar directamente: </p>
-        </div>
-    </div>
-
-    <div class="container text-center my-3">
+    <div class="container text-center">
         <form method='GET' action="/temario/agregar/">
             <div class="form-row align-items-center">
-                <div class="col-md-8 col-xm-12">
+                <div class="col-8">
                     {% render_field filtro.form.query class="form-control" placeholder="Nombre o clave de materia" %}
                 </div>
-                <div class="col-md-4">
-                    <button class="my-btn small" type="submit">Buscar</button>
+                <div class="col-auto my-3">
+                    <button class="my-btn smaller" type="submit">Buscar</button>
                 </div>
             </div>
         </form>
     </div>
 
-
-    <div class="row mt-5">
+    <div class="container mt-3 scroll">
         {% if materias %}
         <table class="table">
             <thead class="thead-dark">
@@ -41,15 +34,17 @@
                 <tr>
                     <th scope="row">{{materia.clave_materia}}</th>
                     <td>{{ materia.nombre }}</td>
-                    <td><a href="{% url 'accounts:temario_agregar' materia.id %}">
-                        <button class="btn btn-success">Agregar</button>
+                    <td>
+                        <a href="{% url 'accounts:temario_agregar' materia.id %}">
+                            <button title="Agregar esta materia a mi temario" class="btn btn-success">Agregar</button>
+                        </a>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
         {% else %}
-            <p class="note-empty"> No se encontraron resultados a la búsqueda</p>
+        <p class="note-empty"> No se encontraron resultados a la búsqueda</p>
         {% endif %}
     </div>
 
