@@ -37,6 +37,9 @@
     </div>
   </div>
 
+
+
+  
   <!-- Opcion de filtrado-->
   <form class="form-inline justify-content-end" method="get">
     <div class="form-group">
@@ -46,12 +49,20 @@
   </form>
 
 
+
+
   <!-- Tarjeta de asesoria -->
   {% for asesoria in asesorias %}
-  <div class="card my-3">
+  <div class="card my-card my-3">
+    <!-- Revisar el estado -->
+    <div class="card-header {{asesoria.estado}} text-right">
+      <h5 class="{{asesoria.estado}} mr-3">{{asesoria.get_estado_display}}</h5>
+    </div>
+
     <div class="row">
+
       <!-- Datos -->
-      <div class="card-body col-md-auto mx-3">
+      <div class="card-body col-md-auto mx-3 ml-5">
         <h6 class="card-text text-secondary">Asesoria con</h6>
         <h3 class="card-title">
           <img class="mr-2" src="{% static 'images/user.svg' %}" height="40" alt="Foto de perfil">
@@ -68,8 +79,9 @@
         <!-- Tema, Fecha, Hora, Lugar...  -->
         <h5 class="card-text my-3"><strong>Sobre {{asesoria.subtema.nombre}}</strong></h5>
         <ul class="list-unstyled my-1">
-          <li class="card-text">El dia <strong>{{ asesoria.fecha_asesoria|date:"l d M Y" }}</strong> a las <strong> {{
-              asesoria.fecha_asesoria|time:"H:i" }}</strong> hrs.</li>
+          <li class="card-text">El dia <strong>{{ asesoria.fecha_asesoria|date:"l d M Y" }}</strong> a las
+            <strong> {{ asesoria.fecha_asesoria|time:"H:i" }}</strong> hrs.
+          </li>
 
           <li class="card-text font-weight-light">Lugar:
             {% if asesoria.asesor.lugar_asesoria %}
@@ -80,29 +92,25 @@
           </li>
         </ul>
       </div>
-      <div class="card-body text-center col-md-3 m-auto">
-        <!-- Estado de la asesoria -->
-        <div>
-          <h5 class="status {{asesoria.estado}}">{{asesoria.get_estado_display}}</h5>
-        </div>
+      <div class="card-body text-center col-md-4 my-auto mx-n4">
         <!-- Boton/botones de accion -->
-        <div class="mt-4">
+        <div>
           {% if request.user|has_group:"asesorados" %}
           {% if asesoria.estado == 'pendiente' or asesoria.estado == 'aceptada' %}
           <a role="button" href="{% url 'asesoria:cancelar_asesoria' asesoria.id %}"
-            class="btn btn-secondary">Cancelar</a>
+            class="btn-lg btn-secondary">Cancelar</a>
           {% endif %}
           {% else %}
           {% if asesoria.estado == 'pendiente' %}
           <a role="button" href="{% url 'asesoria:aceptar_asesoria' asesoria.id %}"
-            class="aceptar btn btn btn-warning">Aceptar</a>
+            class="btn-lg btn-success mr-4">Aceptar</a>
           <a role="button" href="{% url 'asesoria:rechazar_asesoria' asesoria.id %}"
-            class="btn btn-secondary">Rechazar</a>
+            class="btn-lg btn-secondary">Rechazar</a>
           {% elif asesoria.estado == 'aceptada' %}
           <a role="button" href="{% url 'asesoria:finalizar_asesoria' asesoria.id %}"
-            class="btn btn-warning">Finalizar</a>
+            class="btn-lg btn-success mr-4">Finalizar</a>
           <a role="button" href="{% url 'asesoria:cancelar_asesoria' asesoria.id %}"
-            class="btn btn-secondary">Cancelar</a>
+            class="btn-lg btn-secondary">Cancelar</a>
           {% endif %}
           {% endif %}
         </div>
