@@ -2,17 +2,18 @@
 
 {% block content %}
 
+
 {% if form.errors %}
 {% for field in form %}
 {% for error in field.errors %}
-<div class="alert alert-danger alert-dismissible">
+<div class="alert alert-danger alert-dismissible fade show">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
     <strong>{{ error|escape }}</strong>
 </div>
 {% endfor %}
 {% endfor %}
 {% for error in form.non_field_errors %}
-<div class="alert alert-danger alert-dismissible">
+<div class="alert alert-danger alert-dismissible fade show">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
     <strong>{{ error|escape }}</strong>
 </div>
@@ -21,7 +22,7 @@
 
 {% if messages %}
 {% for message in messages %}
-<div class="alert {{ message.tags }} alert-dismissible" role="alert">
+<div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -29,7 +30,8 @@
     {{ message|safe }}
     {% else %}
     {{ message }}
-    {% endif %} </div>
+    {% endif %}
+</div>
 {% endfor %}
 {% endif %}
 {% endblock %}

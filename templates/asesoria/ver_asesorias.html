@@ -36,9 +36,6 @@
       {% endif %}
     </div>
   </div>
-
-
-
   
   <!-- Opcion de filtrado-->
   <form class="form-inline justify-content-end" method="get">
@@ -48,19 +45,15 @@
     <button class="btn my-btn col-auto mb-auto ml-2" type="submit">Filtrar</button>
   </form>
 
-
-
-
   <!-- Tarjeta de asesoria -->
   {% for asesoria in asesorias %}
   <div class="card my-card my-3">
     <!-- Revisar el estado -->
     <div class="card-header {{asesoria.estado}} text-right">
-      <h5 class="{{asesoria.estado}} mr-3">{{asesoria.get_estado_display}}</h5>
+      <h5 class="{{asesoria.estado}} mr-3" title="Estado">{{asesoria.get_estado_display}}</h5>
     </div>
 
     <div class="row">
-
       <!-- Datos -->
       <div class="card-body col-md-auto mx-3 ml-5">
         <h6 class="card-text text-secondary">Asesoria con</h6>
@@ -82,7 +75,6 @@
           <li class="card-text">El dia <strong>{{ asesoria.fecha_asesoria|date:"l d M Y" }}</strong> a las
             <strong> {{ asesoria.fecha_asesoria|time:"H:i" }}</strong> hrs.
           </li>
-
           <li class="card-text font-weight-light">Lugar:
             {% if asesoria.asesor.lugar_asesoria %}
             {{asesoria.asesor.lugar_asesoria}}
@@ -105,7 +97,7 @@
           <a role="button" href="{% url 'asesoria:aceptar_asesoria' asesoria.id %}"
             class="btn-lg btn-success mr-4">Aceptar</a>
           <a role="button" href="{% url 'asesoria:rechazar_asesoria' asesoria.id %}"
-            class="btn-lg btn-secondary">Rechazar</a>
+            class="btn-lg btn-secondary m-b">Rechazar</a>
           {% elif asesoria.estado == 'aceptada' %}
           <a role="button" href="{% url 'asesoria:finalizar_asesoria' asesoria.id %}"
             class="btn-lg btn-success mr-4">Finalizar</a>

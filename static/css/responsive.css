@@ -24,6 +24,10 @@
         height: 35px;
         font-size: 16px;
     }
+    .m-b{
+        display: inline;
+    }
+
 }
 
 /* // Medium devices (tablets, 768px and up) sm */
@@ -49,6 +53,10 @@
         font-size: 20px;
         width: 18.75rem;
     }
+    .m-b{
+        display: block;
+    }
+
 }
 
 /* // Large devices (desktops, 992px and up) md */
@@ -74,6 +82,10 @@
         font-size: 20px;
         width: 18.75rem;
     }
+    .m-b{
+        display: inline;
+    }
+
  }
 
 /* // Extra large devices (large desktops, 1200px and up) */
