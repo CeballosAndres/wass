@@ -8,17 +8,11 @@
         <a class="navbar-brand" href="{% url 'accounts:principal' %}">
             <img src="{% static 'images/Logo.png' %}" width="75" height="40" alt="Wass logo" title="Menu Principal">
         </a>
-
         
         <ul class="navbar-nav d-flex flex-row">
-            {% if request.user|has_group:"asesorados" %}
-            <li class="nombre navbar-text mr-3" title="Usuario">{{asesor.nombre}}</li>
-            {% else %}
-            <li class="nombre navbar-text mr-3" title="Usuario">{{asesorado.nombre}}</li>
-            {% endif %}
-            
             <li class="nav-item">
                 {% if not hide_config %}
+                <li class="nombre navbar-text mr-3" title="Usuario">{{user.username}}</li>
                 <a title="Configurar perfil" href="{% url 'accounts:configurar' %}">
                     <i class="icon fas fa-user-circle mr-3"></i>
                 </a>
