@@ -36,7 +36,7 @@
       {% endif %}
     </div>
   </div>
-  
+
   <!-- Opcion de filtrado-->
   <form class="form-inline justify-content-end" method="get">
     <div class="form-group">
@@ -45,48 +45,52 @@
     <button class="btn my-btn col-auto mb-auto ml-2" type="submit">Filtrar</button>
   </form>
 
+
+
   <!-- Tarjeta de asesoria -->
   {% for asesoria in asesorias %}
-  <div class="card my-card my-3">
+  <div class="card my-3 my-card">
     <!-- Revisar el estado -->
     <div class="card-header {{asesoria.estado}} text-right">
       <h5 class="{{asesoria.estado}} mr-3" title="Estado">{{asesoria.get_estado_display}}</h5>
     </div>
-
-    <div class="row">
-      <!-- Datos -->
-      <div class="card-body col-md-auto mx-3 ml-5">
-        <h6 class="card-text text-secondary">Asesoria con</h6>
-        <h3 class="card-title">
-          <img class="mr-2" src="{% static 'images/user.svg' %}" height="40" alt="Foto de perfil">
-          {% if request.user|has_group:"asesorados" %}
-          {% if asesoria.asesor.nombre %}
-          {{asesoria.asesor.nombre}}
-          {% else %}
-          {{asesoria.asesor}}
-          {% endif %}
-          {% else %}
-          {{asesoria.asesorado.nombre}}
-          {% endif %}
-        </h3>
-        <!-- Tema, Fecha, Hora, Lugar...  -->
-        <h5 class="card-text my-3"><strong>Sobre {{asesoria.subtema.nombre}}</strong></h5>
-        <ul class="list-unstyled my-1">
-          <li class="card-text">El dia <strong>{{ asesoria.fecha_asesoria|date:"l d M Y" }}</strong> a las
-            <strong> {{ asesoria.fecha_asesoria|time:"H:i" }}</strong> hrs.
-          </li>
-          <li class="card-text font-weight-light">Lugar:
-            {% if asesoria.asesor.lugar_asesoria %}
-            {{asesoria.asesor.lugar_asesoria}}
+    <!-- Datos -->
+    <div class="row no-gutters">
+      <!-- Nombre y foto del asesor / asesorado...  -->
+      <div class="col-md-8">
+        <div class="card-body">
+          <h6 class="card-text text-secondary">Asesoria con</h6>
+          <h3 class="card-title">
+            <img class="mr-2" src="{% static 'images/user.svg' %}" height="40" alt="Foto de perfil">
+            {% if request.user|has_group:"asesorados" %}
+            {% if asesoria.asesor.nombre %}
+            {{asesoria.asesor.nombre}}
             {% else %}
-            Acordar con el asesor.
+            {{asesoria.asesor}}
             {% endif %}
-          </li>
-        </ul>
+            {% else %}
+            {{asesoria.asesorado.nombre}}
+            {% endif %}
+          </h3>
+          <!-- Tema, Fecha, Hora, Lugar...  -->
+          <h5 class="card-text my-3"><strong>Sobre {{asesoria.subtema.nombre}}</strong></h5>
+          <ul class="list-unstyled my-1">
+            <li class="card-text">El dia <strong>{{ asesoria.fecha_asesoria|date:"l d M Y" }}</strong> a las
+              <strong> {{ asesoria.fecha_asesoria|time:"H:i" }}</strong> hrs.
+            </li>
+            <li class="card-text font-weight-light">Lugar:
+              {% if asesoria.asesor.lugar_asesoria %}
+              {{asesoria.asesor.lugar_asesoria}}
+              {% else %}
+              Acordar con el asesor.
+              {% endif %}
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="card-body text-center col-md-4 my-auto mx-n4">
-        <!-- Boton/botones de accion -->
-        <div>
+      <!-- Boton/botones de accion -->
+      <div class="col-auto m-auto">
+        <div class="card-body">
           {% if request.user|has_group:"asesorados" %}
           {% if asesoria.estado == 'pendiente' or asesoria.estado == 'aceptada' %}
           <a role="button" href="{% url 'asesoria:cancelar_asesoria' asesoria.id %}"
@@ -97,7 +101,7 @@
           <a role="button" href="{% url 'asesoria:aceptar_asesoria' asesoria.id %}"
             class="btn-lg btn-success mr-4">Aceptar</a>
           <a role="button" href="{% url 'asesoria:rechazar_asesoria' asesoria.id %}"
-            class="btn-lg btn-secondary m-b">Rechazar</a>
+            class="btn-lg btn-secondary">Rechazar</a>
           {% elif asesoria.estado == 'aceptada' %}
           <a role="button" href="{% url 'asesoria:finalizar_asesoria' asesoria.id %}"
             class="btn-lg btn-success mr-4">Finalizar</a>
@@ -108,6 +112,7 @@
         </div>
       </div>
     </div>
+
     <!-- Para ver detalles -->
     <div class="card-footer text-right">
       <a class="card-link" href="{% url 'asesoria:detalle_asesoria' asesoria.id %}">
@@ -115,10 +120,9 @@
       </a>
     </div>
   </div>
+
   {% endfor%}
 
-
 </main>
-
 
 {% endblock %}
