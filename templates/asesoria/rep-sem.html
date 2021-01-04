@@ -9,7 +9,6 @@
   <table class="table table-striped table-hover">
     <thead>
       <tr>
-        <th scope="col">Tema</th>
         <th scope="col">
           {% if request.user|has_group:"asesorados" %}
           Asesor
@@ -17,14 +16,14 @@
           Alumno
           {% endif %}
         </th>
+        <th scope="col">Tema</th>
         <th scope="col">Fecha</th>
         <th scope="col">Estado</th>
       </tr>
     </thead>
     <tbody>
       {% for asesoria in asesorias %}
-      <tr class='clickable-row' data-href="{% url 'asesoria:detalle_asesoria' asesoria.id %}">
-        <th scope="row">{{ asesoria.subtema }}</th>
+      <tr class="clickable-row" data-href="{% url 'asesoria:detalle_asesoria' asesoria.id %}">
         <td>
           {% if request.user|has_group:"asesorados" %}
           {{asesoria.asesor.nombre}}
@@ -32,6 +31,7 @@
           {{asesoria.asesorado.nombre}}
           {% endif %}
         </td>
+        <th scope="row">{{ asesoria.subtema }}</th>
         <td>{{ asesoria.fecha_asesoria.date }}</td>
         <td>{{ asesoria.get_estado_display }}</td>
       </tr>

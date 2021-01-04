@@ -24,8 +24,8 @@
         height: 35px;
         font-size: 16px;
     }
-    .m-b{
-        display: inline;
+    .nombre{
+        display: none;
     }
 
 }
@@ -53,9 +53,10 @@
         font-size: 20px;
         width: 18.75rem;
     }
-    .m-b{
-        display: block;
+    .nombre{
+        display:inline;
     }
+
 
 }
 
@@ -82,8 +83,8 @@
         font-size: 20px;
         width: 18.75rem;
     }
-    .m-b{
-        display: inline;
+    .nombre{
+        display:inline;
     }
 
  }
