@@ -1,0 +1,20 @@
+Este es un mensaje para notificarle que el alumno {{asesoria.asesorado.nombre}} ha{% if asesoria.estado == 'pendiente' %} solicitado una nueva asesoría para el{% elif asesoria.estado == 'cancelada'%} cancelado su asesoría del{% endif %} día {{ asesoria.fecha_asesoria|date:"l d M Y" }} a las {{ asesoria.fecha_asesoria|time:"H:i" }}, sobre el tema: "{{ asesoria.subtema.nombre }}".
+
+
+{% if asesoria.descripcion %}
+Descripción de asesoría: {{asesoria.descripcion}}
+{% endif %}
+{% if asesoria.requisitos %}
+Requsitos para la asesoría: {{asesoria.requisitos}}
+{% endif %}
+{% if asesoria.comentario_finalizada %}
+Comentario final: {{asesoria.comentario_finalizada}}
+{% endif %}
+{% if asesoria.razon_cancelada %}
+Razón de cancelación: {{asesoria.razon_cancelada}}
+Te invitamos a solicitar una nueva asesoría con otro docente.
+{% endif %}
+{% if asesoria.razon_rechazada %}
+Razón de rechazo: {{asesoria.razon_rechazada}}
+Te invitamos a solicitar una nueva asesoría con otro docente.
+{% endif %}

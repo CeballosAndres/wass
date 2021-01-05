@@ -20,7 +20,7 @@
         width: 250px;
     }
     .smaller {
-        width: 65px;
+        width: auto;
         height: 35px;
         font-size: 16px;
     }
@@ -51,7 +51,7 @@
     .smaller {
         height: 50px;
         font-size: 20px;
-        width: 18.75rem;
+        width: auto;
     }
     .nombre{
         display:inline;

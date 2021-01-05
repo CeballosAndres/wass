@@ -151,5 +151,8 @@ a:hover {
     height : 10vh;
     position : relative;
     top : 20vh;
-    
+}
+
+.info li {
+    font-size: 1.125rem;
 }

@@ -1,0 +1,19 @@
+Este es un mensaje para notificarte que el docente {{asesoria.asesor.nombre}} ha{% if asesoria.estado == 'aceptada' %} aceptado{% elif asesoria.estado == 'rechazada' %} rechazado{% elif asesoria.estado == 'finalizada'%} finalizado{% elif asesoria.estado == 'cancelada'%} cancelado{% endif %} su asesoría del día {{ asesoria.fecha_asesoria|date:"l d M Y" }} a las {{ asesoria.fecha_asesoria|time:"H:i" }}, sobre el tema: "{{ asesoria.subtema.nombre }}".
+
+{% if asesoria.descripcion %}
+Descripción de asesoría: {{asesoria.descripcion}}
+{% endif %}
+{% if asesoria.requisitos %}
+Requsitos para la asesoría: {{asesoria.requisitos}}
+{% endif %}
+{% if asesoria.comentario_finalizada %}
+Comentario final: {{asesoria.comentario_finalizada}}
+{% endif %}
+{% if asesoria.razon_cancelada %}
+Razón de cancelación: {{asesoria.razon_cancelada}}
+Te invitamos a solicitar una nueva asesoría con otro docente.
+{% endif %}
+{% if asesoria.razon_rechazada %}
+Razón de rechazo: {{asesoria.razon_rechazada}}
+Te invitamos a solicitar una nueva asesoría con otro docente.
+{% endif %}

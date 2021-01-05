@@ -106,6 +106,7 @@ def nuevaAsesoria(request, materia, tema, subtema, asesor, hora):
             asesoria.fecha_asesoria = fecha_asesoria
             # almacena el id de la agenda para faciliar consutlas TODO: mejorar
             asesoria.agenda = hora
+            asesoria.estado = 'pendiente'
             asesoria.asesorado = asesorado
             asesoria.asesor = asesor
             asesoria.subtema = subtema
