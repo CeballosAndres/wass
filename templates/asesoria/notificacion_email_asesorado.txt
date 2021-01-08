@@ -1,4 +1,4 @@
-Este es un mensaje para notificarte que el docente {{asesoria.asesor.nombre}} ha{% if asesoria.estado == 'aceptada' %} aceptado{% elif asesoria.estado == 'rechazada' %} rechazado{% elif asesoria.estado == 'finalizada'%} finalizado{% elif asesoria.estado == 'cancelada'%} cancelado{% endif %} su asesoría del día {{ asesoria.fecha_asesoria|date:"l d M Y" }} a las {{ asesoria.fecha_asesoria|time:"H:i" }}, sobre el tema: "{{ asesoria.subtema.nombre }}".
+Este es un mensaje para notificarte que {% if asesoria.estado == 'pendiente' %}has solicitado una asesoria con el docente {{asesoria.asesor.nombre}} el {% else %}el docente {{asesoria.asesor.nombre}} ha{% if asesoria.estado == 'aceptada' %} aceptado{% elif asesoria.estado == 'rechazada' %} rechazado{% elif asesoria.estado == 'finalizada'%} finalizado{% elif asesoria.estado == 'cancelada'%} cancelado{% endif %} su asesoría del {% endif %}día {{ asesoria.fecha_asesoria|date:"l d M Y" }} a las {{ asesoria.fecha_asesoria|time:"H:i" }}, sobre el tema: "{{ asesoria.subtema.nombre }}".
 
 {% if asesoria.descripcion %}
 Descripción de asesoría: {{asesoria.descripcion}}

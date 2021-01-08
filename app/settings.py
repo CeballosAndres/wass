@@ -83,7 +83,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'app.wsgi.application'
 
 CRONJOBS = [
-    ('15 * * * 0-4', 'asesoria.cron.resetAvailability')
+    ('* * * * *', 'asesoria.cron.resetAvailability')
 ]
 
 # Database
