@@ -90,13 +90,13 @@ hr{
 
 }
 .aceptada {
-    background-color: #28a745;
+    background-color: #2dbe4f;
 }
 .rechazada {
     background-color: #dc3545;
 }
 .finalizada {
-    background-color: #17a2b8;
+    background-color: #1fc0cc;
 }
 .cancelada {
     color: white;
@@ -162,4 +162,9 @@ textarea { resize: none; }
 
 .my-table tr {
     cursor: pointer;
+}
+
+.lapso {
+    margin: 0 .5rem;
+    display: inline;
 }

@@ -27,6 +27,9 @@
     .nombre{
         display: none;
     }
+    .lapso {
+        display: none;
+    }
 
 }
 
@@ -55,6 +58,10 @@
     }
     .nombre{
         display:inline;
+    }
+    .lapso {
+        margin: 0 .5rem;
+        display: inline;
     }
 
 
@@ -85,6 +92,10 @@
     }
     .nombre{
         display:inline;
+    }
+    .lapso {
+        margin: 0 .5rem;
+        display: inline;
     }
 
  }

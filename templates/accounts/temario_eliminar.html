@@ -4,15 +4,17 @@
 
 {% block content %}
 
-<main class="container">
+<main class="container text-center">
     
-    <div class="row">
-        <div class="col-md-9 text-center">
+    <div class="row mt-3">
+        <div class="col mt-3">
             <form action="" method="post">
                 {% csrf_token %}
-                <h2>¿Está seguro de eliminar {{materia.nombre}} de sus asesorias?</h2>
-                <input type="submit" value="Eliminar" class="btn btn-danger">
-                <a href="{% url 'accounts:temario'%}" class="btn btn-primary">Cancelar</a>
+                <h2 class="mb-4">¿Está seguro de eliminar la materia "{{materia.nombre}}" de sus asesorias?</h2>
+                <div class="text-center">
+                    <input type="submit" value="Eliminar" class="btn btn-lg btn-warning mx-3">
+                    <a href="{% url 'accounts:temario'%}" class="btn btn-lg my-btn mx-3">Cancelar</a>
+                </div>
             </form>
         </div>
     </div>
