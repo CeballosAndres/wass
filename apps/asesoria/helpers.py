@@ -15,8 +15,8 @@ def enviarEmail(accion, asesoria):
     # msg_html = render_to_string('asesoria/notificacion_email.html', email_context)
     # Send two emails
     datatuple = (
-        (f'{accion.capitalize()} de asesoría', msg_plain, 'wass.asesorias@gmail.com', [asesoria.asesorado]),
-        (f'{accion.capitalize()} de asesoría', msg_plain_a, 'wass.asesorias@gmail.com', [asesoria.asesor]),
+        (f'{accion.capitalize()} de asesoría', msg_plain, 'waas.asesorias@gmail.com', [asesoria.asesorado]),
+        (f'{accion.capitalize()} de asesoría', msg_plain_a, 'waas.asesorias@gmail.com', [asesoria.asesor]),
     )
 
     send_mass_mail(datatuple)
