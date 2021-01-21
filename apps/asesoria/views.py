@@ -297,7 +297,7 @@ def repSem(request):
         messages.warning(request, 'No existen asesorias.')
 
     context = {
-        'title': 'Reporte de asesorías por semestre',
+        'title': 'Asesorías por semestre',
         'asesorias': asesorias,
     }
     return render(request, 'asesoria/rep-sem.html', context)
