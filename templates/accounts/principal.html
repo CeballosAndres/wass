@@ -45,18 +45,18 @@
                         <ul style="font-size: 0.75rem">
                             {% if request.user|has_group:"asesorados" %}
                             <!-- En caso de ser asesorado... -->
-                                <li><b>"Agendar"</b> contiene el proceso para solicitar una asesoría.</li>
+                                <li><b>"Nueva asesoría"</b> contiene el proceso para solicitar una asesoría.</li>
                                 <li><b>"Ver asesorías"</b> presenta la lista de tus asesorías, estados y opciones correspondientes (pendientes, aceptadas, rechazas, canceladas o finalizadas).</li>
-                                <li><b>"Reportes"</b> muestra gráficos en base a tu historial de asesorías tomadas por semestre.</li>
+                                <li><b>"Reportes"</b> muestra gráficos con base a tu historial de asesorías tomadas por semestre.</li>
                             {% elif request.user|has_group:"asesores" %}
                             <!-- En caso de ser asesor... -->
                                 <li><b>"Mis asesorías"</b> presenta la lista de sus asesorías, estados y opciones correspondientes (pendientes, aceptadas, rechazas, canceladas o finalizadas).</li>
                                 <li><b>"Horario"</b> contiene sus horarios disponibles para impartir asesorías, divididos en lapsos de 30 minutos.</li>
                                 <li><b>"Temario"</b> comprende los temas de cada materia en las que puede brindar asesorías.</li>
-                                <li><b>"Reportes"</b> muestra gráficos en base a su historial de asesorías impartidas por semestre.</li>
+                                <li><b>"Reportes"</b> muestra gráficos con base a su historial de asesorías impartidas por semestre.</li>
                             {% else %}
                             <!-- En caso de ser jefe de dpto.. -->
-                                <li><b>"Reportes"</b> muestra gráficos en base al historial de asesorías impartidas por asesores de su departamento por semestre.</li>
+                                <li><b>"Reportes"</b> muestra gráficos con base al historial de asesorías impartidas por asesores de su departamento por semestre.</li>
                             {% endif %}
                         </ul>              
                     </div>

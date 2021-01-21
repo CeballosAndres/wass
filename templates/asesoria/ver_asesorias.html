@@ -59,7 +59,7 @@
       <!-- Nombre y foto del asesor / asesorado...  -->
       <div class="col-md-8">
         <div class="card-body">
-          <h6 class="card-text text-secondary">Asesoria con</h6>
+          <h6 class="card-text text-secondary">Asesoría con</h6>
           <h3 class="card-title">
             <img class="mr-2" src="{% static 'images/user.svg' %}" height="40" alt="Foto de perfil">
             {% if request.user|has_group:"asesorados" %}
@@ -73,9 +73,9 @@
             {% endif %}
           </h3>
           <!-- Tema, Fecha, Hora, Lugar...  -->
-          <h5 class="card-text my-3"><strong>Sobre {{asesoria.subtema.nombre}}</strong></h5>
+          <h5 class="card-text my-3"><strong>{{asesoria.subtema.nombre}}</strong></h5>
           <ul class="list-unstyled my-1">
-            <li class="card-text">El dia <strong>{{ asesoria.fecha_asesoria|date:"l d M Y" }}</strong> a las
+            <li class="card-text"><strong>{{ asesoria.fecha_asesoria|date:"l d M Y" }}</strong> a las
               <strong> {{ asesoria.fecha_asesoria|time:"H:i" }}</strong> hrs.
             </li>
             <li class="card-text font-weight-light">Lugar:

@@ -45,7 +45,7 @@ hr{
 }
 
 .my-card:hover{
-    transform: scale(1.02);
+    transform: scale(1.005);
     box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
 }
 
@@ -155,4 +155,11 @@ a:hover {
 
 .info li {
     font-size: 1.125rem;
+}
+
+/* Hacer que el text area no se pueda cambiar de tamanio */
+textarea { resize: none; }
+
+.my-table tr {
+    cursor: pointer;
 }

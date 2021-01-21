@@ -51,12 +51,13 @@
 
     <!--Botones cambiar contrasenia y actualizar-->
     <div class="row justify-content-md-center">
-        <div class="col-md-5 mt-5">
-            <a class="btn btn-warning btn-lg" href="{% url 'accounts:contrasena' %}">Cambiar contraseña</a>   
+        <div class="col-md-5 mt-5 text-center">
+            <input type="submit" class="btn btn-warning btn-lg px-5" value="Actualizar">
         </div>
         <div class="col-md-auto"></div>
-        <div class="col-md-5 mt-5">
-            <input type="submit" class="my-btn small" value="Actualizar">
+        <div class="col-md-5 mt-5 text-center">
+            <a class="btn my-btn small" href="{% url 'accounts:contrasena' %}"> <i class="fas fa-key mr-2"></i> Cambiar contraseña</a>
+            
         </div>
     </div>
 

@@ -57,7 +57,7 @@ def principal(request):
                     'asesoria:ver_asesorias': {'text': 'Ver asesorías', 'title': 'Ver mi lista de asesorías',
                                                'icon': 'fas fa-chalkboard-teacher'},
                     'asesoria:reportes': {'text': 'Reportes', 'title': 'Mostar reportes de mi historial',
-                                          'icon': 'fas fa-chart-pie'}}
+                                          'icon': 'fas fa-folder-open'}}
         asesorado = Asesorado.objects.get(usuario=request.user.id)
         if not asesorado.carrera:
             messages.warning(request, 'Acceda al ícono de usuario y registre sus datos.')
@@ -70,7 +70,7 @@ def principal(request):
                     'accounts:temario': {'text': 'Temario', 'title': 'Elegir mis temas para asesorar',
                                          'icon': 'fas fa-list'},
                     'asesoria:reportes': {'text': 'Reportes', 'title': 'Mostar reportes de mi historial',
-                                          'icon': 'fas fa-chart-pie'}
+                                          'icon': 'fas fa-folder-open'}
                     }
         asesor = Asesor.objects.get(usuario=request.user.id)
         materias = TemarioAsesor.objects.filter(asesor=asesor).distinct('materia')
@@ -84,7 +84,7 @@ def principal(request):
 
     elif group == 'jefes':
         opciones = {
-            'asesoria:reportes': {'text': 'Reportes', 'title': 'Mostar datos generados', 'icon': 'fas fa-chart-pie'}
+            'asesoria:reportes': {'text': 'Reportes', 'title': 'Mostar datos generados', 'icon': 'fas fa-folder-open'}
         }
     context = {'opciones': opciones}
     return render(request, 'accounts/principal.html', context)
